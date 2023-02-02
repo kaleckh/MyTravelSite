@@ -1,0 +1,36 @@
+.header {
+    background-color: none;
+    height: 70px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid white;
+}
+
+.headerItem {
+    font-size: small;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.home {
+    margin: 10px;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.headerButtonContainer {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+    width: 30%;
+    justify-content: space-between;
+}
+
+.headerItem {
+    font-size: small;
+    padding: 10px;
+    font-weight: bold;
+}

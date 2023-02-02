@@ -5,13 +5,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-bottom: 1px solid white;
 }
 
 .headerItem {
     font-size: small;
     padding: 10px;
-    font-weight: bold;
+    font-weight: 200;
 }
 
 .home {

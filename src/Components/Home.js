@@ -60,12 +60,11 @@ function Home() {
         <Header />
         <div className="mainContainer">
           <div className="mainBox">
-            <div className="title">Where do you want to go?</div>
-            <Select
-              className="mainInput"
-              options={changedData}
-              onChange={(obj) => {}}
-            />
+            <div className="homeTitle">Travel and meet new friends</div>
+            <div>
+            <button></button>
+            <button></button>
+            </div>
           </div>
         </div>
       </div>

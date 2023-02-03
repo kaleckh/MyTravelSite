@@ -1,4 +1,4 @@
-import "./Home.css";
+import styles from "./Home.module.css";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Select from "react-select";
@@ -15,7 +15,7 @@ function Home() {
   const [createTrip, setCreateTrip] = useState(true);
   //   const [profileToggle, setProfileToggle] = useState(false);
   const [isSettingLocation, setIsSettingLocation] = useState(false);
-
+  const [homeScreen, sethomeScreen] = useState(true);
   const [myTrips, setMyTrips] = useState([]);
   const [myId, setMyId] = useState("");
   //   const { email, setEmail } = useContext(UserContext);
@@ -55,18 +55,56 @@ function Home() {
   // }, []);
 
   return (
-    <div className="full">
-      <div className="wholeScreen">
-        <Header />
-        <div className="mainContainer">
-          <div className="mainBox">
-            <div className="homeTitle">Travel and meet new friends</div>
-            <div>
-            <button></button>
-            <button></button>
+    <div className={styles.full}>
+      <div className={styles.wholeScreen} >
+        {homeScreen ? (
+          <>
+            <Header />
+            <div className={styles.mainContainer}>
+              <div className={styles.mainBox}>
+                <div className={styles.homeTitle}>
+                  Meet cool people and travel the world
+                </div>
+                <div className={styles.buttonContainer}>
+                  <button
+                    onClick={() => {
+                      sethomeScreen(false);
+                    }}
+                  >
+                    Login
+                  </button>
+                  <button
+                    onClick={() => {
+                      sethomeScreen(false);
+                    }}
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={`${styles.loginContainer} ${styles.blur}`}>
+            <div className={styles.loginPage}>
+              <div className={styles.leftSideInput}></div>
+              <div className={styles.inputContainer}>
+                <div className={styles.words}>Welcome</div>
+                <div className={styles.row}>
+                  <input placeholder="first name" type="text" />
+                  <input placeholder="last name" type="text" />
+                </div>
+                <input placeholder="email" type="text" />
+                <input placeholder="password" type="text" />
+                <input placeholder="confirm password" type="text" />
+                <div>
+                  <button className={styles.color} onClick={() => {Navigate('/person/:money')}}>Register</button>
+                  <button className={styles.color}>Login instead</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

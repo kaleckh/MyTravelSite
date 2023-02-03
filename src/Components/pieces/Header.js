@@ -1,17 +1,17 @@
 import React from "react";
 import "./Header.css";
-import { useNavigate } from "react-router-dom";
 
-export default function Header() {
-  const Navigate = useNavigate();
+
+export default function Header(props) {
+  
 
   return (
     <header className="header">
-      <div className="home">Home</div>
+      <div className="home">{props.home}</div>
       <div className="headerButtonContainer">
-        <div className="headerItem">CREATE A TRIP</div>
-        <div className="headerItem">MY TRIPS</div>
-        <div className="headerItem">MY PROFILE</div>
+        <div className="headerItem">{props.createTrip}</div>
+        <div className="headerItem">{props.myTrips}</div>
+        <div className="headerItem">{props.myProfile}</div>
       </div>
     </header>
   );

@@ -2,6 +2,7 @@ import styles from "./Person.module.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./pieces/Header";
+import SearchBar from "./pieces/SearchBar";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
@@ -65,18 +66,28 @@ function Person() {
   // }, []);
 
   return (
-    <div className={styles.wholeScreen}>
-      <Header
-        home={"Home"}
-        createTrip={"Create Trip"}
-        myTrips={"My Trips"}
-        myProfile={"My Profile"}
-      />
-      <div className={styles.container}>
-        <div className={styles.title}>Where do you wanna go?</div>
-        <input type="text"  />
+    <>
+      <div className={styles.wholeScreen}>
+        <Header
+          home={"Home"}
+          createTrip={"Create Trip"}
+          myTrips={"My Trips"}
+          myProfile={"My Profile"}
+        />
+        <div className={styles.container}>
+          <div className={styles.title}>Where do you wanna go?</div>
+          <SearchBar/>
+        </div>
       </div>
-    </div>
+      <div className={styles.secondContainer}>
+        <div className={styles.title}>Who are we?</div>
+        <div>
+          <div className={styles.paragraph}>
+            A platform focused on connecting travellers
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

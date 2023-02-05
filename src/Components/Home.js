@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../Firebase";
 import Header from "./pieces/Header";
 
+
 function Home() {
   const Navigate = useNavigate();
   const [tripLocation, setTripLocation] = useState("");

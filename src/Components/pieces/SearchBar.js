@@ -43,8 +43,8 @@ export default function SearchBar() {
         <div className={styles.dataResult}>
           {filteredData.slice(0, 15).map((item, index) => {
             return (
-              <a className={styles.dataItem}>
-                <p>{item.location}</p>
+              <a onClick={() => {navigate("/trip/:id")}}  className={styles.dataItem}>
+                <p  >{item.location}</p>
               </a>
             );
           })}

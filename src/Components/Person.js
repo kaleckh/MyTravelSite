@@ -6,7 +6,7 @@ import SearchBar from "./pieces/SearchBar";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
-import { auth } from "../Firebase";
+import { auth } from "./Firebase";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 function Person() {
   const Navigate = useNavigate();
@@ -64,7 +64,7 @@ function Person() {
   //     setPeople();
   //   });
   // }, []);
-
+  console.log(auth)
   return (
     <>
       <div className={styles.wholeScreen}>
@@ -72,7 +72,7 @@ function Person() {
           home={"Home"}
           createTrip={"Create Trip"}
           myTrips={"My Trips"}
-          myProfile={"My Profile"}
+          myProfile={"Logout"}
         />
         <div className={styles.container}>
           <div className={styles.title}>Where do you wanna go?</div>

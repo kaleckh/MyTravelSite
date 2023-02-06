@@ -1,0 +1,1 @@
+DELETE FROM peopletravelling WHERE id = $1 returning id

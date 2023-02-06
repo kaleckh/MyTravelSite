@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "../Components/pieces/Header";
 import { signOut } from "firebase/auth";
-import { auth } from "../Firebase";
+import { auth } from "./Firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 function Trip() {

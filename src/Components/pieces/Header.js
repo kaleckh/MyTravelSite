@@ -4,7 +4,13 @@ import "./Header.css";
 import { auth } from "../Firebase";
 import { signOut } from "firebase/auth";
 
-export default function Header(props) {
+export default function Header({
+  home, 
+  toggleMenu,
+  myTrips,
+  myProfile,
+  createTrip
+}) {
   const navigate = useNavigate()
   const logout = async () => {
     await signOut(auth);
@@ -12,11 +18,11 @@ export default function Header(props) {
 
   return (
     <header className="header">
-      <div className="home">{props.home}</div>
+      <div className="home">{home}</div>
       <div className="headerButtonContainer">
-        <div  className="headerItem">{props.createTrip}</div>
-        <div onClick={() => {navigate('/myTrips')}} className="headerItem">{props.myTrips}</div>
-        <div onClick={() => {Promise.all([logout()]).then(navigate('/'))}} className="headerItem">{props.myProfile}</div>
+        <div onClick={() => {toggleMenu()}}  className="headerItem">{createTrip}</div>
+        <div onClick={() => {navigate('/myTrips')}} className="headerItem">{myTrips}</div>
+        <div onClick={() => {Promise.all([logout()]).then(navigate('/'))}} className="headerItem">{myProfile}</div>
       </div>
     </header>
   );

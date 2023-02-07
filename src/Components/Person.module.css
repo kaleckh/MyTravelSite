@@ -50,3 +50,14 @@ input:focus {
     align-items: center;
     flex-direction: column;
 }
+
+.createTripContainer {
+    display: flex;
+    height: 53vh;
+    width: 75vw;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 25px;
+    margin: 20px;
+}

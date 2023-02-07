@@ -22,6 +22,18 @@ let getPerson = (req, res) => {
 			console.log(err);
 		});
 };
+let getTrips = (req, res) => {
+	const dbInstance = req.app.get('db');
+	dbInstance
+		.get_trips()
+		.then((trips) => res.status(200).send(trips))
+		.catch((err) => {
+			res.status(500).send({
+				errorMessage: 'somethin aint right'
+			});
+			console.log(err);
+		});
+};
 let getPersonTrips = (req, res) => {
 	const dbInstance = req.app.get('db');
 	console.log(req.params.id);
@@ -132,5 +144,6 @@ module.exports = {
 	newTrip,
 	deletetrip,
 	getTrip,
+	getTrips,
 	newDate
 };

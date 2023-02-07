@@ -12,6 +12,7 @@ var {
 	newTrip,
   deletetrip,
   getTrip,
+  getTrips
   
 } = require('./controller');
 const app = express();
@@ -36,6 +37,7 @@ massive({
 app.get('/people', getpeople);
 app.get('/person/:email', getPerson);
 app.get('/personTrips/:id', getPersonTrips);
+app.get('/trips', getTrips);
 app.get('/trip/:id', getTrip)
 app.post('/newperson', newperson);
 app.post('/newtrip', newTrip);

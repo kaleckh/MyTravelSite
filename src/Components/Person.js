@@ -6,6 +6,7 @@ import SearchBar from "./pieces/SearchBar";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
+import { useLocation } from "react-router-dom";
 import { auth } from "./Firebase";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 function Person() {
@@ -21,6 +22,9 @@ function Person() {
   const [value, onChange] = useState([new Date(), new Date()]);
   const [tripCity, setTripCity] = useState("");
   const [tripState, setTripState] = useState("");
+  const [trips, setTrips] = useState([]);
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
   const handleSubmit = async (id, location, dates) => {
     try {
       let newTrip = await axios.post("http://localhost:3001/newtrip", {
@@ -42,10 +46,14 @@ function Person() {
   //       Navigate("/home");
   //     }
   //   });
-
   const logout = async () => {
     await signOut(auth);
   };
+  const formattedDate = tripDates.toLocaleString("en,US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 
   let changedData = people.map((person) => {
     return {
@@ -53,16 +61,25 @@ function Person() {
       label: `${person.firstname}`,
     };
   });
+  const handleFilter = () => {
+    axios({
+      method: "get",
+      url: `http://localhost:3001/trips`,
+    }).then((res) => {
+      setTrips(res.data);
+    });
+  };
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://localhost:3001/trips`,
+    }).then((res) => {
+      setTrips(res.data);
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: `http://localhost:3001/personTrips/${email}`,
-  //   }).then((res) => {
-  //     setPeople();
-  //   });
-  // }, []);
-  console.log(auth);
+  console.log(params);
+
   return (
     <>
       <div className={styles.wholeScreen}>
@@ -70,32 +87,34 @@ function Person() {
           home={"Home"}
           createTrip={"Create Trip"}
           myTrips={"My Trips"}
-          myProfile={"Logout"}
+          myProfile={"My Profile"}
+          out={"Logout"}
           toggleMenu={() => {
-            setIsAddingTrip(!isAddingTrip)
+            setIsAddingTrip(!isAddingTrip);
           }}
-
         />
         {isAddingTrip ? (
           <div className={styles.createTripContainer}>
-            <div className="halfTripContainer">
-              <div className="blueBoxWords">Start your journey with us</div>
-              <div className="smallBlueBoxWords">
+            <div className={styles.halfTripContainer}>
+              <div className={styles.blueBoxWords}>
+                Start your journey with us
+              </div>
+              <div className={styles.smallBlueBoxWords}>
                 Join our community of thousands
               </div>
             </div>
 
-            <div className="otherHalfContainer">
+            <div className={styles.otherHalfContainer}>
               <div
                 onClick={() => {
                   setIsSettingLocation(false);
                   setIsAddingTrip(true);
                 }}
-                className="x"
+                className={styles.x}
               >
                 x
               </div>
-              <div className="backWrapper">
+              <div className={styles.backWrapper}>
                 {/* <button
                     onClick={() => {
                       setIsAddingTrip(true);
@@ -106,11 +125,11 @@ function Person() {
                     back
                   </button> */}
               </div>
-              <div className="createTripInputContainer">
-                <div className="myTripInputContainer">
+              <div className={styles.createTripInputContainer}>
+                <div className={styles.myTripInputContainer}>
                   <div>city</div>
                   <input
-                    className="createTripInput"
+                    className={styles.createTripInput}
                     placeholder="City"
                     onChange={(event) => {
                       setTripCity(event.target.value);
@@ -126,18 +145,18 @@ function Person() {
                     }}
                     placeholder="State/Country"
                     type="text"
-                    className="createTripInput"
+                    className={styles.createTripInput}
                   />
                 </div>
               </div>
               <DateRangePicker
                 onChange={onChange}
                 value={value}
-                className="datePicker"
+                className={styles.datePicker}
               />
-              <input className="tripInfo" />
+              <input className={styles.tripInfo} />
               <button
-                className="createButton"
+                className={styles.createButton}
                 onClick={() => {
                   Promise.all([handleSubmit(), setIsSettingDate(false)]).then(
                     () => {
@@ -153,7 +172,7 @@ function Person() {
         ) : (
           <div className={styles.container}>
             <div className={styles.title}>Where do you wanna go?</div>
-            <SearchBar />
+            <SearchBar trips={trips} />
           </div>
         )}
       </div>

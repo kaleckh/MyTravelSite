@@ -17,22 +17,7 @@ function Trip() {
     await signOut(auth);
   };
 
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `http://localhost:3001/trip/${id}`,
-    }).then((res) => {
-      console.log(res);
-      setMyTrip(res.data[0], "first then");
-      axios({
-        method: "get",
-        url: `http://localhost:3001/person/${auth.currentUser.email}`,
-      }).then((res) => {
-        setMyInfo(res.data);
-      });
-    });
-  }, []);
-
+// /
   return (
     <div>
       <Header

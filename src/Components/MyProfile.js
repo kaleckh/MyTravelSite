@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./MyProfile.module.css";
+import styles from "./MyProfile.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "./Firebase";
@@ -59,55 +59,55 @@ function MyProfile() {
         myTrips={"My Trips"}
         myProfile={"My Profile"}
       />
-      <div className={profileWholeScreen}>
-        <div className={leftProfileContainer}>
-          <div className={profileTitle}>{firstName}</div>
-          <div className={profileTitle}>{lastName}</div>
+      <div className={styles.profileWholeScreen}>
+        <div className={styles.leftProfileContainer}>
+          <div className={styles.profileTitle}>{firstName}</div>
+          <div className={styles.profileTitle}>{lastName}</div>
           <div>
-            <div className={profileItem}>{auth.currentUser.email}</div>
-            <div className={profileItem}>Insta: </div>
-            <div className={profileItem}>
+            <div className={styles.profileItem}>{auth.currentUser.email}</div>
+            <div className={styles.profileItem}>Insta: </div>
+            <div className={styles.profileItem}>
               Bio: Looking to travel and meet new friends
             </div>
-            <div className={profileItem}>3 Trips Taken</div>
-            <button className={profileItem}>Send Message</button>
+            <div className={styles.profileItem}>3 Trips Taken</div>
+            <button className={styles.profileItem}>Send Message</button>
           </div>
         </div>
-        <div className={rightProfileContainer}>
+        <div >
           <div>
-            <div className={mainImageContainer}>
+            <div >
               <img
-                className={mainImage}
-                src={require("../photos/kidsFace.jpg")}
+                
+                
                 alt=""
               />
-              <div className={topImagesContainer}>
+              <div >
                 <img
-                  className={smallImage}
-                  src={require("../photos/kidsFace.jpg")}
+                  // className={smallImage}
+                  // src={require("../photos/kidsFace.jpg")}
                   alt=""
                 />
                 <img
-                  className={smallImage}
-                  src={require("../photos/kidsFace.jpg")}
+                  // className={smallImage}
+                  // src={require("../photos/kidsFace.jpg")}
                   alt=""
                 />
               </div>
             </div>
-            <div className={smallImageContainer}>
+            <div >
               <img
-                className={smallImage}
-                src={require("../photos/kidsFace.jpg")}
+                
+                // src={require("../photos/kidsFace.jpg")}
                 alt=""
               />
               <img
-                className={smallImage}
-                src={require("../photos/kidsFace.jpg")}
+                
+                // src={require("../photos/kidsFace.jpg")}
                 alt=""
               />
               <img
-                className={smallImage}
-                src={require("../photos/kidsFace.jpg")}
+                
+                // src={require("../photos/kidsFace.jpg")}
                 alt=""
               />
             </div>

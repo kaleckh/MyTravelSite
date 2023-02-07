@@ -24,6 +24,7 @@ function Home() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginToggle, setLogin] = useState("");
+  
 
   const register = async () => {
     try {
@@ -50,14 +51,7 @@ function Home() {
     await signOut(auth);
   };
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: `http://localhost:3001/personTrips/${auth.currentUser.displayName}`,
-  //   }).then((res) => {
-  //     setCreateTrip(res.data);
-  //   });
-  // }, []);
+ 
   const handleSubmit = async () => {
     try {
       return await axios.post("http://localhost:3001/newperson", {
@@ -69,6 +63,7 @@ function Home() {
       console.log(error.message);
     }
   };
+  
   return (
     <div className={styles.full}>
       <div className={styles.wholeScreen}>
@@ -121,7 +116,7 @@ function Home() {
                       setLoginPassword(event.target.value);
                     }}
                     placeholder="password"
-                    type="text"
+                    type="password"
                   />
 
                   <div>
@@ -170,9 +165,9 @@ function Home() {
                       setRegisterPassword(event.target.value);
                     }}
                     placeholder="password"
-                    type="text"
+                    type="password"
                   />
-                  <input placeholder="confirm password" type="text" />
+                  <input placeholder="confirm password" type="password" />
                   <div>
                     <button
                       className={styles.color}

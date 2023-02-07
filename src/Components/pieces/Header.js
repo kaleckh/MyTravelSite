@@ -5,8 +5,9 @@ import { auth } from "../Firebase";
 import { signOut } from "firebase/auth";
 
 export default function Header({
-  home, 
   toggleMenu,
+  home,
+  out,  
   myTrips,
   myProfile,
   createTrip
@@ -22,7 +23,8 @@ export default function Header({
       <div className="headerButtonContainer">
         <div onClick={() => {toggleMenu()}}  className="headerItem">{createTrip}</div>
         <div onClick={() => {navigate('/myTrips')}} className="headerItem">{myTrips}</div>
-        <div onClick={() => {Promise.all([logout()]).then(navigate('/'))}} className="headerItem">{myProfile}</div>
+        <div onClick={() => {navigate(`/myprofile/:${auth.currentUser.uid}`)}} className="headerItem">{myProfile}</div>
+        <div onClick={() => {Promise.all([logout()]).then(navigate('/'))}} className="headerItem">{out}</div>
       </div>
     </header>
   );

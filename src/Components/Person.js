@@ -25,6 +25,9 @@ function Person() {
   const [trips, setTrips] = useState([]);
   const { search } = useLocation();
   const params = new URLSearchParams(search);
+
+  const localEmail = localStorage.getItem("userEmail");
+
   const handleSubmit = async (id, location, dates) => {
     try {
       let newTrip = await axios.post("http://localhost:3001/newtrip", {
@@ -49,6 +52,9 @@ function Person() {
   const logout = async () => {
     await signOut(auth);
   };
+
+  
+
   const formattedDate = tripDates.toLocaleString("en,US", {
     year: "numeric",
     month: "long",
@@ -78,7 +84,28 @@ function Person() {
     });
   }, []);
 
-  console.log(params);
+  useEffect(() => {
+    if(localEmail || auth) {
+      axios({
+        method: "get",
+        url: `http://localhost:3001/person/${localEmail ?? auth?.currentUser?.email}`,
+      }).then((res) => {
+        setMyId(res.data[0].id);
+      });
+
+    }
+    
+  }, [localEmail]);
+
+  // useEffect(() => {
+  //   axios({
+  //     method: "get",
+  //     url: `http://localhost:3001/person/${localStorage.getItem('userEmail')}`,
+  //   }).then((res) => {
+
+  //     setMyId(res.data[0].id);
+  //   });
+  // }, []);
 
   return (
     <>
@@ -89,6 +116,7 @@ function Person() {
           myTrips={"My Trips"}
           myProfile={"My Profile"}
           out={"Logout"}
+          id={myId}
           toggleMenu={() => {
             setIsAddingTrip(!isAddingTrip);
           }}

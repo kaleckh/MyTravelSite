@@ -20,6 +20,7 @@ function MyProfile() {
   const [isSettingDate, setIsSettingDate] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  
 
   const Navigate = useNavigate();
   const { search } = useLocation();
@@ -36,6 +37,7 @@ function MyProfile() {
     }).then((res) => {
       setFirstName(res.data[0].firstname);
       setLastName(res.data[0].lastname);
+      setMyId(res.data[0].id);
     });
   }, []);
 
@@ -58,6 +60,7 @@ function MyProfile() {
         createTrip={"Create Trip"}
         myTrips={"My Trips"}
         myProfile={"My Profile"}
+        id={myId}
       />
       <div className={styles.profileWholeScreen}>
         <div className={styles.leftProfileContainer}>

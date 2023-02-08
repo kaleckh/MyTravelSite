@@ -1,0 +1,196 @@
+.x {
+    margin-left: 700px;
+    margin-top: 5px;
+    font-weight: 800;
+    font-size: larger;
+}
+
+.tripContainer {
+    display: flex;
+    height: 100%;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+    object-fit: cover;
+}
+
+.createTripContainer {
+    display: flex;
+    height: 53vh;
+    width: 75vw;
+    align-items: center;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 25px;
+    margin: 20px;
+}
+
+.halfTripContainer {
+    width: 300px;
+    background-color: rgb(59, 55, 255);
+    height: 90%;
+    border-radius: 25px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.blueBoxWords {
+    color: white;
+    font-weight: 700;
+    padding: 30px 30px 0 30px;
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.smallBlueBoxWords {
+    color: white;
+    padding: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.backWrapper {
+    display: flex;
+    width: 630px;
+    justify-content: flex-start;
+}
+
+.bigTags {
+    font-size: 65px;
+}
+
+.wholeScreen {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-image: url("./Media/ocean.jpg");
+}
+
+.createButton {
+    width: 50px;
+    margin-left: 45%;
+}
+
+.title {
+    font-size: 50px;
+    margin: 30px;
+    font-weight: 300;
+    letter-spacing: 8px;
+}
+
+.headerButtonContainer {
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.datePicker {
+    background-color: white;
+    height: 50px;
+}
+
+.home {
+    margin: 10px;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.createTripInputContainer {
+    width: 700px;
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35%;
+}
+
+.myTripsWholeScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("./Media/ocean.jpg");
+}
+
+.tripInfo {
+    border: 1px solid black;
+    height: 50px;
+    margin: 20px 0 10px 0;
+    height: 100px;
+}
+
+.otherHalfContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: none;
+}
+
+.createTripInput {
+    width: 325px;
+    height: 45px;
+    border-radius: 7px;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.back {
+    border-radius: 3px;
+    font-size: 0.9rem;
+    background: none;
+    color: black;
+    border: none;
+    text-shadow: 0 1px 0 gray;
+}
+
+.tripDate {
+    width: 150px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    font-weight: 0px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
+}
+
+.tripLocation {
+    height: 45px;
+    width: 250px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin: 20px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 8px;
+    background-color: white;
+    font-size: larger;
+    font-weight: 0px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
+}
+
+.text {
+    font-weight: 400;
+    font-size: 30px;
+}
+
+.tripBox {
+    display: flex;
+}
+
+.showTripContainer {
+    width: 1000px;
+}

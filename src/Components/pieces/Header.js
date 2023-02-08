@@ -7,7 +7,8 @@ import { signOut } from "firebase/auth";
 export default function Header({
   toggleMenu,
   home,
-  out,  
+  out,
+  id,  
   myTrips,
   myProfile,
   createTrip
@@ -19,12 +20,12 @@ export default function Header({
 
   return (
     <header className="header">
-      <div className="home">{home}</div>
+      <div className="home" onClick={() => {navigate(`/person/${auth.currentUser.uid}`)}}>{home}</div>
       <div className="headerButtonContainer">
         <div onClick={() => {toggleMenu()}}  className="headerItem">{createTrip}</div>
-        <div onClick={() => {navigate('/myTrips')}} className="headerItem">{myTrips}</div>
-        <div onClick={() => {navigate(`/myprofile/:${auth.currentUser.uid}`)}} className="headerItem">{myProfile}</div>
-        <div onClick={() => {Promise.all([logout()]).then(navigate('/'))}} className="headerItem">{out}</div>
+        <div onClick={() => {navigate(`/myTrips/${id}`)}} className="headerItem">{myTrips}</div>
+        <div onClick={() => {navigate(`/myprofile/${id}`)}} className="headerItem">{myProfile}</div>
+        <div onClick={() => {Promise.all([logout()]).then([navigate('/'), localStorage.removeItem('userEmail')])}} className="headerItem">{out}</div>
       </div>
     </header>
   );

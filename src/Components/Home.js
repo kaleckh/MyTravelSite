@@ -41,7 +41,9 @@ function Home() {
   const login = async () => {
     console.log(loginEmail, loginPassword, "emails and pasword");
     try {
-      return await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      const loggedUser = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      localStorage.setItem(`userEmail`, `${auth.currentUser.email}`);
+      return loggedUser
     } catch (error) {
       console.log(error.message);
     }

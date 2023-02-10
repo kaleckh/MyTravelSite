@@ -256,23 +256,23 @@ function MyTrips() {
                                   <div className={styles.dates}>
                                     {changeFormat(trip.tripenddate)}
                                   </div>
-                                  <button> Delete</button>
+                                  {isDeletingTrip && <button> Delete</button>}
                                 </div>
                               </div>
-                              
                             </div>
-                            
                           </div>
-                          
                         );
                       })}
-                      
                     </>
                   )}
                 </div>
-                
               )}
-              <DeleteButton deletingTrip={() => {setIsDeletingTrip(!isDeletingTrip)}}/>
+
+              <DeleteButton
+                isDeletingTrip={() => {
+                  setIsDeletingTrip(!isDeletingTrip);
+                }}
+              />
             </div>
           </div>
         ))}

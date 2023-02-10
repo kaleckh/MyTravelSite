@@ -56,8 +56,9 @@
 }
 
 .mainImage {
-    background-color: black;
+    border: gray 1px solid;
     height: 45vh;
+    border-radius: 20px;
     width: 35vw;
     margin: 20px;
     display: flex;
@@ -83,10 +84,12 @@
 .smallImage {
     height: 150px;
     width: 225px;
+    border: darkgray 1px solid;
+    border-radius: 20px;
 }
 
 .smallImageContainer {
-    width: 1012px;
+    width: 100%;
     display: flex;
     justify-content: space-around;
 }
@@ -96,9 +99,11 @@ img {
 }
 
 .imageDiv {
-    background-color: black;
-    height: 177px;
-    width: 225px;
+    border: gray 1px solid;
+    border-radius: 20px;
+    height: 150px;
+    padding: 10px;
+    width: 220px;
 }
 
 .upload {
@@ -115,10 +120,21 @@ img {
 .bottomContainer {
     display: flex;
     justify-content: space-around;
+    width: 100%;
+}
+
+.friends {
+    background-color: black;
+    width: 20%;
 }
 
 .pastTrips {
     display: flex;
+    padding: 15px;
+    background-color: rgb(93, 140, 161);
+    width: 50%;
+    height: 100%;
+    justify-content: space-around;
 }
 
 input {

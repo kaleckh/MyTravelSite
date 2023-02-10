@@ -206,7 +206,7 @@ function MyProfile() {
             </div>
           </div>
           <div className={styles.bottomContainer}>
-            <div className={styles.imageDiv}></div>
+            <div className={styles.friends}></div>
             <div className={styles.pastTrips}>
               <div className={styles.imageDiv}></div>
               <div className={styles.imageDiv}></div>

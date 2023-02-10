@@ -8,9 +8,9 @@ export default function Header({isDeletingTrip}) {
   return (
     <div>
       {toggleDelete ? (
-        <button onClick={() => {isDeletingTrip(); setToggleDelete(!setToggleDelete)}}>Cancel</button>
+        <button onClick={() => {setToggleDelete(!setToggleDelete); isDeletingTrip()}}>Cancel</button>
       ) : (
-        <div className={styles.dots} onClick={() => {isDeletingTrip(); setToggleDelete(!toggleDelete)}}>...</div>
+        <div className={styles.dots} onClick={() => { setToggleDelete(!toggleDelete); isDeletingTrip()}}>...</div>
       )}
     </div>
   );

@@ -80,6 +80,7 @@ function Home() {
                 <div className={styles.buttonContainer}>
                   <button
                     onClick={() => {
+                      
                       sethomeScreen(false);
                       setLogin(true);
                     }}

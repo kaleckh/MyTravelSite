@@ -85,3 +85,8 @@ img {
     height: 100px;
     border-radius: 50px;
 }
+
+.row {
+    display: flex;
+    padding: 10px;
+}

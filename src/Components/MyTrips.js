@@ -9,20 +9,23 @@ import { useLocation } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { async } from "@firebase/util";
 import Header from "./pieces/Header";
+import DeleteButton from "./pieces/DeleteButton";
 
 function MyTrips() {
   const [myTrips, setMyTrips] = useState([]);
   const [myId, setMyId] = useState("");
   const [tripLocation, setTripLocation] = useState("");
   const [tripState, setTripState] = useState("");
+  const [tripCity, setTripCity] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSettingLocation, setIsSettingLocation] = useState(false);
   const [isAddingTrip, setIsAddingTrip] = useState(true);
-  const [isSettingDate, setIsSettingDate] = useState(false);
   const [isDeletingTrip, setIsDeletingTrip] = useState(false);
   const [value, onChange] = useState([new Date(), new Date()]);
   const [startDate, setStartDate] = useState(value[0]);
   const [endDate, setEndDate] = useState(value[1]);
+  const [isAdding, setIsAdding] = useState(false);
+  const [description, setDescription] = useState("");
   const Navigate = useNavigate();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
@@ -30,12 +33,11 @@ function MyTrips() {
   const logout = async () => {
     await signOut(auth);
   };
-  localStorage.setItem(`userEmail`, `${auth.currentUser.email}`)
 
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${auth.currentUser.email}`,
+      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
       axios({
@@ -47,6 +49,7 @@ function MyTrips() {
       });
     });
   }, []);
+
   useEffect(() => {
     changeDateFormat();
   }, [value]);
@@ -59,10 +62,11 @@ function MyTrips() {
         tripstartdate: startDate,
         tripenddate: endDate,
         tripstate: tripState,
+        description: description,
       });
 
       setMyTrips([...myTrips, newTrip.data[0]]);
-      setIsAddingTrip(false);
+      setIsAdding(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -82,7 +86,6 @@ function MyTrips() {
     setIsDeletingTrip(false);
   };
 
-  
   const regularStartDate = new Date(startDate).toLocaleDateString();
   const regularEndDate = new Date(endDate).toLocaleDateString();
 
@@ -95,7 +98,6 @@ function MyTrips() {
       if (i === 0) {
         setStartDate(
           fullYear.toLocaleString("en-US", {
-            year: "numeric",
             month: "long",
             day: "numeric",
           })
@@ -105,7 +107,15 @@ function MyTrips() {
       }
     }
   };
+  const changeFormat = (isoDate) => {
+    const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+    return regularDate;
+  };
 
+  console.log(myTrips);
   return (
     <div
       onClick={() => {
@@ -128,9 +138,17 @@ function MyTrips() {
               myProfile={"My Profile"}
               out={"Logout"}
               id={myId}
+              toggleMenu={() => {
+                setIsAdding(!isAdding);
+              }}
             />
             <div className={styles.tripContainer}>
-              <div className={styles.title}>CURRENT TRIPS</div>
+              {isAdding ? (
+                <div className={styles.title}>Create Trip</div>
+              ) : (
+                <div className={styles.title}>CURRENT TRIPS</div>
+              )}
+
               {myTrips.length === 0 ? (
                 <div>
                   <div className={styles.bigTags}>
@@ -139,45 +157,122 @@ function MyTrips() {
                 </div>
               ) : (
                 <div>
-                  {myTrips.map((trip) => {
-                    return (
-                      <div className={styles.myTripsContainer}>
-                        <div className={styles.tripBox}>
-                          <div
-                            onClick={() => {
-                              Navigate(`/trip/${trip.id}`);
-                            }}
-                            className={styles.tripLocation}
-                          >
-                            <div className={styles.text}>
-                              {trip.triplocation}
-                            </div>
+                  {isAdding ? (
+                    <div
+                      className={`${styles.createTripContainer} ${styles.blur}`}
+                    >
+                      <div className={styles.halfTripContainer}>
+                        <div className={styles.blueBoxWords}>
+                          Start your journey with us
+                        </div>
+                        <div className={styles.smallBlueBoxWords}>
+                          Join our community of thousands
+                        </div>
+                        <div>A quote would go here</div>
+                      </div>
+
+                      <div className={styles.otherHalfContainer}>
+                        <div
+                          onClick={() => {
+                            setIsAdding(!isAdding);
+                          }}
+                          className={styles.x}
+                        >
+                          x
+                        </div>
+                        <div className={styles.backWrapper}></div>
+                        <div className={styles.createTripInputContainer}>
+                          <div className={styles.myTripInputContainer}>
+                            <div>city</div>
+                            <input
+                              className={styles.createTripInput}
+                              placeholder="City"
+                              onChange={(event) => {
+                                setTripLocation(event.target.value);
+                              }}
+                              type="text"
+                            />
                           </div>
-                          <div
-                            onClick={() => {
-                              Navigate(`/trip/${trip.id}`);
-                            }}
-                            className={styles.tripDate}
-                          >
-                            <div className={styles.text}>
-                              {trip.regularStartDate} - {trip.regularEndDate}
-                            </div>
+                          <div>
+                            <div>State/Country</div>
+                            <input
+                              onChange={(event) => {
+                                setTripState(event.target.value);
+                              }}
+                              placeholder="State/Country"
+                              type="text"
+                              className={styles.createTripInput}
+                            />
                           </div>
                         </div>
+                        <DateRangePicker
+                          onChange={onChange}
+                          value={value}
+                          className={styles.datePicker}
+                        />
+                        <input
+                          onChange={(event) => {
+                            setDescription(event.target.value);
+                          }}
+                          className={styles.tripInfo}
+                        />
+                        <button
+                          className={styles.createButton}
+                          onClick={() => {
+                            handleSubmit().then(() => {
+                              setIsAdding(false);
+                            });
+                          }}
+                        >
+                          Next!
+                        </button>
                       </div>
-                    );
-                  })}
+                    </div>
+                  ) : (
+                    <>
+                      {myTrips.map((trip) => {
+                        return (
+                          <div className={styles.myTripsContainer}>
+                            <div className={styles.tripBox}>
+                              <div className={styles.tripLocation}>
+                                <div
+                                  onClick={() => {
+                                    Navigate(`/trip/${trip.id}`);
+                                  }}
+                                  className={styles.location}
+                                >
+                                  {trip.triplocation}
+                                </div>
+                                <div className={styles.location}>
+                                  {trip.tripstate}
+                                </div>
+                              </div>
+                              <div className={styles.tripDate}>
+                                <div className={styles.dateContainer}>
+                                  <div className={styles.dates}>
+                                    {changeFormat(trip.tripstartdate)}
+                                  </div>
+                                  <div>-</div>
+                                  <div className={styles.dates}>
+                                    {changeFormat(trip.tripenddate)}
+                                  </div>
+                                  <button> Delete</button>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            
+                          </div>
+                          
+                        );
+                      })}
+                      
+                    </>
+                  )}
                 </div>
+                
               )}
-              <div
-                onClick={() => {
-                  setIsSettingLocation(true);
-                  setIsAddingTrip(false);
-                }}
-                className={styles.tripLocation}
-              >
-                + NEW TRIP
-              </div>
+              <DeleteButton deletingTrip={() => {setIsDeletingTrip(!isDeletingTrip)}}/>
             </div>
           </div>
         ))}

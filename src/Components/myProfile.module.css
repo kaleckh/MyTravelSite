@@ -8,7 +8,23 @@
     height: 100vh;
     width: 30vw;
     color: white;
-    margin-right: 90px;
+    margin: 20px;
+}
+
+.editContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.edit {
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.editInput {
+    background-color: white;
 }
 
 .profileHeader {
@@ -40,18 +56,20 @@
 }
 
 .mainImage {
-    height: 400px;
-    width: 660px;
-    padding-top: 20px;
-    padding-right: 30px;
-    padding-bottom: 30px;
-    padding-left: 40px;
+    background-color: black;
+    height: 45vh;
+    width: 35vw;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .mainImageContainer {
     width: 70vw;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .topImagesContainer {
@@ -75,4 +93,34 @@
 
 img {
     vertical-align: bottom;
+}
+
+.imageDiv {
+    background-color: black;
+    height: 177px;
+    width: 225px;
+}
+
+.upload {
+    opacity: 0;
+}
+
+.rightSidePhotos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.bottomContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.pastTrips {
+    display: flex;
+}
+
+input {
+    border: none;
 }

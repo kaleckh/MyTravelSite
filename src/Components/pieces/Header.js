@@ -11,7 +11,8 @@ export default function Header({
   id,  
   myTrips,
   myProfile,
-  createTrip
+  createTrip,
+  color
 }) {
   const navigate = useNavigate()
   const logout = async () => {

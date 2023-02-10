@@ -27,12 +27,15 @@
 
 .halfTripContainer {
     width: 300px;
-    background-color: rgb(59, 55, 255);
+    background-color: black;
     height: 90%;
     border-radius: 25px;
     margin: 8px;
     display: flex;
     flex-direction: column;
+    display: flex;
+    align-items: center;
+    color: white;
 }
 
 .blueBoxWords {
@@ -71,6 +74,7 @@
 .createButton {
     width: 50px;
     margin-left: 45%;
+    color: black;
 }
 
 .title {
@@ -91,6 +95,7 @@
 .datePicker {
     background-color: white;
     height: 50px;
+    width: 85%;
 }
 
 .home {
@@ -118,6 +123,12 @@
     background-image: url("./Media/ocean.jpg");
 }
 
+.myTripsContainer {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
 .tripInfo {
     border: 1px solid black;
     height: 50px;
@@ -129,7 +140,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    align-items: center;
+    width: 80%;
     background-color: none;
+    justify-content: center;
 }
 
 .createTripInput {
@@ -150,45 +164,70 @@
 }
 
 .tripDate {
-    width: 150px;
-    box-sizing: border-box;
-    margin-top: 10px;
-    height: 50px;
+    width: 31vw;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: white;
-    border-radius: 8px;
-    font-weight: 0px;
-    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dateContainer {
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.dates {
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.location {
+    font-size: 25px;
+    font-weight: 400;
 }
 
 .tripLocation {
-    height: 45px;
-    width: 250px;
-    box-sizing: border-box;
-    margin-top: 10px;
-    margin: 20px;
-    height: 50px;
+    width: 40%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border-radius: 8px;
-    background-color: white;
-    font-size: larger;
-    font-weight: 0px;
+}
+
+.newTrip {
+    background-color: black;
+    width: 15%;
+    text-align: center;
+    border-radius: 10px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .text {
     font-weight: 400;
     font-size: 30px;
+    display: flex;
 }
 
 .tripBox {
     display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 50px;
+    margin: 10px;
+    cursor: pointer;
 }
 
 .showTripContainer {

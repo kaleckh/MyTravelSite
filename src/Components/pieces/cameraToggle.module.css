@@ -1,0 +1,11 @@
+.uploadContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hide {
+    color: transparent;
+    padding-left: 38%;
+}

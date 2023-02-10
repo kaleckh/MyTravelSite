@@ -1,0 +1,24 @@
+.delete {
+    width: 15px;
+    height: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: black;
+    transition-delay: 50ms;
+    background-color: black;
+}
+
+.delete:hover {
+    background-color: bisque;
+}
+
+.dots {
+    cursor: pointer;
+    font-size: 75px;
+    color: white;
+    font-weight: 900;
+}
+
+.hidden {
+    display: none;
+}

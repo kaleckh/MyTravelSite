@@ -80,7 +80,7 @@ let newTrip = (req, res) => {
 let editdetails = (req, res) => {
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.edit_person([ req.body.firstname, req.body.lastname, req.body.hometown, req.body.location, req.params.id ])
+		.edit_person([ req.body.firstname, req.body.lastname, req.body.instagram, req.body.bio, req.params.id ])
 		.then((peopletravelling) => {
 			res.status(200).send(peopletravelling);
 		})

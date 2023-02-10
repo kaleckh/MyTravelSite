@@ -84,28 +84,20 @@ function Person() {
     });
   }, []);
 
-  useEffect(() => {
-    if(localEmail || auth) {
-      axios({
-        method: "get",
-        url: `http://localhost:3001/person/${localEmail ?? auth?.currentUser?.email}`,
-      }).then((res) => {
-        setMyId(res.data[0].id);
-      });
 
-    }
     
-  }, [localEmail]);
 
-  // useEffect(() => {
-  //   axios({
-  //     method: "get",
-  //     url: `http://localhost:3001/person/${localStorage.getItem('userEmail')}`,
-  //   }).then((res) => {
 
-  //     setMyId(res.data[0].id);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `http://localhost:3001/person/${localStorage.getItem('userEmail')}`,
+    }).then((res) => {
+
+      setMyId(res.data[0].id);
+    });
+  }, []);
+  console.log(myId)
 
   return (
     <>

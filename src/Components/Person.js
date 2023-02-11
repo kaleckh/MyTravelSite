@@ -3,12 +3,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./pieces/Header";
 import SearchBar from "./pieces/SearchBar";
+import { Arrow } from "./Media/Arrow";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
 import { useLocation } from "react-router-dom";
 import { auth } from "./Firebase";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import { Search } from "./Media/Search";
 function Person() {
   const Navigate = useNavigate();
   const [tripLocation, setTripLocation] = useState("");
@@ -53,8 +55,6 @@ function Person() {
     await signOut(auth);
   };
 
-  
-
   const formattedDate = tripDates.toLocaleString("en,US", {
     year: "numeric",
     month: "long",
@@ -84,20 +84,15 @@ function Person() {
     });
   }, []);
 
-
-    
-
-
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${localStorage.getItem('userEmail')}`,
+      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
-
       setMyId(res.data[0].id);
     });
   }, []);
-  console.log(myId)
+  console.log(myId);
 
   return (
     <>
@@ -190,11 +185,18 @@ function Person() {
             </div>
           </div>
         ) : (
-          <div className={styles.container}>
+          <div className={styles.searchContainer}>
             <div className={styles.title}>Where do you wanna go?</div>
-            <SearchBar trips={trips} />
+            <div className={styles.container}>
+              <SearchBar trips={trips} />
+              <Search />
+            </div>
           </div>
         )}
+        <div className={styles.downContainer}>
+          <div className={styles.bottomText}>Huh?</div>
+          <Arrow />
+        </div>
       </div>
       <div className={styles.secondContainer}>
         <div className={styles.title}>Who are we?</div>

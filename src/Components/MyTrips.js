@@ -82,9 +82,9 @@ function MyTrips() {
       console.log(error.message);
     }
   };
-  const closeMenu = () => {
-    setIsDeletingTrip(false);
-  };
+  // const closeMenu = () => {
+  //   setIsDeletingTrip(false);
+  // };
 
   const regularStartDate = new Date(startDate).toLocaleDateString();
   const regularEndDate = new Date(endDate).toLocaleDateString();
@@ -117,11 +117,7 @@ function MyTrips() {
 
   console.log(myTrips);
   return (
-    <div
-      onClick={() => {
-        closeMenu();
-      }}
-    >
+    <div>
       {isAddingTrip &&
         (isLoading ? (
           <div className={styles.myTripsWholeScreen}>
@@ -231,6 +227,7 @@ function MyTrips() {
                   ) : (
                     <>
                       {myTrips.map((trip) => {
+                        console.log(isDeletingTrip);
                         return (
                           <div className={styles.myTripsContainer}>
                             <div className={styles.tripBox}>
@@ -249,14 +246,25 @@ function MyTrips() {
                               </div>
                               <div className={styles.tripDate}>
                                 <div className={styles.dateContainer}>
-                                  <div className={styles.dates}>
-                                    {changeFormat(trip.tripstartdate)}
+                                  <div className={styles.dateContainerLeft}>
+                                    <div className={styles.dates}>
+                                      {changeFormat(trip.tripstartdate)}
+                                    </div>
+                                    <div>-</div>
+                                    <div className={styles.dates}>
+                                      {changeFormat(trip.tripenddate)}
+                                    </div>
                                   </div>
-                                  <div>-</div>
-                                  <div className={styles.dates}>
-                                    {changeFormat(trip.tripenddate)}
-                                  </div>
-                                  {isDeletingTrip && <button> Delete</button>}
+                                  {isDeletingTrip && (
+                                    <button
+                                      onClick={() => {
+                                        handleDelete(trip.id);
+                                      }}
+                                    >
+                                      {" "}
+                                      Delete
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -270,6 +278,7 @@ function MyTrips() {
 
               <DeleteButton
                 isDeletingTrip={() => {
+                  console.log(!isDeletingTrip, "toggle");
                   setIsDeletingTrip(!isDeletingTrip);
                 }}
               />

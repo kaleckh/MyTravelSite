@@ -1,5 +1,5 @@
 .dataResult {
-    width: 300px;
+    width: 500px;
     height: 200px;
     background-color: white;
     overflow: hidden;
@@ -9,6 +9,18 @@
 
 .dataResult::-webkit-scrollbar {
     display: none;
+}
+
+.dateContainer {
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.location {
+    font-size: 30px;
+    font-weight: 500;
 }
 
 .dataResult .dataItem {
@@ -22,4 +34,14 @@
 a:hover {
     background-color: lightgray;
     cursor: pointer;
+}
+
+.input {
+    border-bottom: 1px black solid;
+    width: 500px;
+}
+
+.input::placeholder {
+    color: white;
+    opacity: .3;
 }

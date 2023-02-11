@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./MyProfile.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
@@ -27,7 +27,9 @@ function MyProfile() {
   const [bio, setBio] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileEdit, setProfileEdit] = useState(false);
+  const [toggleFile, setToggleFile] = useState(false);
   window.Buffer = window.Buffer || require("buffer").Buffer;
+  const inputRef = useRef(null);
 
   const Navigate = useNavigate();
   const { search } = useLocation();
@@ -50,6 +52,11 @@ function MyProfile() {
     });
   }, []);
 
+  const onInputClick = (name) => {
+    
+    inputRef.current.click(name);
+  };
+
   const handleDelete = async (id) => {
     try {
       let deleteTrip = await axios.delete(
@@ -63,12 +70,12 @@ function MyProfile() {
   };
   const handleSubmit = async () => {
     try {
-      debugger
+      debugger;
       return await axios.put(`http://localhost:3001/editperson/${myId}`, {
         firstname: firstName,
         lastname: lastName,
         instagram: insta,
-        bio: bio
+        bio: bio,
       });
     } catch (error) {
       console.log(error.message);
@@ -85,7 +92,9 @@ function MyProfile() {
     secretAccessKey: "6fGYVhwlyHQjgScRDJJtUf0WXw0u+9NvQdcTn3el",
   };
 
-  const handleFileInput = (e) => {
+  const handleFileInput = (e, name) => {
+    
+
     setSelectedFile(e.target.files[0]);
   };
 
@@ -170,8 +179,8 @@ function MyProfile() {
                 <button
                   onClick={() => {
                     setProfileEdit(!profileEdit);
-                    debugger
-                    handleSubmit()
+                    debugger;
+                    handleSubmit();
                   }}
                 >
                   Save Changes
@@ -191,25 +200,43 @@ function MyProfile() {
               </>
             )}
           </div>
+          <input
+            onChange={(event) => {
+              handleFileInput(event);
+            }}
+            ref={inputRef}
+            type="file"
+            name=""
+            style={{ display: "none" }}
+          />
         </div>
 
         <div className={styles.rightProfileContainer}>
           <div className={styles.mainImageContainer}>
-            <div className={styles.mainImage}>
-              <CameraToggle />
+            <div
+              onClick={() => {
+                onInputClick(localStorage.getItem("userEmail"));
+              }}
+              className={styles.mainImage}
+            >
+              <Camera />
             </div>
             <div className={styles.rightSidePhotos}>
-              <div className={styles.imageDiv}>
-                <CameraToggle />
+              <div onClick={() => {}} className={styles.imageDiv}>
+                <Camera />
               </div>
-              <div className={styles.imageDiv}></div>
             </div>
           </div>
           <div className={styles.bottomContainer}>
-            <div className={styles.friends}></div>
+            <div className={styles.friends}>
+              <div className={styles.title}>Friends</div>
+            </div>
             <div className={styles.pastTrips}>
-              <div className={styles.imageDiv}></div>
-              <div className={styles.imageDiv}></div>
+              <div className={styles.title}>Previous Trips</div>
+              <div className={styles.row}>
+                <div className={styles.imageDiv}></div>
+                <div className={styles.imageDiv}></div>
+              </div>
             </div>
           </div>
 

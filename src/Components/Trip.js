@@ -16,6 +16,7 @@ function Trip() {
   const [myTrip, setMyTrip] = useState([]);
   const [myId, setMyId] = useState("");
   const [myTrips, setMyTrips] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const logout = async () => {
     await signOut(auth);
@@ -32,6 +33,7 @@ function Trip() {
         url: `http://localhost:3001/trip/${id}`,
       }).then((res) => {
         setMyTrips(res.data);
+        setLoading(false);
       });
     });
   }, []);
@@ -39,59 +41,61 @@ function Trip() {
     const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
+      
     });
     return regularDate;
   };
+  
+ 
 
-
-  // const getCurrentDate = (separator='') => {
-
-  //   let newDate = new Date()
-  //   let date = newDate.getDate();
-  //   let month = newDate.getMonth() + 1;
-  //   let year = newDate.getFullYear();
-    
-  //   return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
-  //   }
-    
+  
+  
   return (
     <div>
-      <Header
-        home={"Home"}
-        createTrip={"Create Trip"}
-        myTrips={"My Trips"}
-        myProfile={"My Profile"}
-      />
-      <div className={styles.tripMainContainer}>
-        <div className={styles.leftTripContainer}>
-          <div className={styles.personaltriptitle}>
-            {myTrips[0].triplocation}
-          </div>
-          <div className={styles.row}>
-            <div className={styles.personaltripdate}>
-              {changeFormat(myTrips[0].tripstartdate)}
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        <>
+          <Header
+            home={"Home"}
+            createTrip={"Create Trip"}
+            myTrips={"My Trips"}
+            myProfile={"My Profile"}
+            out={"Logout"}
+            color={"black"}
+          />
+          <div className={styles.tripMainContainer}>
+            <div className={styles.leftTripContainer}>
+              <div className={styles.personaltriptitle}>
+                {myTrips[0].triplocation}
+              </div>
+              <div className={styles.row}>
+                <div className={styles.personaltripdate}>
+                  {changeFormat(myTrips[0].tripstartdate)}
+                </div>
+                <div className={styles.personaltripdate}>
+                  {changeFormat(myTrips[0].tripenddate)}
+                </div>
+              </div>
+              <img className={styles.tripImage} alt="" />
             </div>
-            <div className={styles.personaltripdate}>
-              {changeFormat(myTrips[0].tripenddate)}
+            <div className={styles.rightTripContainer}>
+              <div className={styles.daysTill}>
+                <div className={styles.daysTillText}>days till</div>
+                <div className={styles.daysTillNumber}>200</div>
+              </div>
+              <div className={styles.boxContainer}>
+                <div className={styles.smallerTitle}>Whose Coming</div>
+                <div className={styles.tripbox} />
+                <div className={styles.smallerTitle}>About the trip</div>
+                <div className={styles.tripbox} />
+                <div className={styles.smallerTitle}>Housing</div>
+                <div className={styles.tripbox} />
+              </div>
             </div>
           </div>
-          <img className={styles.tripImage} alt="" />
-        </div>
-        <div className={styles.rightTripContainer}>
-          <div className={styles.daysTill}>
-            <div className={styles.daysTillText}>days till</div>
-            <div className={styles.daysTillNumber}>200</div>
-          </div>
-          <div className={styles.boxContainer}>
-            <div className={styles.smallerTitle}>Whose Coming</div>
-            <div className={styles.tripbox} />
-            <div className={styles.smallerTitle}>About the trip</div>
-            <div className={styles.tripbox} />
-            <div className={styles.smallerTitle}>Housing</div>
-            <div className={styles.tripbox} />
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

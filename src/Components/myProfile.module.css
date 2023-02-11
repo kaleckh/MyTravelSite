@@ -11,6 +11,10 @@
     margin: 20px;
 }
 
+.row {
+    display: flex;
+}
+
 .editContainer {
     display: flex;
     flex-direction: column;
@@ -41,6 +45,9 @@
 .rightProfileContainer {
     height: 100vh;
     width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .profileTitle {
@@ -60,7 +67,6 @@
     height: 45vh;
     border-radius: 20px;
     width: 35vw;
-    margin: 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -82,8 +88,8 @@
 }
 
 .smallImage {
-    height: 150px;
-    width: 225px;
+    height: 175px;
+    width: 250xpx;
     border: darkgray 1px solid;
     border-radius: 20px;
 }
@@ -101,9 +107,11 @@ img {
 .imageDiv {
     border: gray 1px solid;
     border-radius: 20px;
-    height: 150px;
+    height: 125px;
     padding: 10px;
     width: 220px;
+    display: flex;
+    justify-content: center;
 }
 
 .upload {
@@ -114,7 +122,7 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 20px;
+    height: 100%;
 }
 
 .bottomContainer {
@@ -124,17 +132,26 @@ img {
 }
 
 .friends {
-    background-color: black;
+    background-color: rgb(93, 140, 161);
     width: 20%;
+    display: flex;
+    justify-content: center;
 }
 
 .pastTrips {
     display: flex;
-    padding: 15px;
     background-color: rgb(93, 140, 161);
     width: 50%;
     height: 100%;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-weight: 700;
+    color: white;
+    font-size: 25px;
+    padding-bottom: 10px;
 }
 
 input {

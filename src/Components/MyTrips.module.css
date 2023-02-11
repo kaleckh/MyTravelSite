@@ -174,10 +174,8 @@
 }
 
 .dateContainer {
-    width: 95%;
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
 }
 
 .dates {
@@ -198,6 +196,14 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.dateContainerLeft {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
 }
 
 .newTrip {

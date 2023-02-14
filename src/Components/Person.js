@@ -186,7 +186,7 @@ function Person() {
           </div>
         ) : (
           <div className={styles.searchContainer}>
-            <div className={styles.title}>Where do you wanna go?</div>
+            <div className={styles.title}>Open Trips</div>
             <div className={styles.container}>
               <SearchBar trips={trips} />
               <Search />
@@ -199,11 +199,12 @@ function Person() {
         </div>
       </div>
       <div className={styles.secondContainer}>
-        <div className={styles.title}>Who are we?</div>
-        <div>
+        <div className={styles.title}>What's this?</div>
+        <div className={styles.bottomPiece}>
           <div className={styles.paragraph}>
-            A platform focused on connecting travellers
+            A platform focused on connecting travellers! Create a trip or request to join someone else's
           </div>
+          <div className={styles.reviews}></div>
         </div>
       </div>
     </>

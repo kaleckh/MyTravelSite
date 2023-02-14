@@ -41,7 +41,8 @@ export default function SearchBar(props) {
         <div className={styles.searchIcon}></div>
       </div>
       {filteredData.length !== 0 && (
-        <div className={styles.dataResult}>
+       
+        <div className={`${styles.dataResult}`}>
           {filteredData.slice(0, 15).map((item, index) => {
             return (
               <a

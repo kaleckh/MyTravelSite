@@ -72,11 +72,22 @@
     flex-direction: column;
 }
 
+.mainPic {
+    height: 100%;
+    border-radius: 8px;
+}
+
 .mainImageContainer {
     width: 70vw;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    margin: 20px;
+}
+
+.smallPhoto {
+    height: 250px;
+    border-radius: 8px;
 }
 
 .topImagesContainer {
@@ -108,7 +119,6 @@ img {
     border: gray 1px solid;
     border-radius: 20px;
     height: 125px;
-    padding: 10px;
     width: 220px;
     display: flex;
     justify-content: center;
@@ -121,8 +131,8 @@ img {
 .rightSidePhotos {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     height: 100%;
+    width: 30%;
 }
 
 .bottomContainer {

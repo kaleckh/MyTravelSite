@@ -69,10 +69,6 @@
     height: 100vh;
 }
 
-img {
-    border-radius: 100px;
-}
-
 .smallerTitle {
     font-weight: 500;
     font-size: x-large;

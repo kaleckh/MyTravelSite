@@ -238,10 +238,7 @@ function MyTrips() {
                                   }}
                                   className={styles.location}
                                 >
-                                  {trip.triplocation}
-                                </div>
-                                <div className={styles.location}>
-                                  {trip.tripstate}
+                                  {trip.triplocation}, {trip.tripstate}
                                 </div>
                               </div>
                               <div className={styles.tripDate}>

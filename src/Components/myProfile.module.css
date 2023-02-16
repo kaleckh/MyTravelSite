@@ -43,11 +43,10 @@
 }
 
 .rightProfileContainer {
-    height: 100vh;
-    width: 70vw;
+    height: 90vh;
+    width: 60vw;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .profileTitle {
@@ -82,11 +81,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin: 20px;
 }
 
 .smallPhoto {
     height: 250px;
+    border-radius: 8px;
+}
+
+.smallerPhoto {
+    height: 200px;
     border-radius: 8px;
 }
 
@@ -122,6 +125,7 @@ img {
     width: 220px;
     display: flex;
     justify-content: center;
+    margin: 10px;
 }
 
 .upload {
@@ -138,6 +142,7 @@ img {
 .bottomContainer {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 100%;
 }
 
@@ -150,9 +155,8 @@ img {
 
 .pastTrips {
     display: flex;
-    background-color: rgb(93, 140, 161);
     width: 50%;
-    height: 100%;
+    height: 70%;
     flex-direction: column;
     align-items: center;
 }

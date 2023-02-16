@@ -80,9 +80,22 @@ let newTrip = (req, res) => {
 let editdetails = (req, res) => {
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.edit_person([ req.body.firstname, req.body.lastname, req.body.instagram, req.body.bio, req.params.id ])
+		.edit_person([ req.body.instagram, req.body.bio, req.params.id ])
 		.then((peopletravelling) => {
 			res.status(200).send(peopletravelling);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				errorMessage: err
+			});
+		});
+};
+let edittrip = (req, res) => {
+	const dbInstance = req.app.get('db');
+	dbInstance
+		.edit_trip([ req.body.description, req.body.housing, req.body.friends, req.params.id ])
+		.then((trips) => {
+			res.status(200).send(trips);
 		})
 		.catch((err) => {
 			res.status(500).send({
@@ -145,5 +158,6 @@ module.exports = {
 	deletetrip,
 	getTrip,
 	getTrips,
-	newDate
+	newDate,
+	edittrip
 };

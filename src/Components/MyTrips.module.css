@@ -164,7 +164,7 @@
 }
 
 .tripDate {
-    width: 31vw;
+    width: 28vw;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
@@ -194,7 +194,7 @@
     border-radius: 10px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -234,6 +234,8 @@
     height: 50px;
     margin: 10px;
     cursor: pointer;
+    font-weight: 200;
+    font-size: 20px;
 }
 
 .showTripContainer {

@@ -1,11 +1,18 @@
 .dataResult {
-    width: 500px;
+    width: 600px;
     height: 200px;
     background-color: white;
     overflow: hidden;
     overflow-y: auto;
     box-shadow: rgb(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: all 1s;
+    opacity: 0;
+    border-radius: 8px;
+}
+
+.dataResult.show {
+    opacity: 1;
+    transform: translateY(20px);
 }
 
 .dataResult::-webkit-scrollbar {
@@ -19,9 +26,14 @@
     align-items: center;
 }
 
+.date {
+    font-size: 20px;
+    font-weight: 200;
+}
+
 .location {
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 300;
 }
 
 .dataItem {
@@ -38,12 +50,34 @@ a:hover {
     cursor: pointer;
 }
 
-.input {
-    border-bottom: 1px black solid;
-    width: 500px;
-}
-
 .input::placeholder {
     color: white;
     opacity: 0.3;
+}
+
+.input {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50vw;
+}
+
+.dropdown-menu {
+    position: relative;
+    width: 200px;
+}
+
+.dataContainer {
+    height: 100%;
+    width: 100%;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #0077cc;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
 }

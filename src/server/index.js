@@ -4,6 +4,7 @@ const massive = require('massive');
 const bodyParser = require('body-parser');
 var {
 	getpeople,
+	edittrip,
 	newperson,
 	editdetails,
 	deleteperson,
@@ -23,7 +24,7 @@ app.use(cors());
 app.use(bodyParser());
 const dotenv = require('dotenv');
 require('dotenv').config();
-const CONNECTION_STRING = 'postgres://postgres:postgres@localhost/lets_travel?sslmode=disable';
+const CONNECTION_STRING = 'postgresql://postgres:mvfYRZbHBHK1kK1rnjFo@containers-us-west-22.railway.app:6635/railway';
 
 massive({
 	connectionString: CONNECTION_STRING,
@@ -41,7 +42,8 @@ app.get('/trips', getTrips);
 app.get('/trip/:id', getTrip)
 app.post('/newperson', newperson);
 app.post('/newtrip', newTrip);
-app.put('/editperson/:id', editdetails);
+app.put('/editperson/:id', editdetails); 
+app.put('/edittrip/:id', edittrip); 
 app.delete('/deleteperson/:id', deleteperson);
 app.delete('/deletetrip/:id', deletetrip);
 

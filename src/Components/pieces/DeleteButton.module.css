@@ -14,9 +14,13 @@
 
 .dots {
     cursor: pointer;
-    font-size: 75px;
     color: white;
     font-weight: 900;
+}
+
+.deleteContainer {
+    display: flex;
+    align-items: center;
 }
 
 .hidden {

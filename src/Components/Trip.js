@@ -15,8 +15,12 @@ function Trip() {
   const [myInfo, setMyInfo] = useState([]);
   const [myTrip, setMyTrip] = useState([]);
   const [myId, setMyId] = useState("");
+  const [description, setDescription] = useState("");
+  const [housing, setHousing] = useState("");
+  const [friends, setFriends] = useState("");
   const [myTrips, setMyTrips] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [toggleTripDetails, setToggleTripDetails] = useState(false);
   const { id } = useParams();
   const logout = async () => {
     await signOut(auth);
@@ -37,19 +41,27 @@ function Trip() {
       });
     });
   }, []);
+
   const changeFormat = (isoDate) => {
     const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
-      
     });
     return regularDate;
   };
-  
- 
+  const handleSubmit = async () => {
+    try {
+      return await axios.put(`http://localhost:3001/editperson/${id}`, {
+        description: description,
+        housing: housing,
+        friends: friends,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
-  
-  
+  console.log(myTrips)
   return (
     <div>
       {loading ? (
@@ -64,33 +76,99 @@ function Trip() {
             out={"Logout"}
             color={"black"}
           />
+
           <div className={styles.tripMainContainer}>
-            <div className={styles.leftTripContainer}>
-              <div className={styles.personaltriptitle}>
-                {myTrips[0].triplocation}
-              </div>
-              <div className={styles.row}>
-                <div className={styles.personaltripdate}>
-                  {changeFormat(myTrips[0].tripstartdate)}
+            <div className={styles.tripContainer}>
+              <div className={styles.leftTripContainer}>
+                <div className={styles.personaltriptitle}>
+                  {myTrips[0].triplocation}
                 </div>
-                <div className={styles.personaltripdate}>
-                  {changeFormat(myTrips[0].tripenddate)}
+                <div className={styles.row}>
+                  <div className={styles.personaltripdate}>
+                    {`${changeFormat(
+                      myTrips[0].tripstartdate
+                    )} - ${changeFormat(myTrips[0].tripenddate)}`}
+                  </div>
                 </div>
+                <img className={styles.tripImage} alt="" />
               </div>
-              <img className={styles.tripImage} alt="" />
-            </div>
-            <div className={styles.rightTripContainer}>
-              <div className={styles.daysTill}>
-                <div className={styles.daysTillText}>days till</div>
-                <div className={styles.daysTillNumber}>200</div>
-              </div>
-              <div className={styles.boxContainer}>
-                <div className={styles.smallerTitle}>Whose Coming</div>
-                <div className={styles.tripbox} />
-                <div className={styles.smallerTitle}>About the trip</div>
-                <div className={styles.tripbox} />
-                <div className={styles.smallerTitle}>Housing</div>
-                <div className={styles.tripbox} />
+              <div className={styles.rightTripContainer}>
+                <div className={styles.daysTill}>
+                  <div className={styles.center}>
+                    <div className={styles.daysTillText}>days till</div>
+                    <div className={styles.daysTillNumber}>200</div>
+                  </div>
+                </div>
+                <div className={styles.boxContainer}>
+                  {!toggleTripDetails ? (
+                    <div className={styles.center}>
+                      
+                      <div className={styles.smallerTitle}>Whose Coming</div>
+                      <div className={styles.tripbox} >
+                        {myTrips[0].friends}
+                      </div>
+                      <div className={styles.smallerTitle}>About the trip</div>
+                      <div className={styles.tripbox}>{myTrips[0].description} </div>
+                      <div className={styles.smallerTitle}>Housing</div>
+                      <div className={styles.tripbox}>{myTrips[0].housing}</div>
+                      <div className={styles.row}>
+                        <button
+                          className={`${styles.smallerTitle} ${styles.tripButton}`}
+                          onClick={() => {
+                            setToggleTripDetails(true);
+                          }}
+                        >
+                          Edit
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      {" "}
+                      <div className={styles.smallerTitle}>Whose Coming</div>
+                      <div className={styles.tripbox}>
+                        <textarea
+                          onChange={(event) => {
+                            setFriends(event.target.value);
+                          }}
+                          placeholder="Tag Friends Coming"
+                          type="text"
+                        />
+                      </div>
+                      <div className={styles.smallerTitle}>About the trip</div>
+                      <div className={styles.tripbox}>
+                        <textarea
+                          onChange={(event) => {
+                            setDescription(event.target.value);
+                          }}
+                          placeholder="What are you gonna be doing this trip?"
+                          type="text"
+                        />
+                      </div>
+                      <div className={styles.smallerTitle}>Housing</div>
+                      <div className={styles.tripbox}>
+                        <textarea
+                          onChange={(event) => {
+                            setHousing(event.target.value);
+                          }}
+                          placeholder="What kind of housing and where will you be staying"
+                          type="text"
+                        />
+                      </div>
+                      <div className={styles.row}>
+                        <button
+                          onClick={() => {
+                            setToggleTripDetails(!toggleTripDetails);
+                            handleSubmit();
+                          }}
+                          className={`${styles.smallerTitle} ${styles.tripButton}`}
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>

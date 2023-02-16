@@ -88,10 +88,7 @@ function MyProfile() {
   };
   const handleSubmit = async () => {
     try {
-      debugger;
       return await axios.put(`http://localhost:3001/editperson/${myId}`, {
-        firstname: firstName,
-        lastname: lastName,
         instagram: insta,
         bio: bio,
       });
@@ -110,8 +107,9 @@ function MyProfile() {
     secretAccessKey: "6fGYVhwlyHQjgScRDJJtUf0WXw0u+9NvQdcTn3el",
   };
 
-  const handleFileInput = (e, name) => {
+  const handleFileInput = (e) => {
     console.log(e.target.files[0]);
+
     setSelectedFile(e.target.files[0]);
   };
 
@@ -126,7 +124,7 @@ function MyProfile() {
             <button
               className={styles.upload}
               onClick={() => {
-                debugger;
+                
                 uploadFile(selectedFile);
               }}
             >
@@ -150,17 +148,12 @@ function MyProfile() {
 
   const uploadFile = async (file) => {
     const ReactS3Client = new S3(config);
-    debugger;
-    console.log(file);
+
     ReactS3Client.uploadFile(file, `${myId}-${photoName}`)
       .then((data) => console.log(data.location), setButtonToggle(false))
       .catch((err) => console.error(err));
   };
 
-  console.log(myId);
-  console.log(
-    "https://travelimagebucket.s3.us-west-2.amazonaws.com/823fe405-a34d-4039-b93c-a3962eef1914-main.jpeg"
-  );
   return (
     <div>
       <Header
@@ -213,7 +206,7 @@ function MyProfile() {
                 <button
                   onClick={() => {
                     setProfileEdit(!profileEdit);
-                    debugger;
+
                     handleSubmit();
                   }}
                 >
@@ -245,33 +238,22 @@ function MyProfile() {
           />
         </div>
 
-        <div className={styles.rightProfileContainer}>
-          <div className={styles.mainImageContainer}>
-            <div
-              onClick={() => {
-                setPhotoName("main");
-                onInputClick();
-              }}
-              className={styles.mainImage}
-            >
-              <Camera />
-              <img
-                className={styles.mainPic}
-                src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-main.jpeg`}
-              />
-              {buttonToggle && (
-                <>
-                  {" "}
-                  <button
-                    onClick={() => {
-                      uploadFile(selectedFile);
-                    }}
-                  >
-                    button
-                  </button>
-                  );
-                </>
-              )}
+        <div>
+          <div className={styles.rightProfileContainer}>
+            <div className={styles.mainImageContainer}>
+              <div
+                onClick={() => {
+                  setPhotoName("main");
+                  onInputClick();
+                }}
+                className={styles.mainImage}
+              >
+                <Camera />
+                <img
+                  className={styles.mainPic}
+                  src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-main.jpeg`}
+                />
+              </div>
             </div>
             <div className={styles.rightSidePhotos}>
               <div
@@ -290,18 +272,22 @@ function MyProfile() {
                     alt=""
                   />
                 </div>
-                {buttonToggle1 && (
-                  <>
-                    {" "}
-                    <button
-                      onClick={() => {
-                        uploadFile(selectedFile);
-                      }}
-                    >
-                      button
-                    </button>
-                  </>
-                )}
+              </div>
+              <div
+                onClick={() => {
+                  setPhotoName("rightSide");
+                  setButtonToggle1(true);
+                  onInputClick();
+                }}
+                className={styles.imageDiv}
+              >
+                <Camera />
+                <div>
+                  <img
+                    className={styles.smallPhoto}
+                    src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-leftTrip.jpeg`}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -309,23 +295,10 @@ function MyProfile() {
             <div className={styles.friends}>
               <div className={styles.title}>Friends</div>
             </div>
-            <div className={styles.pastTrips}>
-              <div className={styles.title}>Previous Trips</div>
-              <div className={styles.row}>
-                <div className={styles.imageDiv}>
-                  <Camera />
-                  <img src={`${localStorage.getItem("userEmail")}-past1}`} />
-                </div>
-                <div className={styles.imageDiv}>
-                  <Camera />
-                  <img src="" alt="" />
-                </div>
-              </div>
-            </div>
           </div>
-
-          <div />
         </div>
+
+        <div />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "./Firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { Audio } from "react-loader-spinner";
 
 function Trip() {
   const { search } = useLocation();
@@ -61,13 +62,24 @@ function Trip() {
     }
   };
 
-  console.log(myTrips)
+  console.log(myTrips);
   return (
     <div>
       {loading ? (
-        <div>Loading</div>
+        <div className={styles.loadingContainer}>
+          {" "}
+          <Audio
+            height="80"
+            width="80"
+            radius="9"
+            color="white"
+            ariaLabel="loading"
+            wrapperStyle
+            wrapperClass
+          />
+        </div>
       ) : (
-        <>
+        <div>
           <Header
             home={"Home"}
             createTrip={"Create Trip"}
@@ -102,13 +114,12 @@ function Trip() {
                 <div className={styles.boxContainer}>
                   {!toggleTripDetails ? (
                     <div className={styles.center}>
-                      
                       <div className={styles.smallerTitle}>Whose Coming</div>
-                      <div className={styles.tripbox} >
-                        {myTrips[0].friends}
-                      </div>
+                      <div className={styles.tripbox}>{myTrips[0].friends}</div>
                       <div className={styles.smallerTitle}>About the trip</div>
-                      <div className={styles.tripbox}>{myTrips[0].description} </div>
+                      <div className={styles.tripbox}>
+                        {myTrips[0].description}{" "}
+                      </div>
                       <div className={styles.smallerTitle}>Housing</div>
                       <div className={styles.tripbox}>{myTrips[0].housing}</div>
                       <div className={styles.row}>
@@ -172,7 +183,7 @@ function Trip() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

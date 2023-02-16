@@ -37,11 +37,27 @@
     justify-content: space-around;
     width: 80%;
     align-items: center;
-    height: 50%;
+    height: 90%;
 }
 
 .reviews {
     width: 50vw;
+}
+
+img {
+    width: auto;
+}
+
+.homeImage {
+    width: 50vw;
+    border-radius: 8px;
+}
+
+.bottomLeft {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .searchContainer {

@@ -24,7 +24,6 @@ function Home() {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [loginToggle, setLogin] = useState("");
-  
 
   const register = async () => {
     try {
@@ -41,9 +40,13 @@ function Home() {
   const login = async () => {
     console.log(loginEmail, loginPassword, "emails and pasword");
     try {
-      const loggedUser = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+      const loggedUser = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
       localStorage.setItem(`userEmail`, `${auth.currentUser.email}`);
-      return loggedUser
+      return loggedUser;
     } catch (error) {
       console.log(error.message);
     }
@@ -53,8 +56,8 @@ function Home() {
     await signOut(auth);
   };
 
- 
   const handleSubmit = async () => {
+    debugger;
     try {
       return await axios.post("http://localhost:3001/newperson", {
         firstname: firstName,
@@ -65,7 +68,7 @@ function Home() {
       console.log(error.message);
     }
   };
-  
+
   return (
     <div className={styles.full}>
       <div className={styles.wholeScreen}>
@@ -79,8 +82,8 @@ function Home() {
                 </div>
                 <div className={styles.buttonContainer}>
                   <button
+                    className={styles.button}
                     onClick={() => {
-                      
                       sethomeScreen(false);
                       setLogin(true);
                     }}
@@ -88,6 +91,7 @@ function Home() {
                     Login
                   </button>
                   <button
+                    className={styles.button}
                     onClick={() => {
                       sethomeScreen(false);
                       setLogin(false);
@@ -124,7 +128,7 @@ function Home() {
 
                   <div>
                     <button
-                      className={styles.color}
+                      className={styles.loginbutton}
                       onClick={() => {
                         setLogin(false);
                       }}
@@ -137,7 +141,7 @@ function Home() {
                           Navigate(`/person/${auth.currentUser.uid}`);
                         });
                       }}
-                      className={styles.color}
+                      className={styles.loginbutton}
                     >
                       Login
                     </button>
@@ -175,7 +179,9 @@ function Home() {
                     <button
                       className={styles.color}
                       onClick={() => {
-                        Promise.all([register(), handleSubmit()]).then(setLogin(true));
+                        Promise.all([register(), handleSubmit()]).then(
+                          setLogin(true)
+                        );
                       }}
                     >
                       Register

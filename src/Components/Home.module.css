@@ -100,7 +100,6 @@ button {
 
 input {
     margin: 5px;
-    border: 1px black solid;
     height: 60px;
     border-radius: 2px;
 }
@@ -123,10 +122,28 @@ input {
 .color {
     color: black;
     font-size: 20px;
-    border: .5px black solid;
     transition-delay: 50ms;
 }
 
 .color:hover {
     background-color: aquamarine;
+}
+
+.button {
+    border-radius: 25px;
+    padding: 15px;
+    background-color: transparent;
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.loginbutton {
+    border-radius: 25px;
+    padding: 15px;
+    background-color: transparent;
+    color: black;
+    border: .5px black solid;
+    font-size: 25px;
+    font-weight: 400;
 }

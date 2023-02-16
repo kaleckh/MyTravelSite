@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./pieces/Header";
 import SearchBar from "./pieces/SearchBar";
 import { Arrow } from "./Media/Arrow";
+import homePhoto from "./Media/homebottm.jpg";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
@@ -199,12 +200,17 @@ function Person() {
         </div>
       </div>
       <div className={styles.secondContainer}>
-        <div className={styles.title}>What's this?</div>
         <div className={styles.bottomPiece}>
-          <div className={styles.paragraph}>
-            A platform focused on connecting travellers! Create a trip or request to join someone else's
+          <div className={styles.bottomLeft}>
+            <div className={styles.title}>What's this?</div>
+            <div className={styles.paragraph}>
+              A platform focused on connecting travellers! Create a trip or
+              request to join someone else's
+            </div>
           </div>
-          <div className={styles.reviews}></div>
+          <div className={styles.reviews}>
+            <img className={styles.homeImage} src={homePhoto} alt="" />
+          </div>
         </div>
       </div>
     </>

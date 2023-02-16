@@ -1,5 +1,5 @@
 .rightTripContainer {
-    height: 100vh;
+    height: 100%;
     width: 50vw;
     display: flex;
     flex-direction: column;
@@ -12,7 +12,7 @@
 }
 
 .tripMainContainer {
-    height: 100vh;
+    height: 100%;
     background-color: rgb(237, 233, 229);
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
     flex-direction: column;
     align-items: center;
     width: 50vw;
-    height: 100vh;
+    height: 100%;
 }
 
 .personaltriptitle {
@@ -71,7 +71,7 @@
     margin: 10px;
     padding-top: 20px;
     display: flex;
-    height: 100vh;
+    height: 100%;
 }
 
 .tripContainer {
@@ -114,6 +114,14 @@ textarea {
 
 textarea:focus {
     outline: none;
+}
+
+.loadingContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .row {

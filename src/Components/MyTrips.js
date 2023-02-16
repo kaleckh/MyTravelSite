@@ -10,6 +10,7 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { async } from "@firebase/util";
 import Header from "./pieces/Header";
 import DeleteButton from "./pieces/DeleteButton";
+import { Audio } from "react-loader-spinner";
 
 function MyTrips() {
   const [myTrips, setMyTrips] = useState([]);
@@ -121,8 +122,16 @@ function MyTrips() {
       {isAddingTrip &&
         (isLoading ? (
           <div className={styles.myTripsWholeScreen}>
-            <div className={styles.tripContainer}>
-              <div>Loading</div>
+            <div className={styles.LoadingTripContainer}>
+              <Audio
+                height="80"
+                width="80"
+                radius="9"
+                color="white"
+                ariaLabel="loading"
+                wrapperStyle
+                wrapperClass
+              />
             </div>
           </div>
         ) : (
@@ -231,13 +240,13 @@ function MyTrips() {
                         return (
                           <div className={styles.myTripsContainer}>
                             <div className={styles.tripBox}>
-                              <div className={styles.tripLocation}>
-                                <div
-                                  onClick={() => {
-                                    Navigate(`/trip/${trip.id}`);
-                                  }}
-                                  className={styles.location}
-                                >
+                              <div
+                                onClick={() => {
+                                  Navigate(`/trip/${trip.id}`);
+                                }}
+                                className={styles.tripLocation}
+                              >
+                                <div className={styles.location}>
                                   {trip.triplocation}, {trip.tripstate}
                                 </div>
                               </div>
@@ -254,6 +263,7 @@ function MyTrips() {
                                   </div>
                                   {isDeletingTrip && (
                                     <button
+                                      className={styles.deleteButton}
                                       onClick={() => {
                                         handleDelete(trip.id);
                                       }}

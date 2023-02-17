@@ -21,6 +21,7 @@ function Trip() {
   const [friends, setFriends] = useState("");
   const [myTrips, setMyTrips] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [render, setRender] = useState(true);
   const [toggleTripDetails, setToggleTripDetails] = useState(false);
   const { id } = useParams();
   const logout = async () => {
@@ -52,17 +53,19 @@ function Trip() {
   };
   const handleSubmit = async () => {
     try {
-      return await axios.put(`http://localhost:3001/editperson/${id}`, {
+      await axios.put(`http://localhost:3001/edittrip/${id}`, {
         description: description,
         housing: housing,
         friends: friends,
       });
+
+      return await setRender(!render);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  console.log(myTrips);
+  console.log(myTrips[0]);
   return (
     <div>
       {loading ? (

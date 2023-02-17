@@ -89,6 +89,7 @@ button {
     flex-direction: column;
     height: 100%;
     width: 40%;
+    align-items: center;
     justify-content: center;
 }
 
@@ -109,6 +110,16 @@ input {
     font-size: 23px;
     text-align: center;
     width: 80%;
+    margin: 20px;
+    padding: 20px;
+}
+
+button:focus {
+    background-color: aqua;
+}
+
+button:hover {
+    background-color: aqua;
 }
 
 .leftSideInput {

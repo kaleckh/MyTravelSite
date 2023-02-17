@@ -1,8 +1,9 @@
 import React from "react";
 
-export const Camera = () => {
+export const Camera = (props) => {
   return (
     <svg
+    onClick={() => {props.upload()}}
       cursor="pointer"
       height="100px"
       xmlns="http://www.w3.org/2000/svg"

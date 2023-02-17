@@ -54,7 +54,7 @@ export default function SearchBar(props) {
             return (
               <a
                 onClick={() => {
-                  navigate("/trip/:id");
+                  navigate(`/trip/${item.id}`);
                 }}
                 className={styles.dataItem}
               >

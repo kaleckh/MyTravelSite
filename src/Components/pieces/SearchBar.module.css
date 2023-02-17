@@ -80,4 +80,11 @@ a:hover {
 .search {
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+@media (width < 1000px) {
+    .dataResult {
+        width: 100%;
+    }
 }

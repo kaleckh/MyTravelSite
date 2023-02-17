@@ -1,15 +1,14 @@
 import styles from "./Home.module.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState} from "react";
 import axios from "axios";
-import Select from "react-select";
+
 import { useNavigate } from "react-router-dom";
 
 import { auth } from "./Firebase";
 import Header from "./pieces/Header";
 import {
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
+  
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
@@ -52,9 +51,7 @@ function Home() {
     }
   };
 
-  const logout = async () => {
-    await signOut(auth);
-  };
+
 
   const handleSubmit = async () => {
     debugger;
@@ -158,7 +155,7 @@ function Home() {
                       placeholder="first name"
                       type="text"
                     />
-                    <input placeholder="last name" type="text" />
+                    <input onChange={(event) => {setLastName(event.target.value)}} placeholder="last name" type="text" />
                   </div>
                   <input
                     onChange={(event) => {

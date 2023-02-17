@@ -35,17 +35,20 @@ function MyTrips() {
     await signOut(auth);
   };
 
-  useEffect(() => {
+useEffect(() => {
+    
     axios({
       method: "get",
       url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
+      
       setMyId(res.data[0].id);
       axios({
         method: "get",
         url: `http://localhost:3001/personTrips/${res.data[0].id}`,
       }).then((res) => {
         setIsLoading(false);
+        
         setMyTrips(res.data);
       });
     });

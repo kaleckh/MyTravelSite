@@ -1,47 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./MyProfile.module.css";
-import { Link, useNavigate } from "react-router-dom";
+
 import { signOut } from "firebase/auth";
 import { auth } from "./Firebase";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import Header from "./pieces/Header";
-import { Camera } from "./Media/Camera";
+
 import S3 from "react-aws-s3";
-import CameraToggle from "./pieces/cameraToggle";
+
+import Toggle from "./pieces/Toggle";
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const getSignedUrl = require("@aws-sdk/s3-request-presigner");
 
 function MyProfile() {
-  const [profileToggle, setProfileToggle] = useState(false);
   const [myTrips, setMyTrips] = useState([]);
   const [myId, setMyId] = useState("");
-
-  const [tripLocation, setTripLocation] = useState("");
-  const [tripDates, setTripDates] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSettingLocation, setIsSettingLocation] = useState(false);
-  const [isAddingTrip, setIsAddingTrip] = useState(true);
-  const [isSettingDate, setIsSettingDate] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [insta, setInsta] = useState("");
   const [bio, setBio] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileEdit, setProfileEdit] = useState(false);
-  const [toggleFile, setToggleFile] = useState(false);
+
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const inputRef = useRef(null);
   const [photoName, setPhotoName] = useState("");
-  const [buttonToggle, setButtonToggle] = useState(false);
-  const [buttonToggle1, setButtonToggle1] = useState(false);
-  const [buttonToggle2, setButtonToggle2] = useState(true);
-  const [buttonToggle3, setButtonToggle3] = useState(true);
+  
+
   const [email, setEmail] = useState("");
   const region = "us-west-2";
-  const accessKeyId = "AKIA33JD5MXASQ5NXR5S";
-  const secretAccessKey = "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";
+  const accessKeyId = "AKIA33JD5MXA4IOG2YU4";
+  const secretAccessKey = "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";
 
-  const Navigate = useNavigate();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
 
@@ -71,7 +61,7 @@ function MyProfile() {
     });
   }, []);
 
-  const onInputClick = (email, photoPlace) => {
+  const onInputClick = () => {
     inputRef.current.click();
   };
 
@@ -103,8 +93,8 @@ function MyProfile() {
   const config = {
     bucketName: "travelimagebucket",
     region: "us-west-2",
-    accessKeyId: "AKIA33JD5MXASQ5NXR5S",
-    secretAccessKey: "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",
+    accessKeyId: "AKIA33JD5MXA5HVNTCDO",
+    secretAccessKey: "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",
   };
 
   const handleFileInput = (e) => {
@@ -112,25 +102,6 @@ function MyProfile() {
 
     setSelectedFile(e.target.files[0]);
   };
-
-  {
-    /* <input
-              onChange={(event) => {
-                handleFileInput(event);
-              }}
-              className={styles.upload}
-              type="file"
-            />
-            <button
-              className={styles.upload}
-              onClick={() => {
-                
-                uploadFile(selectedFile);
-              }}
-            >
-              Send that one!
-            </button> */
-  }
   const getFileUrl = () => {
     getSignedUrl(
       client,
@@ -146,11 +117,12 @@ function MyProfile() {
       });
   };
 
-  const uploadFile = async (file) => {
+  const uploadFile = async () => {
+    debugger;
     const ReactS3Client = new S3(config);
 
-    ReactS3Client.uploadFile(file, `${myId}-${photoName}`)
-      .then((data) => console.log(data.location), setButtonToggle(false))
+    ReactS3Client.uploadFile(selectedFile, `${myId}-${photoName}`)
+      .then((data) => console.log(data.location),)
       .catch((err) => console.error(err));
   };
 
@@ -212,6 +184,13 @@ function MyProfile() {
                 >
                   Save Changes
                 </button>
+                <button
+                  onClick={() => {
+                    setProfileEdit(!profileEdit);
+                  }}
+                >
+                  Cancel
+                </button>
               </>
             ) : (
               <>
@@ -241,54 +220,32 @@ function MyProfile() {
         <div>
           <div className={styles.rightProfileContainer}>
             <div className={styles.mainImageContainer}>
-              <div
-                onClick={() => {
-                  setPhotoName("main");
-                  onInputClick();
+              <Toggle
+                id={myId}
+                type={"main"}
+                class={styles.mainPic}
+                filterName={() => {
+                  setPhotoName();
                 }}
-                className={styles.mainImage}
-              >
-                <Camera />
-                <img
-                  className={styles.mainPic}
-                  src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-main.jpeg`}
-                />
-              </div>
+              />
             </div>
             <div className={styles.rightSidePhotos}>
-              <div
-                onClick={() => {
-                  setPhotoName("rightSide");
-                  setButtonToggle1(true);
-                  onInputClick();
+              <Toggle
+                id={myId}
+                type={"rightSide"}
+                class={styles.smallPhoto}
+                filterName={() => {
+                  setPhotoName();
                 }}
-                className={styles.imageDiv}
-              >
-                <Camera />
-                <div>
-                  <img
-                    className={styles.smallPhoto}
-                    src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-rightSide.jpeg`}
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div
-                onClick={() => {
-                  setPhotoName("rightSide");
-                  setButtonToggle1(true);
-                  onInputClick();
+              />
+              <Toggle
+                id={myId}
+                type={"rightbottom"}
+                class={styles.smallPhoto}
+                filterName={() => {
+                  setPhotoName();
                 }}
-                className={styles.imageDiv}
-              >
-                <Camera />
-                <div>
-                  <img
-                    className={styles.smallPhoto}
-                    src={`https://travelimagebucket.s3.us-west-2.amazonaws.com/${myId}-leftTrip.jpeg`}
-                  />
-                </div>
-              </div>
+              />
             </div>
           </div>
           <div className={styles.bottomContainer}>

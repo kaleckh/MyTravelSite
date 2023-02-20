@@ -1,5 +1,5 @@
 import styles from "./Home.module.css";
-import React, { useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,9 @@ import { auth } from "./Firebase";
 import Header from "./pieces/Header";
 import {
   createUserWithEmailAndPassword,
-  
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
+import loginPhoto from "./Media/loginphoto.jpg";
 function Home() {
   const Navigate = useNavigate();
 
@@ -50,8 +49,6 @@ function Home() {
       console.log(error.message);
     }
   };
-
-
 
   const handleSubmit = async () => {
     debugger;
@@ -103,25 +100,33 @@ function Home() {
         ) : (
           <div className={`${styles.loginContainer} ${styles.blur}`}>
             <div className={styles.loginPage}>
-              <div className={styles.leftSideInput}></div>
+              <div className={styles.leftSideInput}>
+                <img className={styles.loginImage} src={loginPhoto} alt="" />
+              </div>
+
               {loginToggle ? (
                 <div className={styles.inputContainer}>
-                  <div className={styles.words}>Welcome Back!</div>
+                  <div className={styles.loginBackContainer}>
+                    <div className={styles.back}>X</div>
+                  </div>
+                  <div className={styles.words}>Login!</div>
                   <div className={styles.row}></div>
-                  <input
-                    onChange={(event) => {
-                      setLoginEmail(event.target.value);
-                    }}
-                    placeholder="email"
-                    type="text"
-                  />
-                  <input
-                    onChange={(event) => {
-                      setLoginPassword(event.target.value);
-                    }}
-                    placeholder="password"
-                    type="password"
-                  />
+                  <div className={styles.inputContainer}>
+                    <input
+                      onChange={(event) => {
+                        setLoginEmail(event.target.value);
+                      }}
+                      placeholder="email"
+                      type="text"
+                    />
+                    <input
+                      onChange={(event) => {
+                        setLoginPassword(event.target.value);
+                      }}
+                      placeholder="password"
+                      type="password"
+                    />
+                  </div>
 
                   <div>
                     <button
@@ -147,50 +152,59 @@ function Home() {
               ) : (
                 <div className={styles.inputContainer}>
                   <div className={styles.words}>Welcome</div>
-                  <div className={styles.row}>
+                  <div className={styles.inputTop}>
+                    <div className={styles.row}>
+                      <input
+                        onChange={(event) => {
+                          setFirstName(event.target.value);
+                        }}
+                        placeholder="first name"
+                        type="text"
+                      />
+                      <input
+                        onChange={(event) => {
+                          setLastName(event.target.value);
+                        }}
+                        placeholder="last name"
+                        type="text"
+                      />
+                    </div>
+
                     <input
                       onChange={(event) => {
-                        setFirstName(event.target.value);
+                        setRegisterEmail(event.target.value);
                       }}
-                      placeholder="first name"
+                      placeholder="email"
                       type="text"
                     />
-                    <input onChange={(event) => {setLastName(event.target.value)}} placeholder="last name" type="text" />
-                  </div>
-                  <input
-                    onChange={(event) => {
-                      setRegisterEmail(event.target.value);
-                    }}
-                    placeholder="email"
-                    type="text"
-                  />
-                  <input
-                    onChange={(event) => {
-                      setRegisterPassword(event.target.value);
-                    }}
-                    placeholder="password"
-                    type="password"
-                  />
-                  <input placeholder="confirm password" type="password" />
-                  <div>
-                    <button
-                      className={styles.color}
-                      onClick={() => {
-                        Promise.all([register(), handleSubmit()]).then(
-                          setLogin(true)
-                        );
+                    <input
+                      onChange={(event) => {
+                        setRegisterPassword(event.target.value);
                       }}
-                    >
-                      Register
-                    </button>
-                    <button
-                      onClick={() => {
-                        setLogin(true);
-                      }}
-                      className={styles.color}
-                    >
-                      Login instead
-                    </button>
+                      placeholder="password"
+                      type="password"
+                    />
+                    <input placeholder="confirm password" type="password" />
+                    <div>
+                      <button
+                        className={styles.loginbutton}
+                        onClick={() => {
+                          Promise.all([register(), handleSubmit()]).then(
+                            setLogin(true)
+                          );
+                        }}
+                      >
+                        Register
+                      </button>
+                      <button
+                        onClick={() => {
+                          setLogin(true);
+                        }}
+                        className={styles.loginbutton}
+                      >
+                        Login instead
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

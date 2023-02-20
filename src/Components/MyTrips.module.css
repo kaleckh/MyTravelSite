@@ -174,19 +174,23 @@
 }
 
 .tripDate {
-    width: 29vw;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+    width: 200px;
 }
 
 .dateContainer {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-radius: 10px;
+    background-color: rgb(190, 199, 201);
 }
 
 .deleteButton {
@@ -206,21 +210,14 @@
 }
 
 .tripLocation {
-    width: 40%;
+    width: 300px;
+    padding: 20px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.dateContainerLeft {
-    width: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px;
 }
 
 .newTrip {
@@ -247,7 +244,7 @@
 .tripBox {
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 60%;
     height: 50px;
     margin: 10px;
     cursor: pointer;
@@ -257,4 +254,52 @@
 
 .showTripContainer {
     width: 1000px;
+}
+
+@media (width < 1400px) {
+    .title {
+        font-size: 45px;
+    }
+    .location {
+        font-size: 25px;
+    }
+    .dates {
+        font-size: 25px;
+    }
+    .tripBox {
+        width: 70%;
+    }
+}
+
+@media (width < 1200px) {
+    .location {
+        font-size: 25px;
+    }
+    .dates {
+        font-size: 20px;
+    }
+    .tripBox {
+        width: 80%;
+    }
+}
+
+@media (width < 1000px) {
+    .location {
+        font-size: 20px;
+    }
+    .dates {
+        font-size: 15px;
+    }
+}
+
+@media (width < 600px) {
+    .location {
+        font-size: 15px;
+    }
+    .dates {
+        font-size: 15px;
+    }
+    .tripBox {
+        width: 100%;
+    }
 }

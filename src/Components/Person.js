@@ -187,10 +187,12 @@ function Person() {
           </div>
         ) : (
           <div className={styles.searchContainer}>
-            <div className={styles.title}>Open Trips</div>
-            <div className={styles.container}>
-              <SearchBar trips={trips} />
-              <Search />
+            <div className={styles.inputSizer}>
+              <div className={styles.title}>Open Trips</div>
+              <div className={styles.container}>
+                <SearchBar trips={trips} />
+                <Search />
+              </div>
             </div>
           </div>
         )}

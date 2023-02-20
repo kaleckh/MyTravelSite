@@ -128,3 +128,12 @@ textarea:focus {
     display: flex;
     padding: 10px;
 }
+
+@media (width < 870px) {
+    .tripContainer {
+        flex-direction: column;
+    }
+    .daysTill {
+        display: none;
+    }
+}

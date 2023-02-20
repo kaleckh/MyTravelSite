@@ -11,6 +11,12 @@ body {
     height: 100vh;
 }
 
+.loginBackContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .wholeScreen {
     display: flex;
     flex-direction: column;
@@ -33,6 +39,11 @@ body {
     flex-direction: column;
 }
 
+.back {
+    font-weight: 800;
+    font-size: 25px;
+}
+
 .mainBox {
     width: 50%;
     height: 100%;
@@ -53,7 +64,7 @@ body {
 }
 
 button {
-    border: white .5px solid;
+    border: white 0.5px solid;
     color: black;
     margin: 10px;
     font-size: 20px;
@@ -74,6 +85,7 @@ button {
     width: 70%;
     display: flex;
     border-radius: 15px;
+    justify-content: space-around;
 }
 
 .loginContainer {
@@ -88,9 +100,16 @@ button {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 40%;
+    margin: 15px;
+    width: 70%;
     align-items: center;
-    justify-content: center;
+}
+
+.inputTop {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .row {
@@ -102,16 +121,27 @@ button {
 input {
     margin: 5px;
     height: 60px;
+    width: 95%;
     border-radius: 2px;
+    border-bottom: 1px black solid;
+}
+
+input:focus {
+    border-color: blue;
 }
 
 .words {
-    font-weight: 300;
-    font-size: 23px;
+    font-weight: 600;
+    font-size: 30px;
     text-align: center;
     width: 80%;
     margin: 20px;
     padding: 20px;
+}
+
+.inputContainer {
+    width: 80%;
+    height: 50%;
 }
 
 button:focus {
@@ -123,11 +153,19 @@ button:hover {
 }
 
 .leftSideInput {
-    width: 50%;
-    background-image: url("./Media/loginphoto.jpg");
+    width: 45%;
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 15px;
+}
+
+.loginImage {
+    width: auto;
+    height: 95%;
+    width: 100%;
+    border-radius: 15px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .color {
@@ -154,7 +192,49 @@ button:hover {
     padding: 15px;
     background-color: transparent;
     color: black;
-    border: .5px black solid;
+    border: 0.5px black solid;
     font-size: 25px;
     font-weight: 400;
+}
+
+@media (width < 1200px) {}
+
+@media (width < 1000px) {
+    .loginbutton {
+        font-size: 15px;
+    }
+}
+
+@media (width < 700px) {
+    .loginImage {
+        display: none;
+    }
+    .leftSideInput {
+        display: none;
+    }
+    .words {
+        font-weight: 400;
+        font-size: 30px;
+        text-align: center;
+        width: 80%;
+        margin: 20px;
+        padding: 20px;
+    }
+    .loginbutton {
+        border-radius: 25px;
+        padding: 15px;
+        background-color: transparent;
+        color: black;
+        border: 0.5px black solid;
+        font-size: 25px;
+        font-weight: 400;
+    }
+    .inputContainer {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
 }

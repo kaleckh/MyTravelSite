@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./MyProfile.module.css";
+import styles from "./my-profile.module.css";
 
 import { signOut } from "firebase/auth";
 import { auth } from "./Firebase";

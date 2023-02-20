@@ -115,6 +115,7 @@ useEffect(() => {
     const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
       month: "long",
       day: "numeric",
+      year: "numeric"
     });
     return regularDate;
   };
@@ -256,13 +257,10 @@ useEffect(() => {
                               <div className={styles.tripDate}>
                                 <div className={styles.dateContainer}>
                                   <div className={styles.dateContainerLeft}>
-                                    <div className={styles.dates}>
-                                      {changeFormat(trip.tripstartdate)}
-                                    </div>
-                                    <div>-</div>
+                                    
                                     <div className={styles.dates}>
                                       {changeFormat(trip.tripenddate)}
-                                    </div>
+                                     </div>
                                   </div>
                                   {isDeletingTrip && (
                                     <button

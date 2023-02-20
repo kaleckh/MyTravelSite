@@ -118,7 +118,9 @@ button {
     width: 100%;
 }
 
-input {
+.input {
+    background-color: transparent;
+    border: none;
     margin: 5px;
     height: 60px;
     width: 95%;
@@ -188,7 +190,7 @@ button:hover {
 }
 
 .loginbutton {
-    border-radius: 25px;
+    border-radius: 30px;
     padding: 15px;
     background-color: transparent;
     color: black;
@@ -221,7 +223,7 @@ button:hover {
         padding: 20px;
     }
     .loginbutton {
-        border-radius: 25px;
+        border-radius: 30px;
         padding: 15px;
         background-color: transparent;
         color: black;
@@ -232,9 +234,29 @@ button:hover {
     .inputContainer {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: 50%;
         width: 100%;
         align-items: center;
-        justify-content: center;
+    }
+    .words {
+        font-size: 45px;
+    }
+    .loginPage {
+        background-color: white;
+        height: 95%;
+        width: 95%;
+        display: flex;
+        border-radius: 15px;
+        justify-content: space-around;
+    }
+    .mainBox {
+        padding-top: 50px;
+        width: 70%;
+    }
+    .inputTop {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

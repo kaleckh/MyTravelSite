@@ -68,7 +68,6 @@ function Home() {
       <div className={styles.wholeScreen}>
         {homeScreen ? (
           <>
-            <Header />
             <div className={styles.mainContainer}>
               <div className={styles.mainBox}>
                 <div className={styles.homeTitle}>
@@ -107,12 +106,20 @@ function Home() {
               {loginToggle ? (
                 <div className={styles.inputContainer}>
                   <div className={styles.loginBackContainer}>
-                    <div className={styles.back}>X</div>
+                    <div
+                      onClick={() => {
+                        sethomeScreen(!homeScreen);
+                      }}
+                      className={styles.back}
+                    >
+                      X
+                    </div>
                   </div>
                   <div className={styles.words}>Login!</div>
                   <div className={styles.row}></div>
                   <div className={styles.inputContainer}>
                     <input
+                      className={styles.input}
                       onChange={(event) => {
                         setLoginEmail(event.target.value);
                       }}
@@ -120,6 +127,7 @@ function Home() {
                       type="text"
                     />
                     <input
+                      className={styles.input}
                       onChange={(event) => {
                         setLoginPassword(event.target.value);
                       }}
@@ -155,6 +163,7 @@ function Home() {
                   <div className={styles.inputTop}>
                     <div className={styles.row}>
                       <input
+                        className={styles.input}
                         onChange={(event) => {
                           setFirstName(event.target.value);
                         }}
@@ -162,6 +171,7 @@ function Home() {
                         type="text"
                       />
                       <input
+                        className={styles.input}
                         onChange={(event) => {
                           setLastName(event.target.value);
                         }}
@@ -171,6 +181,7 @@ function Home() {
                     </div>
 
                     <input
+                      className={styles.input}
                       onChange={(event) => {
                         setRegisterEmail(event.target.value);
                       }}
@@ -178,6 +189,7 @@ function Home() {
                       type="text"
                     />
                     <input
+                      className={styles.input}
                       onChange={(event) => {
                         setRegisterPassword(event.target.value);
                       }}
@@ -185,7 +197,7 @@ function Home() {
                       type="password"
                     />
                     <input placeholder="confirm password" type="password" />
-                    <div>
+                    <div className={styles.row}>
                       <button
                         className={styles.loginbutton}
                         onClick={() => {

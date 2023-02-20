@@ -76,7 +76,7 @@ img {
     flex-direction: column;
 }
 
-input {
+.input {
     width: 70%;
     font-size: 25px;
     background-color: transparent;

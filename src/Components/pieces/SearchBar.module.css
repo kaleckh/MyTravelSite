@@ -57,9 +57,11 @@ a:hover {
 
 .input {
     padding: 10px;
+    border: none;
+    background-color: transparent;
     border-bottom: 1px solid #ccc;
     border-radius: 4px;
-    width: 65vw;
+    width: 60vw;
 }
 
 .dropdown-menu {
@@ -86,5 +88,8 @@ a:hover {
 @media (width < 1000px) {
     .dataResult {
         width: 100%;
+    }
+    .input {
+        width: 70vw;
     }
 }

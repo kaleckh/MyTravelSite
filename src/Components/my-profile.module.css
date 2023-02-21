@@ -187,8 +187,21 @@ img {
     }
     .rightProfileContainer {
         height: 50%;
+        width: 100%;
+    }
+    .leftProfileContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 65vh;
     }
     .profileWholeScreen {
         align-items: center;
+    }
+    .mainPic {
+        width: 300px;
+    }
+    .leftProfileContainer {
+        width: 100vw;
     }
 }

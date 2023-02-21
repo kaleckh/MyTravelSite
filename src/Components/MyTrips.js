@@ -35,20 +35,18 @@ function MyTrips() {
     await signOut(auth);
   };
 
-useEffect(() => {
-    
+  useEffect(() => {
     axios({
       method: "get",
       url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
-      
       setMyId(res.data[0].id);
       axios({
         method: "get",
         url: `http://localhost:3001/personTrips/${res.data[0].id}`,
       }).then((res) => {
         setIsLoading(false);
-        
+
         setMyTrips(res.data);
       });
     });
@@ -114,8 +112,8 @@ useEffect(() => {
   const changeFormat = (isoDate) => {
     const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
       month: "long",
-      day: "numeric",
-      year: "numeric"
+
+      year: "numeric",
     });
     return regularDate;
   };
@@ -148,7 +146,7 @@ useEffect(() => {
               out={"Logout"}
               id={myId}
               toggleMenu={() => {
-                setIsAdding(!isAdding);
+                setIsAdding(true);
               }}
             />
             <div className={styles.tripContainer}>
@@ -183,7 +181,7 @@ useEffect(() => {
                       <div className={styles.otherHalfContainer}>
                         <div
                           onClick={() => {
-                            setIsAdding(!isAdding);
+                            setIsAdding(false);
                           }}
                           className={styles.x}
                         >
@@ -214,16 +212,19 @@ useEffect(() => {
                             />
                           </div>
                         </div>
-                        <DateRangePicker
-                          onChange={onChange}
-                          value={value}
-                          className={styles.datePicker}
-                        />
-                        <input
+                        <div className={styles.datePickerContainer}>
+                          <DateRangePicker
+                            onChange={onChange}
+                            value={value}
+                            className={styles.datePicker}
+                          />
+                        </div>
+                        <textarea
                           onChange={(event) => {
                             setDescription(event.target.value);
                           }}
                           className={styles.tripInfo}
+                          placeholder="Description of what you guys will do"
                         />
                         <button
                           className={styles.createButton}
@@ -257,10 +258,9 @@ useEffect(() => {
                               <div className={styles.tripDate}>
                                 <div className={styles.dateContainer}>
                                   <div className={styles.dateContainerLeft}>
-                                    
                                     <div className={styles.dates}>
                                       {changeFormat(trip.tripenddate)}
-                                     </div>
+                                    </div>
                                   </div>
                                   {isDeletingTrip && (
                                     <button

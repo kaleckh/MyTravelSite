@@ -2,6 +2,7 @@ import { HideImage } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.css";
+import {Search} from '../Media/Search'
 
 export default function SearchBar(props) {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function SearchBar(props) {
     <div className={styles.search}>
       <div className={styles.searchInput}>
         <input
-          type="text"
+          type="search"
           onChange={(event) => {
             handleFilter(event);
           }}
@@ -45,6 +46,7 @@ export default function SearchBar(props) {
           onFocus={() => setIsDropdownOpen(true)}
           onBlur={() => setIsDropdownOpen(false)}
         />
+        <Search />
         <div className={styles.searchIcon}></div>
       </div>
 

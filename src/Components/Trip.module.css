@@ -36,6 +36,10 @@
 .personaltripdate {
     font-weight: 200;
     font-size: 20px;
+    display: flex;
+    width: 250px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .daysTill {
@@ -135,5 +139,19 @@ textarea:focus {
     }
     .daysTill {
         display: none;
+    }
+    .rightTripContainer {
+        width: 100 vw;
+    }
+    .tripbox {
+        margin: 10px;
+        width: 300px;
+        background-color: white;
+        height: 100px;
+        border-radius: 75px;
+        display: flex;
+        font-weight: 300;
+        font-size: 15px;
+        justify-content: center;
     }
 }

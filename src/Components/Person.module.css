@@ -6,6 +6,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;
+    justify-content: space-between;
 }
 
 .title {
@@ -58,6 +59,7 @@ img {
     height: 80vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 40%;
 }
 
@@ -65,7 +67,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 75%;
+    height: 100%;
     width: 100%;
 }
 
@@ -121,12 +123,15 @@ input:focus {
 
 .halfTripContainer {
     width: 300px;
-    background-color: rgb(59, 55, 255);
+    background-color: black;
     height: 90%;
     border-radius: 25px;
     margin: 8px;
     display: flex;
     flex-direction: column;
+    display: flex;
+    align-items: center;
+    color: white;
 }
 
 .blueBoxWords {
@@ -148,20 +153,40 @@ input:focus {
     display: flex;
     flex-direction: column;
     height: 100%;
+    align-items: center;
+    width: 80%;
     background-color: none;
+    justify-content: center;
+}
+
+.createTripInput {
+    width: 95%;
+    height: 45px;
+    border-radius: 7px;
+    margin: 5px;
+    border: 1px solid black;
 }
 
 .x {
     margin-left: 700px;
     margin-top: 5px;
     font-weight: 800;
+    height: 20px;
+    width: 20px;
     font-size: larger;
+}
+
+.center {
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }
 
 .backWrapper {
     display: flex;
-    width: 630px;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+    height: 10px;
 }
 
 .createTripInputContainer {
@@ -174,7 +199,7 @@ input:focus {
 }
 
 .createTripInput {
-    width: 325px;
+    width: 95%;
     height: 45px;
     border-radius: 7px;
     margin: 5px;
@@ -196,6 +221,7 @@ input:focus {
 .createButton {
     width: 50px;
     margin-left: 45%;
+    display: contents;
 }
 
 @media (width < 1000px) {
@@ -222,6 +248,36 @@ input:focus {
 
 @media (width < 600px) {
     .title {
-        font-size: 40px;
+        font-size: 50px;
+    }
+    .inputSizer {
+        height: 80%;
+    }
+    .bottomLeft {
+        width: 100%;
+    }
+    .reviews {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+    }
+    .location {
+        font-size: 20px;
+    }
+    .dates {
+        font-size: 15px;
+    }
+    .tripBox {
+        width: 100%;
+    }
+    .halfTripContainer {
+        display: none;
+    }
+    .createTripContainer {
+        width: 95vw;
+        justify-content: center;
+    }
+    .datePickerContainer {
+        width: 100%;
     }
 }

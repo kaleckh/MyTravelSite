@@ -85,6 +85,7 @@
     width: 50px;
     margin-left: 45%;
     color: black;
+    display: contents;
 }
 
 .title {
@@ -92,6 +93,7 @@
     margin: 30px;
     font-weight: 300;
     letter-spacing: 8px;
+    text-align: center;
 }
 
 .headerButtonContainer {
@@ -157,7 +159,7 @@
 }
 
 .createTripInput {
-    width: 325px;
+    width: 95%;
     height: 45px;
     border-radius: 7px;
     margin: 5px;
@@ -294,12 +296,22 @@
 
 @media (width < 600px) {
     .location {
-        font-size: 15px;
+        font-size: 20px;
     }
     .dates {
         font-size: 15px;
     }
     .tripBox {
+        width: 100%;
+    }
+    .halfTripContainer {
+        display: none;
+    }
+    .createTripContainer {
+        width: 95vw;
+        justify-content: center;
+    }
+    .datePickerContainer {
         width: 100%;
     }
 }

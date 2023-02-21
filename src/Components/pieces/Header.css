@@ -43,6 +43,14 @@
     .headerButtonContainer {
         width: 40%;
     }
+    .header {
+        background-color: none;
+        height: 70px;
+        color: white;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+    }
 }
 
 @media (width < 600px) {

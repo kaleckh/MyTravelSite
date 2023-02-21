@@ -19,13 +19,15 @@ function Person() {
   const [tripDates, setTripDates] = useState("");
   const [isSettingLocation, setIsSettingLocation] = useState(false);
   const [isSettingDate, setIsSettingDate] = useState(false);
-  const [isAddingTrip, setIsAddingTrip] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [myTrips, setMyTrips] = useState([]);
   const [myId, setMyId] = useState("");
+  const [isAddingTrip, setIsAddingTrip] = useState(false);
   const [value, onChange] = useState([new Date(), new Date()]);
   const [tripCity, setTripCity] = useState("");
   const [tripState, setTripState] = useState("");
   const [trips, setTrips] = useState([]);
+  const [description, setDescription] = useState("");
   const { search } = useLocation();
   const params = new URLSearchParams(search);
 
@@ -110,79 +112,81 @@ function Person() {
           }}
         />
         {isAddingTrip ? (
-          <div className={styles.createTripContainer}>
-            <div className={styles.halfTripContainer}>
-              <div className={styles.blueBoxWords}>
-                Start your journey with us
+          <div className={styles.center}>
+            <div className={`${styles.createTripContainer} ${styles.blur}`}>
+              <div className={styles.halfTripContainer}>
+                <div className={styles.blueBoxWords}>
+                  Start your journey with us
+                </div>
+                <div className={styles.smallBlueBoxWords}>
+                  Join our community of thousands
+                </div>
+                <div>A quote would go here</div>
               </div>
-              <div className={styles.smallBlueBoxWords}>
-                Join our community of thousands
-              </div>
-            </div>
 
-            <div className={styles.otherHalfContainer}>
-              <div
-                onClick={() => {
-                  setIsSettingLocation(false);
-                  setIsAddingTrip(true);
-                }}
-                className={styles.x}
-              >
-                x
-              </div>
-              <div className={styles.backWrapper}>
-                {/* <button
+              <div className={styles.otherHalfContainer}>
+                <div className={styles.backWrapper}>
+                  <div
+                    className={styles.x}
                     onClick={() => {
-                      setIsAddingTrip(true);
-                      setIsSettingLocation(false);
+                      
+                      setIsAddingTrip(false);
                     }}
-                    className="back"
                   >
-                    back
-                  </button> */}
-              </div>
-              <div className={styles.createTripInputContainer}>
-                <div className={styles.myTripInputContainer}>
-                  <div>city</div>
-                  <input
-                    className={styles.createTripInput}
-                    placeholder="City"
-                    onChange={(event) => {
-                      setTripCity(event.target.value);
-                    }}
-                    type="text"
+                    x
+                  </div>
+                </div>
+
+                <div className={styles.createTripInputContainer}>
+                  <div className={styles.myTripInputContainer}>
+                    <div>city</div>
+                    <input
+                      className={styles.createTripInput}
+                      placeholder="City"
+                      onChange={(event) => {
+                        setTripLocation(event.target.value);
+                      }}
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <div>State/Country</div>
+                    <input
+                      onChange={(event) => {
+                        setTripState(event.target.value);
+                      }}
+                      placeholder="State/Country"
+                      type="text"
+                      className={styles.createTripInput}
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.datePickerContainer}>
+                  <DateRangePicker
+                    onChange={onChange}
+                    value={value}
+                    className={styles.datePicker}
                   />
                 </div>
-                <div>
-                  <div>State/Country</div>
-                  <input
-                    onChange={(event) => {
-                      setTripState(event.target.value);
-                    }}
-                    placeholder="State/Country"
-                    type="text"
-                    className={styles.createTripInput}
-                  />
-                </div>
+                <textarea
+                  onChange={(event) => {
+                    setDescription(event.target.value);
+                  }}
+                  className={styles.tripInfo}
+                  placeholder="Description of what you guys will do"
+                />
+                <button
+                  className={styles.createButton}
+                  onClick={() => {
+                    handleSubmit().then(() => {
+                      setIsAdding(false);
+                    });
+                  }}
+                >
+                  Next!
+                </button>
               </div>
-              <DateRangePicker
-                onChange={onChange}
-                value={value}
-                className={styles.datePicker}
-              />
-              <input className={styles.tripInfo} />
-              <button
-                className={styles.createButton}
-                onClick={() => {
-                  Promise.all([handleSubmit(), setIsSettingDate(false)]).then(
-                    () => {
-                      setIsAddingTrip(true);
-                    }
-                  );
-                }}
-              >
-                Next!
-              </button>
             </div>
           </div>
         ) : (
@@ -191,7 +195,7 @@ function Person() {
               <div className={styles.title}>Open Trips</div>
               <div className={styles.container}>
                 <SearchBar trips={trips} />
-                <Search />
+                <div></div>
               </div>
             </div>
           </div>

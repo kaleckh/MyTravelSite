@@ -100,9 +100,9 @@ function Trip() {
                 </div>
                 <div className={styles.row}>
                   <div className={styles.personaltripdate}>
-                    {`${changeFormat(
-                      myTrips[0].tripstartdate
-                    )} - ${changeFormat(myTrips[0].tripenddate)}`}
+                    <div>{changeFormat(myTrips[0].tripstartdate)}</div>
+                    <div>-</div>
+                    <div>{changeFormat(myTrips[0].tripenddate)}</div>
                   </div>
                 </div>
                 <img className={styles.tripImage} alt="" />

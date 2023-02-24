@@ -8,7 +8,36 @@
 .tripImage {
     height: 300px;
     width: 400px;
-    padding: 60px;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+.blackBox:hover {
+    background-color: white;
+}
+
+.blackBox {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.blackBoxContainer {
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.svgContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+}
+
+.svgLogoContainer {
+    display: flex;
+    justify-content: end;
 }
 
 .tripMainContainer {
@@ -133,6 +162,27 @@ textarea:focus {
     padding: 10px;
 }
 
+.wholeScreen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+.tagContainer {
+    width: 80%;
+}
+
+.tag {
+    font-weight: 500;
+    color: black;
+    font-size: 15px;
+    cursor: pointer;
+}
+
 @media (width < 870px) {
     .tripContainer {
         flex-direction: column;
@@ -152,6 +202,5 @@ textarea:focus {
         display: flex;
         font-weight: 300;
         font-size: 15px;
-        justify-content: center;
     }
 }

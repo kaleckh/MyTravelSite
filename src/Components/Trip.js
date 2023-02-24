@@ -7,14 +7,21 @@ import { auth } from "./Firebase";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
+import { isAdmin } from "@firebase/util";
+import { Hike } from "./Media/Hike";
+import { Surf } from "./Media/Surf";
+import { Relax } from "./Media/Relax";
+import { Cheers } from "./Media/Cheers";
+import surf from './Media/surf.jpg'
+import explore from './Media/explore.jpg'
+import hike from './Media/hike.jpg'
+import party from './Media/party.jpg'
 
 function Trip() {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const Navigate = useNavigate();
 
-  const [myInfo, setMyInfo] = useState([]);
-  const [myTrip, setMyTrip] = useState([]);
   const [myId, setMyId] = useState("");
   const [description, setDescription] = useState("");
   const [housing, setHousing] = useState("");
@@ -22,6 +29,9 @@ function Trip() {
   const [myTrips, setMyTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [render, setRender] = useState(true);
+  const [admin, setIsAdmin] = useState(true);
+  const [image, setImage] = useState();
+  const [tripGroup, setTripGroup] = useState();
   const [toggleTripDetails, setToggleTripDetails] = useState(false);
   const { id } = useParams();
   const logout = async () => {
@@ -40,6 +50,20 @@ function Trip() {
       }).then((res) => {
         setMyTrips(res.data);
         setLoading(false);
+        console.log(res.data[0], `this is the response`);
+        setDescription(res.data[0].description);
+        setHousing(res.data[0].housing);
+        setFriends(res.data[0].friends);
+
+        axios({
+          method: "get",
+          url: `http://localhost:3001/tripgroup/${id}`,
+        }).then((res) => {
+          if (myId === res.data[0].personid) {
+            setIsAdmin(true);
+          }
+          setTripGroup(res.data);
+        });
       });
     });
   }, []);
@@ -59,15 +83,15 @@ function Trip() {
         friends: friends,
       });
 
-      return await setRender(!render);
+      await setRender(!render);
     } catch (error) {
       console.log(error.message);
     }
   };
+  console.log(tripGroup, "thos os my group")
 
-  console.log(myTrips[0]);
   return (
-    <div>
+    <div className={styles.wholeScreen}>
       {loading ? (
         <div className={styles.loadingContainer}>
           {" "}
@@ -85,7 +109,6 @@ function Trip() {
         <div>
           <Header
             home={"Home"}
-            createTrip={"Create Trip"}
             myTrips={"My Trips"}
             myProfile={"My Profile"}
             out={"Logout"}
@@ -105,7 +128,25 @@ function Trip() {
                     <div>{changeFormat(myTrips[0].tripenddate)}</div>
                   </div>
                 </div>
-                <img className={styles.tripImage} alt="" />
+                <div className={styles.svgContainer}>
+                  <div className={styles.blackBoxContainer}>
+                    <div onClick={() => {setImage(explore)}}  className={styles.blackBox}>
+                      <Relax />
+                    </div>
+                    <div onClick={() => {setImage(party)}} className={styles.blackBox}>
+                      <Cheers/>
+                    </div>
+                    <div onClick={() => {setImage(hike)}} className={styles.blackBox}>
+                      <Hike/>
+                    </div>
+                    <div onClick={() => {setImage(surf)}} className={styles.blackBox}>
+                      <Surf/>
+                    </div>
+                  </div>
+                  <div className={styles.imgContainer}>
+                    <img className={styles.tripImage} src={image} alt="" />
+                  </div>
+                </div>
               </div>
               <div className={styles.rightTripContainer}>
                 <div className={styles.daysTill}>
@@ -118,22 +159,48 @@ function Trip() {
                   {!toggleTripDetails ? (
                     <div className={styles.center}>
                       <div className={styles.smallerTitle}>Whose Coming</div>
-                      <div className={styles.tripbox}>{myTrips[0].friends}</div>
-                      <div className={styles.smallerTitle}>About the trip</div>
                       <div className={styles.tripbox}>
-                        {myTrips[0].description}{" "}
+                        {tripGroup?.map((trip) => {
+                          return (
+                            <div className={styles.tagContainer}>
+                              <div
+                                className={styles.tag}
+                                onClick={() => {
+                                  Navigate(`/myprofile/${trip.email}`);
+                                }}
+                              >
+                                {trip.friends}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className={styles.smallerTitle}>About the trip</div>
+
+                      <div className={styles.tripbox}>
+                        <div className={styles.tagContainer}>
+                          {myTrips[0].description}{" "}
+                        </div>
                       </div>
                       <div className={styles.smallerTitle}>Housing</div>
-                      <div className={styles.tripbox}>{myTrips[0].housing}</div>
+
+                      <div className={styles.tripbox}>
+                        <div className={styles.tagContainer}>{myTrips[0].housing}</div>
+                      </div>
+
                       <div className={styles.row}>
-                        <button
-                          className={`${styles.smallerTitle} ${styles.tripButton}`}
-                          onClick={() => {
-                            setToggleTripDetails(true);
-                          }}
-                        >
-                          Edit
-                        </button>
+                        {!admin ? (
+                          <button>Request Join</button>
+                        ) : (
+                          <button
+                            className={`${styles.smallerTitle} ${styles.tripButton}`}
+                            onClick={() => {
+                              setToggleTripDetails(true);
+                            }}
+                          >
+                            Edit
+                          </button>
+                        )}
                       </div>
                     </div>
                   ) : (
@@ -145,7 +212,7 @@ function Trip() {
                           onChange={(event) => {
                             setFriends(event.target.value);
                           }}
-                          placeholder="Tag Friends Coming"
+                          placeholder="Invite friends from their profile or tag friends here!"
                           type="text"
                         />
                       </div>

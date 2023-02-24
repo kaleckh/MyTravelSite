@@ -17,6 +17,12 @@
     color: white;
 }
 
+.half {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
 .paragraph {
     font-size: 40px;
     font-weight: 600;
@@ -38,7 +44,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 90%;
+    height: 100vh;
 }
 
 .reviews {
@@ -167,19 +173,28 @@ input:focus {
     border: 1px solid black;
 }
 
+.xContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .x {
-    margin-left: 700px;
-    margin-top: 5px;
     font-weight: 800;
     height: 20px;
     width: 20px;
     font-size: larger;
+    cursor: pointer;
 }
 
 .center {
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+.datePickerContainer {
+    width: 80%;
 }
 
 .backWrapper {
@@ -209,6 +224,14 @@ input:focus {
 .datePicker {
     background-color: white;
     height: 50px;
+    width: 100%;
+}
+
+.eightyPercent {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tripInfo {
@@ -218,9 +241,18 @@ input:focus {
     height: 100px;
 }
 
+.nextContainer {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.nextContainer:hover {
+    background-color: goldenrod;
+}
+
 .createButton {
     width: 50px;
-    margin-left: 45%;
     display: contents;
 }
 
@@ -243,6 +275,16 @@ input:focus {
 @media (width < 800px) {
     .title {
         font-size: 50px;
+    }
+    .homeImage {
+        height: 250px;
+        width: 350px;
+    }
+    .paragraph {
+        font-size: 30px;
+    }
+    .bottomLeft {
+        width: 48%;
     }
 }
 

@@ -15,9 +15,11 @@ import { Audio } from "react-loader-spinner";
 function MyTrips() {
   const [myTrips, setMyTrips] = useState([]);
   const [myId, setMyId] = useState("");
+  const [myEmail, setMyEmail] = useState("");
   const [tripLocation, setTripLocation] = useState("");
   const [tripState, setTripState] = useState("");
   const [tripCity, setTripCity] = useState(false);
+  const [oops, setOops] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSettingLocation, setIsSettingLocation] = useState(false);
   const [isAddingTrip, setIsAddingTrip] = useState(true);
@@ -30,6 +32,7 @@ function MyTrips() {
   const Navigate = useNavigate();
   const { search } = useLocation();
   const params = new URLSearchParams(search);
+  const { id } = useParams();
 
   const logout = async () => {
     await signOut(auth);
@@ -41,14 +44,18 @@ function MyTrips() {
       url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
+      setMyEmail(res.data[0].email);
       axios({
         method: "get",
         url: `http://localhost:3001/personTrips/${res.data[0].id}`,
-      }).then((res) => {
-        setIsLoading(false);
-
-        setMyTrips(res.data);
-      });
+      })
+        .then((res) => {
+          setIsLoading(false);
+          setMyTrips(res.data);
+        })
+        .then(() => {
+        
+        });
     });
   }, []);
 
@@ -62,19 +69,27 @@ function MyTrips() {
         person_id: myId,
         triplocation: tripLocation,
         tripstartdate: startDate,
-        tripenddate: endDate,
+        tripenddate: endDate, 
         tripstate: tripState,
-        description: description,
+        description: description
       });
 
       setMyTrips([...myTrips, newTrip.data[0]]);
       setIsAdding(false);
+      debugger
+      await axios.post(`http://localhost:3001/newtripgroup`, {
+        personid: myId,
+        tripid: newTrip.data[0].id,
+        email: myEmail,
+      });
+      debugger
     } catch (error) {
       console.log(error.message);
     }
   };
   const handleDelete = async (id) => {
     try {
+      await axios.delete(`http://localhost:3001/deletetripgroup/${id}`, {});
       let deleteTrip = await axios.delete(
         `http://localhost:3001/deletetrip/${id}`,
         {}
@@ -118,7 +133,8 @@ function MyTrips() {
     return regularDate;
   };
 
-  console.log(myTrips);
+  
+  
   return (
     <div>
       {isAddingTrip &&
@@ -147,6 +163,7 @@ function MyTrips() {
               id={myId}
               toggleMenu={() => {
                 setIsAdding(true);
+                setOops(false);
               }}
             />
             <div className={styles.tripContainer}>
@@ -156,7 +173,7 @@ function MyTrips() {
                 <div className={styles.title}>CURRENT TRIPS</div>
               )}
 
-              {myTrips.length === 0 ? (
+              {oops ? (
                 <div>
                   <div className={styles.bigTags}>
                     Oops looks like you have no trips!
@@ -179,69 +196,75 @@ function MyTrips() {
                       </div>
 
                       <div className={styles.otherHalfContainer}>
-                        <div
-                          onClick={() => {
-                            setIsAdding(false);
-                          }}
-                          className={styles.x}
-                        >
-                          x
-                        </div>
-                        <div className={styles.backWrapper}></div>
-                        <div className={styles.createTripInputContainer}>
-                          <div className={styles.myTripInputContainer}>
-                            <div>city</div>
-                            <input
-                              className={styles.createTripInput}
-                              placeholder="City"
-                              onChange={(event) => {
-                                setTripLocation(event.target.value);
+                        <div className={styles.eightyPercent}>
+                          <div className={styles.xContainer}>
+                            <div
+                              onClick={() => {
+                                setIsAdding(false);
                               }}
-                              type="text"
+                              className={styles.x}
+                            >
+                              x
+                            </div>
+                          </div>
+                          <div className={styles.backWrapper}></div>
+                          <div className={styles.createTripInputContainer}>
+                            <div className={styles.half}>
+                              <div>city</div>
+                              <input
+                                className={styles.createTripInput}
+                                placeholder="City"
+                                onChange={(event) => {
+                                  setTripLocation(event.target.value);
+                                }}
+                                type="text"
+                              />
+                            </div>
+                            <div className={styles.half}>
+                              <div>State/Country</div>
+                              <input
+                                onChange={(event) => {
+                                  setTripState(event.target.value);
+                                }}
+                                placeholder="State/Country"
+                                type="text"
+                                className={styles.createTripInput}
+                              />
+                            </div>
+                          </div>
+                          <div className={styles.datePickerContainer}>
+                            <DateRangePicker
+                              onChange={onChange}
+                              value={value}
+                              className={styles.datePicker}
                             />
                           </div>
-                          <div>
-                            <div>State/Country</div>
-                            <input
-                              onChange={(event) => {
-                                setTripState(event.target.value);
-                              }}
-                              placeholder="State/Country"
-                              type="text"
-                              className={styles.createTripInput}
-                            />
-                          </div>
-                        </div>
-                        <div className={styles.datePickerContainer}>
-                          <DateRangePicker
-                            onChange={onChange}
-                            value={value}
-                            className={styles.datePicker}
+                          <textarea
+                            onChange={(event) => {
+                              setDescription(event.target.value);
+                            }}
+                            className={styles.tripInfo}
+                            placeholder="Description of what you guys will do"
                           />
+                          <div className={styles.nextContainer}>
+                            <button
+                              className={styles.createButton}
+                              onClick={() => {
+                                handleSubmit().then(() => {
+                                  setIsAdding(false);
+                                });
+                              }}
+                            >
+                              Next!
+                            </button>
+                          </div>
                         </div>
-                        <textarea
-                          onChange={(event) => {
-                            setDescription(event.target.value);
-                          }}
-                          className={styles.tripInfo}
-                          placeholder="Description of what you guys will do"
-                        />
-                        <button
-                          className={styles.createButton}
-                          onClick={() => {
-                            handleSubmit().then(() => {
-                              setIsAdding(false);
-                            });
-                          }}
-                        >
-                          Next!
-                        </button>
                       </div>
                     </div>
                   ) : (
                     <>
                       {myTrips.map((trip) => {
-                        console.log(isDeletingTrip);
+                        
                         return (
                           <div className={styles.myTripsContainer}>
                             <div className={styles.tripBox}>
@@ -259,22 +282,25 @@ function MyTrips() {
                                 <div className={styles.dateContainer}>
                                   <div className={styles.dateContainerLeft}>
                                     <div className={styles.dates}>
-                                      {changeFormat(trip.tripenddate)}
+                                      {changeFormat(trip.tripstartdate)}
                                     </div>
                                   </div>
-                                  {isDeletingTrip && (
-                                    <button
-                                      className={styles.deleteButton}
-                                      onClick={() => {
-                                        handleDelete(trip.id);
-                                      }}
-                                    >
-                                      {" "}
-                                      Delete
-                                    </button>
-                                  )}
                                 </div>
                               </div>
+                              {isDeletingTrip ? (
+                                <div className={styles.buttonCreateContainer}>
+                                  <button
+                                    className={styles.deleteButton}
+                                    onClick={() => {
+                                      handleDelete(trip.id);
+                                    }}
+                                  >
+                                    X
+                                  </button>
+                                </div>
+                              ) : (
+                                <div className={styles.filler}></div>
+                              )}
                             </div>
                           </div>
                         );

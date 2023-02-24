@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 import Header from "./pieces/Header";
 
 import S3 from "react-aws-s3";
-
+import { Camera } from "./Media/Camera";
 import Toggle from "./pieces/Toggle";
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const getSignedUrl = require("@aws-sdk/s3-request-presigner");
@@ -25,7 +25,6 @@ function MyProfile() {
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const inputRef = useRef(null);
   const [photoName, setPhotoName] = useState("");
-  
 
   const [email, setEmail] = useState("");
   const region = "us-west-2";
@@ -58,6 +57,8 @@ function MyProfile() {
       setFirstName(res.data[0].firstname);
       setLastName(res.data[0].lastname);
       setMyId(res.data[0].id);
+      setInsta(res.data[0].insta);
+      setBio(res.data[0].bio);
     });
   }, []);
 
@@ -93,8 +94,8 @@ function MyProfile() {
   const config = {
     bucketName: "travelimagebucket",
     region: "us-west-2",
-    accessKeyId: "AKIA33JD5MXA5HVNTCDO",
-    secretAccessKey: "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",
+    accessKeyId: "AKIA33JD5MXA6WMNIZ4S",
+    secretAccessKey: "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",
   };
 
   const handleFileInput = (e) => {
@@ -122,7 +123,7 @@ function MyProfile() {
     const ReactS3Client = new S3(config);
 
     ReactS3Client.uploadFile(selectedFile, `${myId}-${photoName}`)
-      .then((data) => console.log(data.location),)
+      .then((data) => console.log(data.location))
       .catch((err) => console.error(err));
   };
 
@@ -146,7 +147,7 @@ function MyProfile() {
             </div>
             {profileEdit ? (
               <>
-                <input
+                <textarea
                   className={styles.editInput}
                   type="text"
                   placeholder="instagram"
@@ -154,7 +155,7 @@ function MyProfile() {
                     setInsta(event.target.value);
                   }}
                 />
-                <input
+                <textarea
                   className={styles.editInput}
                   type="text"
                   placeholder="Whats your bio"
@@ -193,8 +194,17 @@ function MyProfile() {
                 </button>
               </>
             ) : (
-              <>
-                <button className={styles.profileItem}>Send Message</button>
+              <div className={styles.editButtonContainer}>
+                <button
+                  onClick={() => {
+                    alert(
+                      "this button doesnt work yet, will add at some point in the future"
+                    );
+                  }}
+                  className={styles.profileItem}
+                >
+                  Send Message
+                </button>
                 <div
                   onClick={() => {
                     setProfileEdit(!profileEdit);
@@ -203,10 +213,10 @@ function MyProfile() {
                 >
                   ...
                 </div>
-              </>
+              </div>
             )}
           </div>
-          <input
+          <textarea
             onChange={(event) => {
               handleFileInput(event);
             }}
@@ -218,40 +228,57 @@ function MyProfile() {
         </div>
 
         <div>
-          <div className={styles.rightProfileContainer}>
-            <div className={styles.mainImageContainer}>
-              <Toggle
-                id={myId}
-                type={"main"}
-                class={styles.mainPic}
-                filterName={() => {
-                  setPhotoName();
-                }}
-              />
+          {profileEdit ? (
+            <div className={styles.rightProfileContainer}>
+              <div className={styles.mainImageContainer}>
+                <div className={styles.mainPic}>
+                  <Camera />
+                </div>
+              </div>
+              <div className={styles.rightSidePhotos}>
+                <div className={styles.smallPhoto}>
+                  <Camera />
+                </div>
+                <div className={styles.smallPhoto}>
+                  <Camera />
+                </div>
+              </div>
             </div>
-            <div className={styles.rightSidePhotos}>
-              <Toggle
-                id={myId}
-                type={"rightSide"}
-                class={styles.smallPhoto}
-                filterName={() => {
-                  setPhotoName();
-                }}
-              />
-              <Toggle
-                id={myId}
-                type={"rightbottom"}
-                class={styles.smallPhoto}
-                filterName={() => {
-                  setPhotoName();
-                }}
-              />
+          ) : (
+            <div className={styles.rightProfileContainer}>
+              <div className={styles.mainImageContainer}>
+                <Toggle
+                  id={myId}
+                  type={"main"}
+                  class={styles.mainPic}
+                  filterName={() => {
+                    setPhotoName();
+                  }}
+                />
+              </div>
+              <div className={styles.rightSidePhotos}>
+                <Toggle
+                  id={myId}
+                  type={"rightSide"}
+                  class={styles.smallPhoto}
+                  filterName={() => {
+                    setPhotoName();
+                  }}
+                />
+                <Toggle
+                  id={myId}
+                  type={"rightbottom"}
+                  class={styles.smallPhoto}
+                  filterName={() => {
+                    setPhotoName();
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
+
           <div className={styles.bottomContainer}>
-            <div className={styles.friends}>
-              <div className={styles.title}>Friends</div>
-            </div>
+            <div className={styles.friends}></div>
           </div>
         </div>
 

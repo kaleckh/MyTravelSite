@@ -65,7 +65,7 @@ let newTrip = (req, res) => {
 	console.log(req.body, "this is body");
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.new_trip([ req.body.person_id, req.body.triplocation, req.body.tripstartdate, req.body.tripenddate, req.body.tripstate ])
+		.new_trip([ req.body.person_id, req.body.triplocation, req.body.tripstartdate, req.body.tripenddate, req.body.tripstate, req.body.description ])
 		.then((trips) => {
 			res.status(200).send(trips);
 		})
@@ -129,10 +129,36 @@ let deletetrip = (req, res) => {
 			});
 		});
 };
+let deleteTripGroup = (req, res) => {
+	const dbInstance = req.app.get('db');
+	dbInstance
+		.delete_trip_group([ req.params.id ])
+		.then((trips) => {
+			res.status(200).send(trips);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				errorMessage: err
+			});
+		});
+};
 let getTrip = (req, res) => {
 	const dbInstance = req.app.get('db');
 	dbInstance
 		.get_trip(req.params.id)
+		.then((trip) => {
+			res.status(200).send(trip);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				errorMessage: err
+			});
+		});
+};
+let getTripGroup = (req, res) => {
+	const dbInstance = req.app.get('db');
+	dbInstance
+		.get_trip_group(req.params.id)
 		.then((trip) => {
 			res.status(200).send(trip);
 		})
@@ -147,17 +173,33 @@ let newDate = (req, res) => {
 	dbInstance
 	.new_date()
 }
+let newTripGroup = (req, res) => {
+	const dbInstance = req.app.get('db');
+	dbInstance
+		.new_trip_group(req.body.personid, req.body.tripid, req.body.email)
+		.then((trip) => {
+			res.status(200).send(trip);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				errorMessage: err
+			});
+		});
+};
 module.exports = {
 	getpeople,
 	newperson,
 	editdetails,
 	deleteperson,
+	deleteTripGroup,
 	getPerson,
 	getPersonTrips,
 	newTrip,
 	deletetrip,
 	getTrip,
 	getTrips,
+	getTripGroup,
 	newDate,
-	edittrip
+	edittrip,
+	newTripGroup
 };

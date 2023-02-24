@@ -2,7 +2,7 @@ import { HideImage } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SearchBar.module.css";
-import {Search} from '../Media/Search'
+import { Search } from "../Media/Search";
 
 export default function SearchBar(props) {
   const navigate = useNavigate();
@@ -60,9 +60,11 @@ export default function SearchBar(props) {
                 }}
                 className={styles.dataItem}
               >
-                <p className={styles.location}>
-                  {item.tripstate}, {item.triplocation}
-                </p>
+                <div className={styles.thirty}>
+                  <p className={styles.location}>
+                    {item.tripstate}, {item.triplocation}
+                  </p>
+                </div>
                 <div className={styles.dateContainer}>
                   <p className={styles.date}>
                     {changeFormat(item.tripstartdate)}
@@ -71,6 +73,9 @@ export default function SearchBar(props) {
                   <p className={styles.date}>
                     {changeFormat(item.tripenddate)}
                   </p>
+                </div>
+                <div className={styles.spots}>
+                  <div className={styles.date}>3 Spots Open</div>
                 </div>
               </a>
             );

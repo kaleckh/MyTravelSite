@@ -72,8 +72,12 @@
 
 .mainPic {
     height: 350px;
-    width: auto;
+    width: 500px;
     border-radius: 8px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mainImageContainer {
@@ -87,6 +91,10 @@
     height: 250px;
     width: 330px;
     border-radius: 8px;
+    border: 1px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .topImagesContainer {
@@ -95,13 +103,6 @@
     justify-content: space-between;
     height: 371px;
     padding-top: 20px;
-}
-
-.smallImage {
-    height: 175px;
-    width: 250xpx;
-    border: darkgray 1px solid;
-    border-radius: 20px;
 }
 
 .smallImageContainer {
@@ -165,29 +166,68 @@ img {
     padding-bottom: 10px;
 }
 
-@media(width < 1300px) {
+@media (width < 1300px) {
     .mainPic {
-        height: 300px;
-        width: 400px;
-    }
-    .smallPhoto {
-        display: none;
+        height: 250px;
+        width: 350px;
     }
     .rightProfileContainer {
-        justify-content: left;
+        margin: 10px;
     }
     .rightSidePhotos {
-        height: 70%;
+        height: 60%;
+        margin: 10px;
+        justify-content: space-between;
     }
 }
 
-@media(width < 600px) {
+@media (width < 1000px) {
+    .mainPic {
+        width: 150px;
+        height: 50px;
+    }
+}
+
+@media (width< 1100px) {
+    .mainPic {
+        width: 275px;
+        height: 250px;
+    }
+    .smallPhoto {
+        width: 225px;
+        height: 175px;
+    }
+    .profileTitle {
+        font-size: 80px
+    }
+}
+
+@media(width < 900px) {
+    .mainPic {
+        height: 150px;
+        width: 200px;
+    }
+    .smallPhoto {
+        width: 175px;
+        height: 125px;
+    }
+    .rightSidePhotos {
+        height: 50%;
+    }
+    .rightProfileContainer {
+        height: 75vh;
+    }
+}
+
+@media (width < 850px) {
     .profileWholeScreen {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
     .rightProfileContainer {
         height: 50%;
         width: 100%;
+        justify-content: space-evenly;
+        margin: 10px;
     }
     .leftProfileContainer {
         display: flex;
@@ -203,5 +243,18 @@ img {
     }
     .leftProfileContainer {
         width: 100vw;
+    }
+    .rightSidePhotos {
+        display: none;
+    }
+    .editButtonContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    .leftProfileContainer {
+        height: 70vh;
     }
 }

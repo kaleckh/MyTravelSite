@@ -1,0 +1,1 @@
+delete from tripgroup where tripid=$1

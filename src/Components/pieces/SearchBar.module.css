@@ -20,20 +20,32 @@
 }
 
 .dateContainer {
-    width: 60%;
+    width: 30%;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
+.thirty {
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+.spots {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
 .date {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 200;
 }
 
 .location {
-    font-size: 20px;
-    font-weight: 300;
+    font-size: 25px;
+    font-weight: 250;
 }
 
 .dataItem {

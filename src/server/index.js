@@ -13,7 +13,10 @@ var {
 	newTrip,
   deletetrip,
   getTrip,
-  getTrips
+  getTrips,
+  getTripGroup,
+  newTripGroup,
+  deleteTripGroup
   
 } = require('./controller');
 const app = express();
@@ -40,11 +43,14 @@ app.get('/person/:email', getPerson);
 app.get('/personTrips/:id', getPersonTrips);
 app.get('/trips', getTrips);
 app.get('/trip/:id', getTrip)
+app.get('/tripgroup/:id', getTripGroup)
 app.post('/newperson', newperson);
 app.post('/newtrip', newTrip);
+app.post('/newtripgroup', newTripGroup);
 app.put('/editperson/:id', editdetails); 
 app.put('/edittrip/:id', edittrip); 
 app.delete('/deleteperson/:id', deleteperson);
 app.delete('/deletetrip/:id', deletetrip);
+app.delete('/deletetripgroup/:id', deleteTripGroup);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

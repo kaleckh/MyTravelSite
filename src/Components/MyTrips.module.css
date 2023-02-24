@@ -2,7 +2,16 @@
     margin-left: 700px;
     margin-top: 5px;
     font-weight: 800;
+    height: 20px;
+    width: 20px;
     font-size: larger;
+    cursor: pointer;
+}
+
+.xContainer {
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
 .tripContainer {
@@ -12,6 +21,12 @@
     align-items: center;
     flex-direction: column;
     object-fit: cover;
+}
+
+.half {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
 }
 
 .LoadingTripContainer {
@@ -46,6 +61,10 @@
     display: flex;
     align-items: center;
     color: white;
+}
+
+.datePickerContainer {
+    width: 90%;
 }
 
 .blueBoxWords {
@@ -182,7 +201,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    width: 240px;
 }
 
 .dateContainer {
@@ -193,6 +212,35 @@
     height: 100%;
     border-radius: 10px;
     background-color: rgb(190, 199, 201);
+}
+
+.buttonCreateContainer {
+    display: flex;
+    height: 100%;
+    width: 10px;
+}
+
+.nextContainer {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.createButton {
+    width: 50px;
+    display: contents;
+}
+
+.eightyPercent {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filler {
+    width: 10px;
+    height: 10px;
 }
 
 .deleteButton {

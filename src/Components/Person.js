@@ -83,7 +83,7 @@ function Person() {
       method: "get",
       url: `http://localhost:3001/trips`,
     }).then((res) => {
-      setTrips(res.data);
+      
     });
   }, []);
 
@@ -102,7 +102,7 @@ function Person() {
       <div className={styles.wholeScreen}>
         <Header
           home={"Home"}
-          createTrip={"Create Trip"}
+          
           myTrips={"My Trips"}
           myProfile={"My Profile"}
           out={"Logout"}
@@ -125,67 +125,70 @@ function Person() {
               </div>
 
               <div className={styles.otherHalfContainer}>
-                <div className={styles.backWrapper}>
-                  <div
-                    className={styles.x}
-                    onClick={() => {
-                      
-                      setIsAddingTrip(false);
+                <div className={styles.eightyPercent}>
+                  <div className={styles.xContainer}>
+                    <div
+                      className={styles.x}
+                      onClick={() => {
+                        setIsAddingTrip(false);
+                      }}
+                    >
+                      x
+                    </div>
+                  </div>
+
+                  <div className={styles.createTripInputContainer}>
+                    <div className={styles.half}>
+                      <div>city</div>
+                      <input
+                        className={styles.createTripInput}
+                        placeholder="City"
+                        onChange={(event) => {
+                          setTripLocation(event.target.value);
+                        }}
+                        type="text"
+                      />
+                    </div>
+                    <div className={styles.half}>
+                      <div>State/Country</div>
+                      <input
+                        onChange={(event) => {
+                          setTripState(event.target.value);
+                        }}
+                        placeholder="State/Country"
+                        type="text"
+                        className={styles.createTripInput}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.datePickerContainer}>
+                    <DateRangePicker
+                      onChange={onChange}
+                      value={value}
+                      className={styles.datePicker}
+                    />
+                  </div>
+                  <textarea
+                    onChange={(event) => {
+                      setDescription(event.target.value);
                     }}
-                  >
-                    x
-                  </div>
-                </div>
-
-                <div className={styles.createTripInputContainer}>
-                  <div className={styles.myTripInputContainer}>
-                    <div>city</div>
-                    <input
-                      className={styles.createTripInput}
-                      placeholder="City"
-                      onChange={(event) => {
-                        setTripLocation(event.target.value);
-                      }}
-                      type="text"
-                    />
-                  </div>
-                  <div>
-                    <div>State/Country</div>
-                    <input
-                      onChange={(event) => {
-                        setTripState(event.target.value);
-                      }}
-                      placeholder="State/Country"
-                      type="text"
-                      className={styles.createTripInput}
-                    />
-                  </div>
-                </div>
-
-                <div className={styles.datePickerContainer}>
-                  <DateRangePicker
-                    onChange={onChange}
-                    value={value}
-                    className={styles.datePicker}
+                    className={styles.tripInfo}
+                    placeholder="Description of what you guys will do"
                   />
+                  <div className={styles.nextContainer}>
+                    <button
+                      className={styles.createButton}
+                      onClick={() => {
+                        handleSubmit().then(() => {
+                          setIsAdding(false);
+                        });
+                      }}
+                    >
+                      Next!
+                    </button>
+                  </div>
                 </div>
-                <textarea
-                  onChange={(event) => {
-                    setDescription(event.target.value);
-                  }}
-                  className={styles.tripInfo}
-                  placeholder="Description of what you guys will do"
-                />
-                <button
-                  className={styles.createButton}
-                  onClick={() => {
-                    handleSubmit().then(() => {
-                      setIsAdding(false);
-                    });
-                  }}
-                >
-                  Next!
-                </button>
               </div>
             </div>
           </div>

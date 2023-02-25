@@ -161,6 +161,7 @@ function Trip() {
                       <div className={styles.smallerTitle}>Whose Coming</div>
                       <div className={styles.tripbox}>
                         {tripGroup?.map((trip) => {
+                          
                           return (
                             <div className={styles.tagContainer}>
                               <div
@@ -169,7 +170,7 @@ function Trip() {
                                   Navigate(`/myprofile/${trip.email}`);
                                 }}
                               >
-                                {trip.friends}
+                                {trip.email}
                               </div>
                             </div>
                           );

@@ -3,6 +3,8 @@ import "./Header.css";
 import { Camera } from "../Media/Camera";
 
 
+
+
 export default function Toggle(props) {
   const [iconToggle, setIconToggle] = useState(false);
 console.log(props)

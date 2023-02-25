@@ -89,34 +89,40 @@ function MyProfile() {
   };
 
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const {
+    REACT_APP_BUCKETNAME,
+    REACT_APP_REGION,
+    REACT_APP_ACCESSKEYID,
+    REACT_APP_SECRETACCESSKEY,
+  } = process.env;
   // the configuration information is fetched from the .env file
   const config = {
-    bucketName: "travelimagebucket",
-    region: "us-west-2",
-    accessKeyId: "AKIA33JD5MXA6WMNIZ4S",
-    secretAccessKey: "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",
+    bucketName: REACT_APP_BUCKETNAME,
+    region: REACT_APP_REGION,
+    accessKeyId: REACT_APP_ACCESSKEYID,
+    secretAccessKey: REACT_APP_SECRETACCESSKEY
   };
+  console.log(config)
 
   const handleFileInput = (e) => {
     console.log(e.target.files[0]);
 
     setSelectedFile(e.target.files[0]);
   };
-  const getFileUrl = () => {
-    getSignedUrl(
-      client,
-      new GetObjectCommand({
-        Bucket: "travelimagebucket",
-        Key: "pexels-johannes-plenio-1105391.jpg",
-      })
-      // 60 seconds
-    )
-      .then((res) => {})
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getFileUrl = () => {
+  //   getSignedUrl(
+  //     client,
+  //     new GetObjectCommand({
+  //       Bucket: "travelimagebucket",
+  //       Key: "pexels-johannes-plenio-1105391.jpg",
+  //     })
+  //     // 60 seconds
+  //   )
+  //     .then((res) => {})
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const uploadFile = async () => {
     debugger;
@@ -127,6 +133,7 @@ function MyProfile() {
       .catch((err) => console.error(err));
   };
 
+  console.log(process.env.REACT_APP_BUCKETNAME, "this is the bullshit envz");
   return (
     <div>
       <Header

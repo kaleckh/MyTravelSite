@@ -11,10 +11,11 @@ export default function SearchBar(props) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleFilter = (event) => {
     const searchWord = event.target.value;
+    console.log(props.trips, "thse are my trips")
     const newFilter = props.trips.filter((value) => {
       return value.triplocation
-        .toLowerCase()
-        .includes(searchWord.toLowerCase());
+        ?.toLowerCase()
+        .includes(searchWord?.toLowerCase());
     });
 
     if (searchWord === "") {

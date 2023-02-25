@@ -83,7 +83,7 @@ function Person() {
       method: "get",
       url: `http://localhost:3001/trips`,
     }).then((res) => {
-      
+      setTrips(res.data)
     });
   }, []);
 
@@ -95,7 +95,7 @@ function Person() {
       setMyId(res.data[0].id);
     });
   }, []);
-  console.log(myId);
+  console.log(trips, "these are my trips");
 
   return (
     <>

@@ -1,3 +1,1 @@
-select t.* from peopletravelling pt
-inner JOIN trips t on t.person_id = pt.id
-where pt.id = $1;
+select * from trips where person_id=$1

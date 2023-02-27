@@ -196,7 +196,7 @@ function Home() {
                       placeholder="password"
                       type="password"
                     />
-                    <input placeholder="confirm password" type="password" />
+
                     <div className={styles.row}>
                       <button
                         className={styles.loginbutton}

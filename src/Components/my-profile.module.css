@@ -43,8 +43,8 @@
 }
 
 .rightProfileContainer {
-    height: 90vh;
-    width: 60vw;
+    height: 56vh;
+    width: 58vw;
     display: flex;
     justify-content: space-around;
 }
@@ -68,6 +68,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin: 10px;
 }
 
 .mainPic {
@@ -85,16 +86,22 @@
     flex-direction: row;
     width: auto;
     margin: 10px;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-top: 25px;
 }
 
 .smallPhoto {
     height: 250px;
     width: 330px;
     border-radius: 8px;
-    border: 1px black solid;
+    border: 2px black solid;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px;
 }
 
 .topImagesContainer {
@@ -135,6 +142,9 @@ img {
     height: 85%;
     justify-content: space-around;
     width: 30%;
+    height: 74.5vh;
+    width: 60%;
+    margin: 30px;
 }
 
 .bottomContainer {
@@ -198,11 +208,11 @@ img {
         height: 175px;
     }
     .profileTitle {
-        font-size: 80px
+        font-size: 80px;
     }
 }
 
-@media(width < 900px) {
+@media (width < 900px) {
     .mainPic {
         height: 150px;
         width: 200px;

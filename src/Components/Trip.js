@@ -33,6 +33,7 @@ function Trip() {
   const [image, setImage] = useState();
   const [tripGroup, setTripGroup] = useState();
   const [toggleTripDetails, setToggleTripDetails] = useState(false);
+  const [photo, setPhoto] = useState("");
   const { id } = useParams();
   const logout = async () => {
     await signOut(auth);
@@ -54,6 +55,7 @@ function Trip() {
         setDescription(res.data[0].description);
         setHousing(res.data[0].housing);
         setFriends(res.data[0].friends);
+        setPhoto(res.data[0].photo)
 
         axios({
           method: "get",
@@ -75,12 +77,17 @@ function Trip() {
     });
     return regularDate;
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (photo) => {
+    
     try {
       await axios.put(`http://localhost:3001/edittrip/${id}`, {
         description: description,
         housing: housing,
         friends: friends,
+        photo: photo
+      }).then((res) => {
+        
+        setPhoto(res.data[0].photo)
       });
 
       await setRender(!render);
@@ -88,7 +95,7 @@ function Trip() {
       console.log(error.message);
     }
   };
-  console.log(tripGroup, "thos os my group")
+  
 
   return (
     <div className={styles.wholeScreen}>
@@ -113,6 +120,7 @@ function Trip() {
             myProfile={"My Profile"}
             out={"Logout"}
             color={"black"}
+            id={myId}
           />
 
           <div className={styles.tripMainContainer}>
@@ -130,21 +138,21 @@ function Trip() {
                 </div>
                 <div className={styles.svgContainer}>
                   <div className={styles.blackBoxContainer}>
-                    <div onClick={() => {setImage(explore)}}  className={styles.blackBox}>
+                    <div onClick={() => {setPhoto(explore); handleSubmit(explore)}}  className={styles.blackBox}>
                       <Relax />
                     </div>
-                    <div onClick={() => {setImage(party)}} className={styles.blackBox}>
+                    <div onClick={() => {setPhoto(party); handleSubmit(party)}} className={styles.blackBox}>
                       <Cheers/>
                     </div>
-                    <div onClick={() => {setImage(hike)}} className={styles.blackBox}>
+                    <div onClick={() => {setPhoto(hike); handleSubmit(hike)}} className={styles.blackBox}>
                       <Hike/>
                     </div>
-                    <div onClick={() => {setImage(surf)}} className={styles.blackBox}>
+                    <div onClick={() => {setPhoto(surf); handleSubmit(surf)}} className={styles.blackBox}>
                       <Surf/>
                     </div>
                   </div>
                   <div className={styles.imgContainer}>
-                    <img className={styles.tripImage} src={image} alt="" />
+                    <img className={styles.tripImage} src={photo} alt="" />
                   </div>
                 </div>
               </div>

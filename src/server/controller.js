@@ -93,7 +93,7 @@ let editdetails = (req, res) => {
 let edittrip = (req, res) => {
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.edit_trip([ req.body.description, req.body.housing, req.body.friends, req.params.id ])
+		.edit_trip([ req.body.description, req.body.housing, req.body.friends, req.body.photo, req.params.id ])
 		.then((trips) => {
 			res.status(200).send(trips);
 		})

@@ -11,7 +11,7 @@ export default function SearchBar(props) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const handleFilter = (event) => {
     const searchWord = event.target.value;
-    console.log(props.trips, "thse are my trips")
+    console.log(props.trips, "thse are my trips");
     const newFilter = props.trips.filter((value) => {
       return value.triplocation
         ?.toLowerCase()
@@ -61,6 +61,10 @@ export default function SearchBar(props) {
                 }}
                 className={styles.dataItem}
               >
+                <div className={styles.center}>
+                  <div className={styles.green}></div>
+                  <div className={styles.colorGreen}>Active</div>
+                </div>
                 <div className={styles.thirty}>
                   <p className={styles.location}>
                     {item.tripstate}, {item.triplocation}

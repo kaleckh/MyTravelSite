@@ -38,6 +38,24 @@
     justify-content: center;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+}
+
+.colorGreen {
+    color: green;
+}
+
+.green {
+    width: 5px;
+    height: 5px;
+    background-color: green;
+    border-radius: 15px;
+}
+
 .date {
     font-size: 20px;
     font-weight: 200;

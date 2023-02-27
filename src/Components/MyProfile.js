@@ -4,7 +4,7 @@ import styles from "./my-profile.module.css";
 import { signOut } from "firebase/auth";
 import { auth } from "./Firebase";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Header from "./pieces/Header";
 
 import S3 from "react-aws-s3";
@@ -21,6 +21,10 @@ function MyProfile() {
   const [bio, setBio] = useState("");
   const [lastName, setLastName] = useState("");
   const [profileEdit, setProfileEdit] = useState(false);
+  const [mainPhoto, setMainPhoto] = useState(true);
+  const [topPhoto, setTopPhoto] = useState(true);
+  const [bottomPhoto, setBottomPhoto] = useState(true);
+  const [uploadToggle, setUploadToggle] = useState();
 
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const inputRef = useRef(null);
@@ -28,20 +32,10 @@ function MyProfile() {
 
   const [email, setEmail] = useState("");
   const region = "us-west-2";
-  const accessKeyId = "AKIA33JD5MXA4IOG2YU4";
-  const secretAccessKey = "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";
 
   const { search } = useLocation();
   const params = new URLSearchParams(search);
-
-  const client = new S3Client({
-    region,
-    credentials: {
-      accessKeyId,
-      secretAccessKey,
-    },
-  });
-
+  const { id } = useParams();
   const logout = async () => {
     await signOut(auth);
   };
@@ -59,6 +53,9 @@ function MyProfile() {
       setMyId(res.data[0].id);
       setInsta(res.data[0].insta);
       setBio(res.data[0].bio);
+      setMainPhoto(res.data[0].main);
+      setTopPhoto(res.data[0].rightside);
+      setBottomPhoto(res.data[0].rightbottom);
     });
   }, []);
 
@@ -82,11 +79,22 @@ function MyProfile() {
       return await axios.put(`http://localhost:3001/editperson/${myId}`, {
         instagram: insta,
         bio: bio,
+        main: mainPhoto,
+        rightside: topPhoto,
+        rightbottom: bottomPhoto,
       });
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  // const client = new S3Client({
+  //   REACT_APP_REGION,
+  //   credentials: {
+  //     REACT_APP_ACCESSKEYID,
+  //     REACT_APP_SECRETACCESSKEY,
+  //   },
+  // });
 
   const [selectedFile, setSelectedFile] = useState(null);
   const {
@@ -100,9 +108,9 @@ function MyProfile() {
     bucketName: REACT_APP_BUCKETNAME,
     region: REACT_APP_REGION,
     accessKeyId: REACT_APP_ACCESSKEYID,
-    secretAccessKey: REACT_APP_SECRETACCESSKEY
+    secretAccessKey: REACT_APP_SECRETACCESSKEY,
   };
-  console.log(config)
+
 
   const handleFileInput = (e) => {
     console.log(e.target.files[0]);
@@ -133,14 +141,13 @@ function MyProfile() {
       .catch((err) => console.error(err));
   };
 
-  console.log(process.env.REACT_APP_BUCKETNAME, "this is the bullshit envz");
   return (
     <div>
       <Header
         home={"Home"}
         myTrips={"My Trips"}
         myProfile={"My Profile"}
-        id={myId}
+        id={id}
         out={"Logout"}
         color="black"
       />
@@ -223,7 +230,7 @@ function MyProfile() {
               </div>
             )}
           </div>
-          <textarea
+          <input
             onChange={(event) => {
               handleFileInput(event);
             }}
@@ -255,29 +262,48 @@ function MyProfile() {
             <div className={styles.rightProfileContainer}>
               <div className={styles.mainImageContainer}>
                 <Toggle
-                  id={myId}
+                  file={selectedFile}
                   type={"main"}
+                  uploadFile={() => {
+                    uploadFile();
+                  }}
+                  onInputClick={() => {
+                    onInputClick();
+                  }}
+                  id={id}
                   class={styles.mainPic}
                   filterName={() => {
-                    setPhotoName();
+                    setPhotoName("main");
                   }}
                 />
               </div>
               <div className={styles.rightSidePhotos}>
                 <Toggle
-                  id={myId}
-                  type={"rightSide"}
+                  uploadFile={() => {
+                    uploadFile();
+                  }}
+                  onInputClick={() => {
+                    onInputClick();
+                  }}
+                  id={id}
+                  type={"rightside"}
                   class={styles.smallPhoto}
                   filterName={() => {
-                    setPhotoName();
+                    setPhotoName("rightside");
                   }}
                 />
                 <Toggle
-                  id={myId}
+                  uploadFile={() => {
+                    uploadFile();
+                  }}
+                  onInputClick={() => {
+                    onInputClick();
+                  }}
+                  id={id}
                   type={"rightbottom"}
                   class={styles.smallPhoto}
                   filterName={() => {
-                    setPhotoName();
+                    setPhotoName("rightbottom");
                   }}
                 />
               </div>

@@ -42,12 +42,12 @@ function Trip() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
+      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
       axios({
         method: "get",
-        url: `http://localhost:3001/trip/${id}`,
+        url: `${REACT_APP_URL}/trip/${id}`,
       }).then((res) => {
         setMyTrips(res.data);
         setLoading(false);
@@ -59,7 +59,7 @@ function Trip() {
 
         axios({
           method: "get",
-          url: `http://localhost:3001/tripgroup/${id}`,
+          url: `${REACT_APP_URL}/tripgroup/${id}`,
         }).then((res) => {
           if (myId === res.data[0].personid) {
             setIsAdmin(true);
@@ -80,7 +80,7 @@ function Trip() {
   const handleSubmit = async (photo) => {
     
     try {
-      await axios.put(`http://localhost:3001/edittrip/${id}`, {
+      await axios.put(`${REACT_APP_URL}/edittrip/${id}`, {
         description: description,
         housing: housing,
         friends: friends,

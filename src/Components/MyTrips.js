@@ -41,13 +41,13 @@ function MyTrips() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
+      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
       setMyEmail(res.data[0].email);
       axios({
         method: "get",
-        url: `http://localhost:3001/personTrips/${res.data[0].id}`,
+        url: `${REACT_APP_URL}/personTrips/${res.data[0].id}`,
       })
         .then((res) => {
           setIsLoading(false);
@@ -65,7 +65,7 @@ function MyTrips() {
 
   const handleSubmit = async () => {
     try {
-      let newTrip = await axios.post(`http://localhost:3001/newtrip`, {
+      let newTrip = await axios.post(`${REACT_APP_URL}/newtrip`, {
         person_id: myId,
         triplocation: tripLocation,
         tripstartdate: startDate,
@@ -77,7 +77,7 @@ function MyTrips() {
       setMyTrips([...myTrips, newTrip.data[0]]);
       setIsAdding(false);
       debugger
-      await axios.post(`http://localhost:3001/newtripgroup`, {
+      await axios.post(`${REACT_APP_URL}/newtripgroup`, {
         personid: myId,
         tripid: newTrip.data[0].id,
         email: myEmail,
@@ -89,9 +89,9 @@ function MyTrips() {
   };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/deletetripgroup/${id}`, {});
+      await axios.delete(`${REACT_APP_URL}/deletetripgroup/${id}`, {});
       let deleteTrip = await axios.delete(
-        `http://localhost:3001/deletetrip/${id}`,
+        `${REACT_APP_URL}/deletetrip/${id}`,
         {}
       );
       setMyTrips(myTrips.filter((trip) => trip.id !== id));

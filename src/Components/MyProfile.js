@@ -46,7 +46,7 @@ function MyProfile() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
+      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setEmail(localStorage.getItem("userEmail"));
       setBio(res.data[0].bio);
@@ -69,7 +69,7 @@ function MyProfile() {
   const handleDelete = async (id) => {
     try {
       let deleteTrip = await axios.delete(
-        `http://localhost:3001/deletetrip/${id}`,
+        `${REACT_APP_URL}/deletetrip/${id}`,
         {}
       );
       setMyTrips(myTrips.filter((trip) => trip.id !== id));
@@ -79,7 +79,7 @@ function MyProfile() {
   };
   const handleSubmit = async () => {
     try {
-      return await axios.put(`http://localhost:3001/editperson/${myId}`, {
+      return await axios.put(`${REACT_APP_URL}/editperson/${myId}`, {
         instagram: insta,
         bio: bio,
         main: mainPhoto,

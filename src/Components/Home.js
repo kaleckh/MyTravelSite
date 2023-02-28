@@ -1,9 +1,7 @@
 import styles from "./Home.module.css";
 import React, { useState } from "react";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
-
 import { auth } from "./Firebase";
 import Header from "./pieces/Header";
 import {
@@ -11,6 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import loginPhoto from "./Media/loginphoto.jpg";
+const {REACT_APP_URL} = process.env
 function Home() {
   const Navigate = useNavigate();
 
@@ -53,7 +52,7 @@ function Home() {
   const handleSubmit = async () => {
     debugger;
     try {
-      return await axios.post("http://localhost:3001/newperson", {
+      return await axios.post(`${REACT_APP_URL}/newperson`, {
         firstname: firstName,
         lastname: lastName,
         email: registerEmail,

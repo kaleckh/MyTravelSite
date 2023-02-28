@@ -61,6 +61,19 @@
     font-weight: 400;
 }
 
+.eighty {
+    width: 80%;
+}
+
+.Button {
+    border-radius: 25px;
+    padding: 15px;
+    background-color: transparent;
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
 .mainImage {
     height: 100%;
     border-radius: 20px;

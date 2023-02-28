@@ -25,6 +25,9 @@ function MyProfile() {
   const [topPhoto, setTopPhoto] = useState(true);
   const [bottomPhoto, setBottomPhoto] = useState(true);
   const [uploadToggle, setUploadToggle] = useState();
+  const [file1, setFile1] = useState();
+  const [file2, setFile2] = useState();
+  const [file3, setFile3] = useState();
 
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const inputRef = useRef(null);
@@ -111,7 +114,6 @@ function MyProfile() {
     secretAccessKey: REACT_APP_SECRETACCESSKEY,
   };
 
-
   const handleFileInput = (e) => {
     console.log(e.target.files[0]);
 
@@ -155,7 +157,7 @@ function MyProfile() {
         <div className={styles.leftProfileContainer}>
           <div className={styles.profileTitle}>{firstName}</div>
           <div className={styles.profileTitle}>{lastName}</div>
-          <div>
+          <div className={styles.eighty}>
             <div className={styles.profileItem}>
               {localStorage.getItem("userEmail")}
             </div>
@@ -191,6 +193,7 @@ function MyProfile() {
             {profileEdit ? (
               <>
                 <button
+                  className={styles.Button}
                   onClick={() => {
                     setProfileEdit(!profileEdit);
 
@@ -200,6 +203,7 @@ function MyProfile() {
                   Save Changes
                 </button>
                 <button
+                  className={styles.Button}
                   onClick={() => {
                     setProfileEdit(!profileEdit);
                   }}
@@ -215,7 +219,7 @@ function MyProfile() {
                       "this button doesnt work yet, will add at some point in the future"
                     );
                   }}
-                  className={styles.profileItem}
+                  className={styles.Button}
                 >
                   Send Message
                 </button>
@@ -278,34 +282,38 @@ function MyProfile() {
                 />
               </div>
               <div className={styles.rightSidePhotos}>
-                <Toggle
-                  uploadFile={() => {
-                    uploadFile();
-                  }}
-                  onInputClick={() => {
-                    onInputClick();
-                  }}
-                  id={id}
-                  type={"rightside"}
-                  class={styles.smallPhoto}
-                  filterName={() => {
-                    setPhotoName("rightside");
-                  }}
-                />
-                <Toggle
-                  uploadFile={() => {
-                    uploadFile();
-                  }}
-                  onInputClick={() => {
-                    onInputClick();
-                  }}
-                  id={id}
-                  type={"rightbottom"}
-                  class={styles.smallPhoto}
-                  filterName={() => {
-                    setPhotoName("rightbottom");
-                  }}
-                />
+                <div className={styles.smallPhoto}>
+                  <Toggle
+                    uploadFile={() => {
+                      uploadFile();
+                    }}
+                    onInputClick={() => {
+                      onInputClick();
+                    }}
+                    id={id}
+                    type={"rightside"}
+                    class={styles.smallPhoto}
+                    filterName={() => {
+                      setPhotoName("rightside");
+                    }}
+                  />
+                </div>
+                <div className={styles.smallPhoto}>
+                  <Toggle
+                    uploadFile={() => {
+                      uploadFile();
+                    }}
+                    onInputClick={() => {
+                      onInputClick();
+                    }}
+                    id={id}
+                    type={"rightbottom"}
+                    class={styles.smallPhoto}
+                    filterName={() => {
+                      setPhotoName("rightbottom");
+                    }}
+                  />
+                </div>
               </div>
             </div>
           )}

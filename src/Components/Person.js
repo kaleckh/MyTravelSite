@@ -35,7 +35,7 @@ function Person() {
 
   const handleSubmit = async (id, location, dates) => {
     try {
-      let newTrip = await axios.post("http://localhost:3001/newtrip", {
+      let newTrip = await axios.post("/newtrip", {
         id: myId,
         location: tripLocation,
         dates: tripDates,
@@ -73,7 +73,7 @@ function Person() {
   const handleFilter = () => {
     axios({
       method: "get",
-      url: `http://localhost:3001/trips`,
+      url: `/trips`,
     }).then((res) => {
       setTrips(res.data);
     });
@@ -81,7 +81,7 @@ function Person() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/trips`,
+      url: `/trips`,
     }).then((res) => {
       setTrips(res.data)
     });
@@ -90,7 +90,7 @@ function Person() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/person/${localStorage.getItem("userEmail")}`,
+      url: `/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
     });

@@ -39,6 +39,11 @@ massive({
 	.catch((err) => console.log(err));
 
 app.get('/people', getpeople);
+app.get('/heartbeat', (req,res) => {
+	res.json({
+		is: "alive"
+	})
+})
 app.get('/person/:email', getPerson);
 app.get('/personTrips/:id', getPersonTrips);
 app.get('/trips', getTrips);

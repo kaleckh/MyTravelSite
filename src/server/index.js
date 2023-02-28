@@ -28,34 +28,33 @@ app.use(bodyParser());
 const dotenv = require('dotenv');
 require('dotenv').config();
 const CONNECTION_STRING = 'postgresql://postgres:mvfYRZbHBHK1kK1rnjFo@containers-us-west-22.railway.app:6635/railway';
-console.log(process.env, "THIS IS ENV")
-// massive({
-// 	connectionString: CONNECTION_STRING,
-// 	ssl: { rejectUnauthorized: false }
-// })
-// 	.then((dbInstance) => {
-// 		app.set('db', dbInstance);
-// 	})
-// 	.catch((err) => console.log(err));
+massive({
+	connectionString: CONNECTION_STRING,
+	ssl: { rejectUnauthorized: false }
+})
+	.then((dbInstance) => {
+		app.set('db', dbInstance);
+	})
+	.catch((err) => console.log(err));
 
-// app.get('/people', getpeople);
+app.get('/people', getpeople);
 app.get('/heartbeat', (req,res) => {
 	res.json({
 		is: "alive"
 	})
 })
-// app.get('/person/:email', getPerson);
-// app.get('/personTrips/:id', getPersonTrips);
-// app.get('/trips', getTrips);
-// app.get('/trip/:id', getTrip)
-// app.get('/tripgroup/:id', getTripGroup)
-// app.post('/newperson', newperson);
-// app.post('/newtrip', newTrip);
-// app.post('/newtripgroup', newTripGroup);
-// app.put('/editperson/:id', editdetails); 
-// app.put('/edittrip/:id', edittrip); 
-// app.delete('/deleteperson/:id', deleteperson);
-// app.delete('/deletetrip/:id', deletetrip);
-// app.delete('/deletetripgroup/:id', deleteTripGroup);
+app.get('/person/:email', getPerson);
+app.get('/personTrips/:id', getPersonTrips);
+app.get('/trips', getTrips);
+app.get('/trip/:id', getTrip)
+app.get('/tripgroup/:id', getTripGroup)
+app.post('/newperson', newperson);
+app.post('/newtrip', newTrip);
+app.post('/newtripgroup', newTripGroup);
+app.put('/editperson/:id', editdetails); 
+app.put('/edittrip/:id', edittrip); 
+app.delete('/deleteperson/:id', deleteperson);
+app.delete('/deletetrip/:id', deletetrip);
+app.delete('/deletetripgroup/:id', deleteTripGroup);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

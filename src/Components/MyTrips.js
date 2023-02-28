@@ -11,6 +11,7 @@ import { async } from "@firebase/util";
 import Header from "./pieces/Header";
 import DeleteButton from "./pieces/DeleteButton";
 import { Audio } from "react-loader-spinner";
+const {REACT_APP_URL} = process.env
 
 function MyTrips() {
   const [myTrips, setMyTrips] = useState([]);

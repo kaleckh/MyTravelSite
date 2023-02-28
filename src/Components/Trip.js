@@ -16,6 +16,7 @@ import surf from './Media/surf.jpg'
 import explore from './Media/explore.jpg'
 import hike from './Media/hike.jpg'
 import party from './Media/party.jpg'
+const {REACT_APP_URL} = process.env
 
 function Trip() {
   const { search } = useLocation();
@@ -42,7 +43,7 @@ function Trip() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
+      url: `${process.env.REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
       axios({

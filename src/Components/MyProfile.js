@@ -10,6 +10,7 @@ import Header from "./pieces/Header";
 import S3 from "react-aws-s3";
 import { Camera } from "./Media/Camera";
 import Toggle from "./pieces/Toggle";
+const {REACT_APP_URL} = process.env
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const getSignedUrl = require("@aws-sdk/s3-request-presigner");
 

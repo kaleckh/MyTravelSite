@@ -73,7 +73,7 @@ function Person() {
   const handleFilter = () => {
     axios({
       method: "get",
-      url: `/trips`,
+      url: `${REACT_APP_URL}/trips`,
     }).then((res) => {
       setTrips(res.data);
     });
@@ -81,7 +81,7 @@ function Person() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/trips`,
+      url: `${REACT_APP_URL}/trips`,
     }).then((res) => {
       setTrips(res.data)
     });
@@ -90,7 +90,7 @@ function Person() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `/person/${localStorage.getItem("userEmail")}`,
+      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
     }).then((res) => {
       setMyId(res.data[0].id);
     });

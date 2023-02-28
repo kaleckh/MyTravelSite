@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { auth } from "./Firebase";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { Search } from "./Media/Search";
+const {REACT_APP_URL} = process.env
 function Person() {
   const Navigate = useNavigate();
   const [tripLocation, setTripLocation] = useState("");

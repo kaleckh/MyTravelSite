@@ -12,11 +12,11 @@ import { Hike } from "./Media/Hike";
 import { Surf } from "./Media/Surf";
 import { Relax } from "./Media/Relax";
 import { Cheers } from "./Media/Cheers";
-import surf from './Media/surf.jpg'
-import explore from './Media/explore.jpg'
-import hike from './Media/hike.jpg'
-import party from './Media/party.jpg'
-const {REACT_APP_URL} = process.env
+import surf from "./Media/surf.jpg";
+import explore from "./Media/explore.jpg";
+import hike from "./Media/hike.jpg";
+import party from "./Media/party.jpg";
+const { REACT_APP_URL } = process.env;
 
 function Trip() {
   const { search } = useLocation();
@@ -30,7 +30,7 @@ function Trip() {
   const [myTrips, setMyTrips] = useState([]);
   const [loading, setLoading] = useState(true);
   const [render, setRender] = useState(true);
-  const [admin, setIsAdmin] = useState(true);
+  const [master, setIsMaster] = useState(false);
   const [image, setImage] = useState();
   const [tripGroup, setTripGroup] = useState();
   const [toggleTripDetails, setToggleTripDetails] = useState(false);
@@ -43,33 +43,37 @@ function Trip() {
   useEffect(() => {
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
+      url: `${process.env.REACT_APP_URL}/person/${localStorage.getItem(
+        "userEmail"
+      )}`,
     }).then((res) => {
       setMyId(res.data[0].id);
-      axios({
-        method: "get",
-        url: `${REACT_APP_URL}/trip/${id}`,
-      }).then((res) => {
-        setMyTrips(res.data);
-        setLoading(false);
-        console.log(res.data[0], `this is the response`);
-        setDescription(res.data[0].description);
-        setHousing(res.data[0].housing);
-        setFriends(res.data[0].friends);
-        setPhoto(res.data[0].photo)
-
-        axios({
-          method: "get",
-          url: `${REACT_APP_URL}/tripgroup/${id}`,
-        }).then((res) => {
-          if (myId === res.data[0].personid) {
-            setIsAdmin(true);
-          }
-          setTripGroup(res.data);
-        });
-      });
     });
   }, []);
+  useEffect(() => {
+    axios({
+      method: "get",
+      url: `${REACT_APP_URL}/trip/${id}`,
+    }).then((res) => {
+      console.log("kale");
+      setMyTrips(res.data);
+      setLoading(false);
+      setDescription(res.data[0].description);
+      setHousing(res.data[0].housing);
+      setFriends(res.data[0].friends);
+      setPhoto(res.data[0].photo);
+      console.log("kale");
+      console.log(myId, "this is my id");
+      console.log(res.data[0].person_id, "this is person id");
+
+      if (myId === res.data[0].person_id) {
+        setIsMaster(true);
+      }
+
+      setTripGroup(res.data);
+      
+    });
+  }, [myId]);
 
   const changeFormat = (isoDate) => {
     const regularDate = new Date(isoDate).toLocaleDateString("en-US", {
@@ -79,25 +83,25 @@ function Trip() {
     return regularDate;
   };
   const handleSubmit = async (photo) => {
-    
     try {
-      await axios.put(`${REACT_APP_URL}/edittrip/${id}`, {
-        description: description,
-        housing: housing,
-        friends: friends,
-        photo: photo
-      }).then((res) => {
-        
-        setPhoto(res.data[0].photo)
-      });
+      await axios
+        .put(`${REACT_APP_URL}/edittrip/${id}`, {
+          description: description,
+          housing: housing,
+          friends: friends,
+          photo: photo,
+        })
+        .then((res) => {
+          setPhoto(res.data[0].photo);
+        });
 
       await setRender(!render);
     } catch (error) {
       console.log(error.message);
     }
   };
-  
 
+  console.log(myId, "this is my id");
   return (
     <div className={styles.wholeScreen}>
       {loading ? (
@@ -138,20 +142,62 @@ function Trip() {
                   </div>
                 </div>
                 <div className={styles.svgContainer}>
-                  <div className={styles.blackBoxContainer}>
-                    <div onClick={() => {setPhoto(explore); handleSubmit(explore)}}  className={styles.blackBox}>
-                      <Relax />
+                  {master ? (
+                    <div className={styles.blackBoxContainer}>
+                      <div
+                        onClick={() => {
+                          setPhoto(explore);
+                          handleSubmit(explore);
+                        }}
+                        className={styles.blackBox}
+                      >
+                        <Relax />
+                      </div>
+                      <div
+                        onClick={() => {
+                          setPhoto(party);
+                          handleSubmit(party);
+                        }}
+                        className={styles.blackBox}
+                      >
+                        <Cheers />
+                      </div>
+                      <div
+                        onClick={() => {
+                          setPhoto(hike);
+                          handleSubmit(hike);
+                        }}
+                        className={styles.blackBox}
+                      >
+                        <Hike />
+                      </div>
+                      <div
+                        onClick={() => {
+                          setPhoto(surf);
+                          handleSubmit(surf);
+                        }}
+                        className={styles.blackBox}
+                      >
+                        <Surf />
+                      </div>
                     </div>
-                    <div onClick={() => {setPhoto(party); handleSubmit(party)}} className={styles.blackBox}>
-                      <Cheers/>
+                  ) : (
+                    <div className={styles.blackBoxContainer}>
+                      <div className={styles.blackBox}>
+                        <Relax />
+                      </div>
+                      <div className={styles.blackBox}>
+                        <Cheers />
+                      </div>
+                      <div className={styles.blackBox}>
+                        <Hike />
+                      </div>
+                      <div className={styles.blackBox}>
+                        <Surf />
+                      </div>
                     </div>
-                    <div onClick={() => {setPhoto(hike); handleSubmit(hike)}} className={styles.blackBox}>
-                      <Hike/>
-                    </div>
-                    <div onClick={() => {setPhoto(surf); handleSubmit(surf)}} className={styles.blackBox}>
-                      <Surf/>
-                    </div>
-                  </div>
+                  )}
+
                   <div className={styles.imgContainer}>
                     <img className={styles.tripImage} src={photo} alt="" />
                   </div>
@@ -170,7 +216,6 @@ function Trip() {
                       <div className={styles.smallerTitle}>Whose Coming</div>
                       <div className={styles.tripbox}>
                         {tripGroup?.map((trip) => {
-                          
                           return (
                             <div className={styles.tagContainer}>
                               <div
@@ -195,13 +240,13 @@ function Trip() {
                       <div className={styles.smallerTitle}>Housing</div>
 
                       <div className={styles.tripbox}>
-                        <div className={styles.tagContainer}>{myTrips[0].housing}</div>
+                        <div className={styles.tagContainer}>
+                          {myTrips[0].housing}
+                        </div>
                       </div>
 
                       <div className={styles.row}>
-                        {!admin ? (
-                          <button>Request Join</button>
-                        ) : (
+                        {master ? (
                           <button
                             className={`${styles.smallerTitle} ${styles.tripButton}`}
                             onClick={() => {
@@ -209,6 +254,10 @@ function Trip() {
                             }}
                           >
                             Edit
+                          </button>
+                        ) : (
+                          <button className={styles.tripButton}>
+                            Request Join
                           </button>
                         )}
                       </div>

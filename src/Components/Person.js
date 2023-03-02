@@ -87,25 +87,17 @@ function Person() {
       url: `${REACT_APP_URL}/trips`,
     }).then((res) => {
       setTrips(res.data);
+      axios({
+        method: "get",
+        url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
+      }).then((res) => {
+        setMyId(res.data[0].id);
+        setIsLoading(false);
+      });
     });
   }, []);
 
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
-    }).then((res) => {
-      setMyId(res.data[0].id);
-    });
-  }, []);
-  useEffect(() => {
-    axios
-      .get(`${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`)
-      .then((response) => {
-        setData(response.data);
-        setIsLoading(false);
-      });
-  }, []);
+  useEffect(() => {}, []);
 
   console.log(trips, "these are my trips");
 

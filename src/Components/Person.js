@@ -32,6 +32,7 @@ function Person() {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const [isLoading, setIsLoading] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
   const [data, setData] = useState([]);
 
   const localEmail = localStorage.getItem("userEmail");
@@ -92,10 +93,15 @@ function Person() {
         url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
       }).then((res) => {
         setMyId(res.data[0].id);
-        setIsLoading(false);
+        setIsConnected(true);
       });
     });
   }, []);
+  useEffect(() => {
+    if (isConnected) {
+      setIsLoading(false);
+    }
+  }, [isConnected]);
 
   useEffect(() => {}, []);
 

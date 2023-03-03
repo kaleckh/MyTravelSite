@@ -1,0 +1,283 @@
+.profileWholeScreen {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(22, 50, 67);
+}
+
+.leftProfileContainer {
+    height: 100vh;
+    width: 30vw;
+    color: white;
+    margin: 20px;
+}
+
+.row {
+    display: flex;
+}
+
+.editContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+}
+
+.edit {
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.editInput {
+    background-color: white;
+}
+
+.profileHeader {
+    background-color: none;
+    height: 70px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid white;
+}
+
+.rightProfileContainer {
+    height: 56vh;
+    width: 58vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+.profileTitle {
+    font-size: 100px;
+    margin: 10px;
+    font-weight: 800;
+}
+
+.profileItem {
+    margin: 10px;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.eighty {
+    width: 80%;
+}
+
+.Button {
+    border-radius: 25px;
+    padding: 15px;
+    background-color: transparent;
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.mainImage {
+    height: 100%;
+    border-radius: 20px;
+    width: 35vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.mainPic {
+    height: 350px;
+    width: 500px;
+    border-radius: 8px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainImageContainer {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin: 10px;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-top: 25px;
+}
+
+.smallPhoto {
+    height: 250px;
+    width: 330px;
+    border-radius: 8px;
+    border: 2px black solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.topImagesContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 371px;
+    padding-top: 20px;
+}
+
+.smallImageContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+.imageDiv {
+    border: gray 1px solid;
+    border-radius: 20px;
+    height: 125px;
+    width: 220px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.upload {
+    opacity: 0;
+}
+
+.rightSidePhotos {
+    display: flex;
+    flex-direction: column;
+    height: 85%;
+    justify-content: space-around;
+    width: 30%;
+    height: 74.5vh;
+    width: 60%;
+    margin: 30px;
+}
+
+.bottomContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.friends {
+    background-color: rgb(93, 140, 161);
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.pastTrips {
+    display: flex;
+    width: 50%;
+    height: 70%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-weight: 700;
+    color: white;
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+
+@media (width < 1300px) {
+    .mainPic {
+        height: 250px;
+        width: 350px;
+    }
+    .rightProfileContainer {
+        margin: 10px;
+    }
+    .rightSidePhotos {
+        height: 60%;
+        margin: 10px;
+        justify-content: space-between;
+    }
+}
+
+@media (width < 1000px) {
+    .mainPic {
+        width: 150px;
+        height: 50px;
+    }
+}
+
+@media (width< 1100px) {
+    .mainPic {
+        width: 275px;
+        height: 250px;
+    }
+    .smallPhoto {
+        width: 225px;
+        height: 175px;
+    }
+    .profileTitle {
+        font-size: 80px;
+    }
+}
+
+@media (width < 900px) {
+    .mainPic {
+        height: 150px;
+        width: 200px;
+    }
+    .smallPhoto {
+        width: 175px;
+        height: 125px;
+    }
+    .rightSidePhotos {
+        height: 50%;
+    }
+    .rightProfileContainer {
+        height: 75vh;
+    }
+}
+
+@media (width < 850px) {
+    .profileWholeScreen {
+        flex-direction: column;
+    }
+    .rightProfileContainer {
+        height: 50%;
+        width: 100%;
+        justify-content: space-evenly;
+        margin: 10px;
+    }
+    .leftProfileContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 65vh;
+    }
+    .profileWholeScreen {
+        align-items: center;
+    }
+    .mainPic {
+        width: 300px;
+    }
+    .leftProfileContainer {
+        width: 100vw;
+    }
+    .rightSidePhotos {
+        display: none;
+    }
+    .editButtonContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    .leftProfileContainer {
+        height: 70vh;
+    }
+}

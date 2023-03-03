@@ -97,7 +97,7 @@ function Person() {
       });
     });
   }, []);
-  useEffect(() => {
+    useEffect(() => {
     if (isConnected) {
       setIsLoading(false);
     }

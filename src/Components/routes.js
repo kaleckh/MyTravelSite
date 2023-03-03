@@ -6,6 +6,7 @@ import Person from "./Person";
 import MyTrips from "./MyTrips.js";
 import Trip from "./Trip";
 import MyProfile from "./MyProfile";
+import Profile from "./Profile";
 
 export default (
   <BrowserRouter>
@@ -15,6 +16,7 @@ export default (
       <Route path="/person/:id" element={<Person />} />
       <Route path="/myTrips/:id" element={<MyTrips />} />
       <Route path="/myprofile/:id" element={<MyProfile />} />
+      <Route path="/profile/:id" element={<Profile />} />
     </Routes>
   </BrowserRouter>
 );

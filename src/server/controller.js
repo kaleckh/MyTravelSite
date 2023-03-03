@@ -65,7 +65,7 @@ let newTrip = (req, res) => {
 	console.log(req.body, "this is body");
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.new_trip([ req.body.person_id, req.body.triplocation, req.body.tripstartdate, req.body.tripenddate, req.body.tripstate, req.body.description ])
+		.new_trip([ req.body.person_id, req.body.triplocation, req.body.tripstartdate, req.body.tripenddate, req.body.tripstate, req.body.description, req.body.owner_email ])
 		.then((trips) => {
 			res.status(200).send(trips);
 		})

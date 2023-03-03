@@ -31,6 +31,7 @@ function Trip() {
   const [loading, setLoading] = useState(true);
   const [render, setRender] = useState(true);
   const [master, setIsMaster] = useState(false);
+  const [ownerEmail, setOwnerEmail] = useState(false);
   const [image, setImage] = useState();
   const [tripGroup, setTripGroup] = useState();
   const [toggleTripDetails, setToggleTripDetails] = useState(false);
@@ -55,16 +56,15 @@ function Trip() {
       method: "get",
       url: `${REACT_APP_URL}/trip/${id}`,
     }).then((res) => {
-      console.log("kale");
+      
       setMyTrips(res.data);
       setLoading(false);
       setDescription(res.data[0].description);
       setHousing(res.data[0].housing);
       setFriends(res.data[0].friends);
       setPhoto(res.data[0].photo);
-      console.log("kale");
-      console.log(myId, "this is my id");
-      console.log(res.data[0].person_id, "this is person id");
+      setOwnerEmail(res.data[0].owner_email);
+      console.log(ownerEmail, "this is the email")
 
       if (myId === res.data[0].person_id) {
         setIsMaster(true);
@@ -134,6 +134,7 @@ function Trip() {
                 <div className={styles.personaltriptitle}>
                   {myTrips[0].triplocation}
                 </div>
+                <div onClick={() => {Navigate(`/profile/${ownerEmail}`)}}>{ownerEmail}</div>
                 <div className={styles.row}>
                   <div className={styles.personaltripdate}>
                     <div>{changeFormat(myTrips[0].tripstartdate)}</div>
@@ -141,7 +142,7 @@ function Trip() {
                     <div>{changeFormat(myTrips[0].tripenddate)}</div>
                   </div>
                 </div>
-                <div className={styles.svgContainer}>
+                <div className={styles.svgContainer}> 
                   {master ? (
                     <div className={styles.blackBoxContainer}>
                       <div

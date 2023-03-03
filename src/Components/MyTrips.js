@@ -72,7 +72,8 @@ function MyTrips() {
         tripstartdate: startDate,
         tripenddate: endDate, 
         tripstate: tripState,
-        description: description
+        description: description,
+        owner_email: localStorage.getItem("userEmail")
       });
 
       setMyTrips([...myTrips, newTrip.data[0]]);

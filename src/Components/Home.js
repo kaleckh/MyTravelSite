@@ -35,7 +35,7 @@ function Home() {
   };
 
   const login = async () => {
-    console.log(loginEmail, loginPassword, "emails and pasword");
+    
     try {
       const loggedUser = await signInWithEmailAndPassword(
         auth,

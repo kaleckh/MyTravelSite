@@ -108,7 +108,7 @@ function Person() {
     }
   }, [isConnected]);
 
-  console.log(trips, "these are my trips");
+  
 
   return (
     <>

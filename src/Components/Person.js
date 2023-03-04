@@ -88,6 +88,10 @@ function Person() {
       url: `${REACT_APP_URL}/trips`,
     }).then((res) => {
       setTrips(res.data);
+    });
+  }, []);
+  useEffect(() => {
+    if (trips.length > 0) {
       axios({
         method: "get",
         url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
@@ -95,15 +99,14 @@ function Person() {
         setMyId(res.data[0].id);
         setIsConnected(true);
       });
-    });
-  }, []);
-    useEffect(() => {
+    }
+  }, [trips]);
+
+  useEffect(() => {
     if (isConnected) {
       setIsLoading(false);
     }
   }, [isConnected]);
-
-  useEffect(() => {}, []);
 
   console.log(trips, "these are my trips");
 

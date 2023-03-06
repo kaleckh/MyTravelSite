@@ -5,6 +5,7 @@ import Header from "./pieces/Header";
 import SearchBar from "./pieces/SearchBar";
 import { Arrow } from "./Media/Arrow";
 import homePhoto from "./Media/homebottm.jpg";
+import isBrowser from "is-in-browser";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";
@@ -91,6 +92,7 @@ function Person() {
     });
   }, []);
   useEffect(() => {
+    debugger
     console.log(isConnected, "before axios is connected")
     if (trips.length > 0) {
       axios({
@@ -109,13 +111,21 @@ function Person() {
 
   useEffect(() => {
     debugger
+    console.log("thhis is loading toggle")
     if (isConnected) {
       setIsLoading(false);
     }
   }, [isConnected]);
+  if (isBrowser) {
+    console.log("is browser")
+  }
+
+if (isNode) {
+ console.log("is node")
+}
 
   
-
+console.log("this is outside of useEffect")
   return (
     <>
       <div className={styles.wholeScreen}>

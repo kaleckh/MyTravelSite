@@ -20,6 +20,7 @@
         "dotenv": "^16.0.3",
         "find-config": "^1.0.0",
         "firebase": "^9.16.0",
+        "is-in-browser": "^2.0.0",
         "massive": "^6.11.2",
         "react": "^18.2.0",
         "react-aws-s3": "^1.5.0",

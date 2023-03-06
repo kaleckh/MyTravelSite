@@ -92,17 +92,23 @@ function Person() {
   }, []);
   useEffect(() => {
     if (trips.length > 0) {
+      console.log(isConnected, "before axios is connected")
       axios({
         method: "get",
         url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,
       }).then((res) => {
         setMyId(res.data[0].id);
+        console.log(isConnected, "inside use effect")
         setIsConnected(true);
+        
+      }).catch((err) => {
+        console.log(err, "this is error message")
       });
     }
   }, [trips]);
 
   useEffect(() => {
+    debugger
     if (isConnected) {
       setIsLoading(false);
     }

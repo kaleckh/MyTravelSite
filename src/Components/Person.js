@@ -5,7 +5,7 @@ import Header from "./pieces/Header";
 import SearchBar from "./pieces/SearchBar";
 import { Arrow } from "./Media/Arrow";
 import homePhoto from "./Media/homebottm.jpg";
-import isBrowser from "is-in-browser";
+import {isBrowser, isNode} from "is-in-browser";
 
 import { useNavigate } from "react-router-dom";
 import { signOut, getAuth } from "firebase/auth";

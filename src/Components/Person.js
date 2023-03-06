@@ -91,8 +91,8 @@ function Person() {
     });
   }, []);
   useEffect(() => {
+    console.log(isConnected, "before axios is connected")
     if (trips.length > 0) {
-      console.log(isConnected, "before axios is connected")
       axios({
         method: "get",
         url: `${REACT_APP_URL}/person/${localStorage.getItem("userEmail")}`,

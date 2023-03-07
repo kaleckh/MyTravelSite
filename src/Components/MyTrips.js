@@ -11,7 +11,7 @@ import { async } from "@firebase/util";
 import Header from "./pieces/Header";
 import DeleteButton from "./pieces/DeleteButton";
 import { Audio } from "react-loader-spinner";
-const {REACT_APP_URL} = process.env
+const { REACT_APP_URL } = process.env;
 
 function MyTrips() {
   const [myTrips, setMyTrips] = useState([]);
@@ -54,9 +54,7 @@ function MyTrips() {
           setIsLoading(false);
           setMyTrips(res.data);
         })
-        .then(() => {
-        
-        });
+        .then(() => {});
     });
   }, []);
 
@@ -70,21 +68,21 @@ function MyTrips() {
         person_id: myId,
         triplocation: tripLocation,
         tripstartdate: startDate,
-        tripenddate: endDate, 
+        tripenddate: endDate,
         tripstate: tripState,
         description: description,
-        owner_email: localStorage.getItem("userEmail")
+        owner_email: localStorage.getItem("userEmail"),
       });
 
       setMyTrips([...myTrips, newTrip.data[0]]);
       setIsAdding(false);
-      debugger
+      debugger;
       await axios.post(`${REACT_APP_URL}/newtripgroup`, {
         personid: myId,
         tripid: newTrip.data[0].id,
         email: myEmail,
       });
-      debugger
+      debugger;
     } catch (error) {
       console.log(error.message);
     }
@@ -135,8 +133,6 @@ function MyTrips() {
     return regularDate;
   };
 
-  
-  
   return (
     <div>
       {isAddingTrip &&
@@ -266,7 +262,6 @@ function MyTrips() {
                   ) : (
                     <>
                       {myTrips.map((trip) => {
-                        
                         return (
                           <div className={styles.myTripsContainer}>
                             <div className={styles.tripBox}>
@@ -314,7 +309,6 @@ function MyTrips() {
 
               <DeleteButton
                 isDeletingTrip={() => {
-                  console.log(!isDeletingTrip, "toggle");
                   setIsDeletingTrip(!isDeletingTrip);
                 }}
               />

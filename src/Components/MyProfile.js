@@ -10,7 +10,7 @@ import Header from "./pieces/Header";
 import S3 from "react-aws-s3";
 import { Camera } from "./Media/Camera";
 import Toggle from "./pieces/Toggle";
-const {REACT_APP_URL} = process.env
+const { REACT_APP_URL } = process.env;
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const getSignedUrl = require("@aws-sdk/s3-request-presigner");
 
@@ -55,7 +55,6 @@ function MyProfile() {
       setFirstName(res.data[0].firstname);
       setLastName(res.data[0].lastname);
       setMyId(res.data[0].id);
-      setInsta(res.data[0].insta);
       setBio(res.data[0].bio);
       setMainPhoto(res.data[0].main);
       setTopPhoto(res.data[0].rightside);
@@ -143,7 +142,7 @@ function MyProfile() {
       .then((data) => console.log(data.location))
       .catch((err) => console.error(err));
   };
-
+console.log(id, "this is my id")
   return (
     <div>
       <Header
@@ -275,7 +274,7 @@ function MyProfile() {
                   onInputClick={() => {
                     onInputClick();
                   }}
-                  id={id}
+                  id={myId}
                   class={styles.mainPic}
                   filterName={() => {
                     setPhotoName("main");
@@ -291,7 +290,7 @@ function MyProfile() {
                     onInputClick={() => {
                       onInputClick();
                     }}
-                    id={id}
+                    id={myId}
                     type={"rightside"}
                     class={styles.smallPhoto}
                     filterName={() => {
@@ -307,7 +306,7 @@ function MyProfile() {
                     onInputClick={() => {
                       onInputClick();
                     }}
-                    id={id}
+                    id={myId}
                     type={"rightbottom"}
                     class={styles.smallPhoto}
                     filterName={() => {

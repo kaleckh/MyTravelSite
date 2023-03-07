@@ -92,7 +92,7 @@ function Person() {
     });
   }, []);
   useEffect(() => {
-    debugger
+    
     console.log(isConnected, "before axios is connected")
     if (trips.length > 0) {
       axios({
@@ -110,7 +110,7 @@ function Person() {
   }, [trips]);
 
   useEffect(() => {
-    debugger
+    
     console.log("thhis is loading toggle")
     if (isConnected) {
       setIsLoading(false);

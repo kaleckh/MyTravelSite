@@ -19,8 +19,8 @@ export default function Toggle(props) {
           setIconToggle(false)
         } 
       });
-  }, []);
-  console.log(props.id)
+  }, [props.id]);
+  
   return (
     <>
       {iconToggle ? (

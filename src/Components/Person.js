@@ -131,6 +131,7 @@ console.log("this is outside of useEffect")
       <div className={styles.wholeScreen}>
         <Header
           home={"Home"}
+          
           myTrips={"My Trips"}
           myProfile={"My Profile"}
           out={"Logout"}

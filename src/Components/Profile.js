@@ -116,7 +116,7 @@ function Profile() {
         home={"Home"}
         myTrips={"My Trips"}
         myProfile={"My Profile"}
-        id={id}
+        id={myId}
         out={"Logout"}
         color="black"
       />

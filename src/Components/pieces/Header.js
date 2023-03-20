@@ -21,7 +21,7 @@ export default function Header({
 
   return (
     <header className={`header ${color}`}>
-      <div className={`home`} onClick={() => {navigate(`/person/${auth.currentUser.uid}`)}}>{home}</div>
+      <div className={`home`} onClick={() => {navigate(`/person/${id}`)}}>{home}</div>
       <div className="headerButtonContainer">
         <div onClick={() => {toggleMenu()}}  className="headerItem">{createTrip}</div>
         <div onClick={() => {navigate(`/myTrips/${id}`)}} className="headerItem">{myTrips}</div>

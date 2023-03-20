@@ -115,7 +115,7 @@ button {
 .row {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 70%;
 }
 
 .input {

@@ -9,7 +9,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import loginPhoto from "./Media/loginphoto.jpg";
-const {REACT_APP_URL} = process.env
+const { REACT_APP_URL } = process.env;
 function Home() {
   const Navigate = useNavigate();
 
@@ -35,7 +35,6 @@ function Home() {
   };
 
   const login = async () => {
-    
     try {
       const loggedUser = await signInWithEmailAndPassword(
         auth,
@@ -91,6 +90,7 @@ function Home() {
                   >
                     Register
                   </button>
+                  <button onClick={() => {localStorage.setItem(`userEmail`, `${"kaleckh@gmail.com"}`); Navigate('/person/2b608321-a52a-48aa-8ebc-932605fc30f6')}} className={styles.button}>Im a recruiter</button>
                 </div>
               </div>
             </div>
@@ -158,6 +158,16 @@ function Home() {
                 </div>
               ) : (
                 <div className={styles.inputContainer}>
+                  <div className={styles.loginBackContainer}>
+                    <div
+                      onClick={() => {
+                        sethomeScreen(!homeScreen);
+                      }}
+                      className={styles.back}
+                    >
+                      X
+                    </div>
+                  </div>
                   <div className={styles.words}>Welcome</div>
                   <div className={styles.inputTop}>
                     <div className={styles.row}>

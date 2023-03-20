@@ -7,11 +7,10 @@ import axios from "axios";
 import { useLocation, useParams } from "react-router-dom";
 import Header from "./pieces/Header";
 
-import S3 from "react-aws-s3";
 import { Camera } from "./Media/Camera";
 import Toggle from "./pieces/Toggle";
 const { REACT_APP_URL } = process.env;
-const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
+
 const getSignedUrl = require("@aws-sdk/s3-request-presigner");
 
 function Profile() {
@@ -63,10 +62,6 @@ function Profile() {
     });
   }, []);
 
-  const onInputClick = () => {
-    inputRef.current.click();
-  };
-
   const handleDelete = async (id) => {
     try {
       let deleteTrip = await axios.delete(
@@ -100,24 +95,6 @@ function Profile() {
   //   },
   // });
 
-  const [selectedFile, setSelectedFile] = useState(null);
-  const {
-    REACT_APP_BUCKETNAME,
-    REACT_APP_REGION,
-    REACT_APP_ACCESSKEYID,
-    REACT_APP_SECRETACCESSKEY,
-  } = process.env;
-  // the configuration information is fetched from the .env file
-  const config = {
-    bucketName: REACT_APP_BUCKETNAME,
-    region: REACT_APP_REGION,
-    accessKeyId: REACT_APP_ACCESSKEYID,
-    secretAccessKey: REACT_APP_SECRETACCESSKEY,
-  };
-
-  const handleFileInput = (e) => {
-    setSelectedFile(e.target.files[0]);
-  };
   // const getFileUrl = () => {
   //   getSignedUrl(
   //     client,
@@ -132,15 +109,6 @@ function Profile() {
   //       console.log(err);
   //     });
   // };
-
-  const uploadFile = async () => {
-    debugger;
-    const ReactS3Client = new S3(config);
-
-    ReactS3Client.uploadFile(selectedFile, `${myId}-${photoName}`)
-      .then((data) => console.log(data.location))
-      .catch((err) => console.error(err));
-  };
 
   return (
     <div>
@@ -220,26 +188,9 @@ function Profile() {
                 >
                   Send Message
                 </button>
-                <div
-                  onClick={() => {
-                    setProfileEdit(!profileEdit);
-                  }}
-                  className={styles.edit}
-                >
-                  ...
-                </div>
               </div>
             )}
           </div>
-          <input
-            onChange={(event) => {
-              handleFileInput(event);
-            }}
-            ref={inputRef}
-            type="file"
-            name=""
-            style={{ display: "none" }}
-          />
         </div>
 
         <div>
@@ -263,14 +214,7 @@ function Profile() {
             <div className={styles.rightProfileContainer}>
               <div className={styles.mainImageContainer}>
                 <Toggle
-                  file={selectedFile}
                   type={"main"}
-                  uploadFile={() => {
-                    uploadFile();
-                  }}
-                  onInputClick={() => {
-                    onInputClick();
-                  }}
                   id={myId}
                   class={styles.mainPic}
                   filterName={() => {
@@ -281,12 +225,6 @@ function Profile() {
               <div className={styles.rightSidePhotos}>
                 <div className={styles.smallPhoto}>
                   <Toggle
-                    uploadFile={() => {
-                      uploadFile();
-                    }}
-                    onInputClick={() => {
-                      onInputClick();
-                    }}
                     id={myId}
                     type={"rightside"}
                     class={styles.smallPhoto}
@@ -297,12 +235,6 @@ function Profile() {
                 </div>
                 <div className={styles.smallPhoto}>
                   <Toggle
-                    uploadFile={() => {
-                      uploadFile();
-                    }}
-                    onInputClick={() => {
-                      onInputClick();
-                    }}
                     id={myId}
                     type={"rightbottom"}
                     class={styles.smallPhoto}

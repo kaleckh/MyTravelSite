@@ -62,10 +62,6 @@ function MyProfile() {
     });
   }, []);
 
-  const onInputClick = () => {
-    inputRef.current.click();
-  };
-
   const handleDelete = async (id) => {
     try {
       let deleteTrip = await axios.delete(
@@ -99,50 +95,10 @@ function MyProfile() {
   //   },
   // });
 
-  const [selectedFile, setSelectedFile] = useState(null);
-  const {
-    REACT_APP_BUCKETNAME,
-    REACT_APP_REGION,
-    REACT_APP_ACCESSKEYID,
-    REACT_APP_SECRETACCESSKEY,
-  } = process.env;
-  // the configuration information is fetched from the .env file
-  const config = {
-    bucketName: REACT_APP_BUCKETNAME,
-    region: REACT_APP_REGION,
-    accessKeyId: REACT_APP_ACCESSKEYID,
-    secretAccessKey: REACT_APP_SECRETACCESSKEY,
-  };
-
-  const handleFileInput = (e) => {
-    console.log(e.target.files[0]);
-
-    setSelectedFile(e.target.files[0]);
-  };
-  // const getFileUrl = () => {
-  //   getSignedUrl(
-  //     client,
-  //     new GetObjectCommand({
-  //       Bucket: "travelimagebucket",
-  //       Key: "pexels-johannes-plenio-1105391.jpg",
-  //     })
-  //     // 60 seconds
-  //   )
-  //     .then((res) => {})
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  const uploadFile = async () => {
-    debugger;
-    const ReactS3Client = new S3(config);
-
-    ReactS3Client.uploadFile(selectedFile, `${myId}-${photoName}`)
-      .then((data) => console.log(data.location))
-      .catch((err) => console.error(err));
-  };
-console.log(id, "this is my id")
+  const stopEdit = () => {
+    setProfileEdit(false)
+  }
+  console.log(id, "this is my id");
   return (
     <div>
       <Header
@@ -234,89 +190,49 @@ console.log(id, "this is my id")
               </div>
             )}
           </div>
-          <input
-            onChange={(event) => {
-              handleFileInput(event);
-            }}
-            ref={inputRef}
-            type="file"
-            name=""
-            style={{ display: "none" }}
-          />
         </div>
 
         <div>
-          {profileEdit ? (
-            <div className={styles.rightProfileContainer}>
-              <div className={styles.mainImageContainer}>
-                <div className={styles.mainPic}>
-                  <Camera />
-                </div>
-              </div>
-              <div className={styles.rightSidePhotos}>
-                <div className={styles.smallPhoto}>
-                  <Camera />
-                </div>
-                <div className={styles.smallPhoto}>
-                  <Camera />
-                </div>
-              </div>
+          <div className={styles.rightProfileContainer}>
+            <div className={styles.mainImageContainer}>
+              <Toggle
+                edit={profileEdit}
+                type={"main"}
+                id={myId}
+                class={styles.mainPic}
+                filterName={() => {
+                  setPhotoName("main");
+                }}
+                stopEdit={() => {stopEdit()}}
+              />
             </div>
-          ) : (
-            <div className={styles.rightProfileContainer}>
-              <div className={styles.mainImageContainer}>
+            <div className={styles.rightSidePhotos}>
+              <div className={styles.smallPhoto}>
                 <Toggle
-                  file={selectedFile}
-                  type={"main"}
-                  uploadFile={() => {
-                    uploadFile();
-                  }}
-                  onInputClick={() => {
-                    onInputClick();
-                  }}
+                  edit={profileEdit}
                   id={myId}
-                  class={styles.mainPic}
+                  type={"rightside"}
+                  class={styles.smallPhoto}
                   filterName={() => {
-                    setPhotoName("main");
+                    setPhotoName("rightside");
                   }}
+                  stopEdit={() => {stopEdit()}}
                 />
               </div>
-              <div className={styles.rightSidePhotos}>
-                <div className={styles.smallPhoto}>
-                  <Toggle
-                    uploadFile={() => {
-                      uploadFile();
-                    }}
-                    onInputClick={() => {
-                      onInputClick();
-                    }}
-                    id={myId}
-                    type={"rightside"}
-                    class={styles.smallPhoto}
-                    filterName={() => {
-                      setPhotoName("rightside");
-                    }}
-                  />
-                </div>
-                <div className={styles.smallPhoto}>
-                  <Toggle
-                    uploadFile={() => {
-                      uploadFile();
-                    }}
-                    onInputClick={() => {
-                      onInputClick();
-                    }}
-                    id={myId}
-                    type={"rightbottom"}
-                    class={styles.smallPhoto}
-                    filterName={() => {
-                      setPhotoName("rightbottom");
-                    }}
-                  />
-                </div>
+              <div className={styles.smallPhoto}>
+                <Toggle
+                  edit={profileEdit}
+                  id={myId}
+                  type={"rightbottom"}
+                  class={styles.smallPhoto}
+                  filterName={() => {
+                    setPhotoName("rightbottom");
+                  }}
+                  stopEdit={() => {stopEdit()}}
+                />
               </div>
             </div>
-          )}
+          </div>
 
           <div className={styles.bottomContainer}>
             <div className={styles.friends}></div>

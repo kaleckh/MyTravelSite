@@ -144,7 +144,7 @@ function Person() {
               wrapperClass
             />
             <div className={styles.free}>My servers are free</div>
-            <div className={styles.smallfree}>Give it a sec haha</div>
+            <div className={styles.smallfree}>Give it a 10 seconds and refresh if needed</div>
           </div>
         ) : (
           <>

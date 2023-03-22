@@ -25,7 +25,7 @@ let getPerson = (req, res) => {
 let getTrips = (req, res) => {
 	const dbInstance = req.app.get('db');
 	dbInstance
-		.get_trips()
+		.get_trips()	
 		.then((trips) => res.status(200).send(trips))
 		.catch((err) => {
 			res.status(500).send({

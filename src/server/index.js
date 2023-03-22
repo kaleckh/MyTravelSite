@@ -27,7 +27,7 @@ app.use(cors());
 app.use(bodyParser());
 const dotenv = require('dotenv');
 require('dotenv').config();
-const CONNECTION_STRING = 'postgresql://postgres:mvfYRZbHBHK1kK1rnjFo@containers-us-west-22.railway.app:6635/railway';
+const CONNECTION_STRING = 'postgresql://postgres:jDSjkH8jyPRQmSKJ9MBh@containers-us-west-22.railway.app:6635/railway';
 massive({
 	connectionString: CONNECTION_STRING,
 	ssl: { rejectUnauthorized: false }

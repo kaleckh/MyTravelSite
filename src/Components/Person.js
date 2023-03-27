@@ -133,7 +133,7 @@ function Person() {
         />
         {isLoading ? (
           <div className={styles.audio}>
-            {" "}
+           
             <Audio
               height="80"
               width="80"
@@ -144,7 +144,9 @@ function Person() {
               wrapperClass
             />
             <div className={styles.free}>My servers are free</div>
-            <div className={styles.smallfree}>Give it a 10 seconds and refresh if needed</div>
+            <div className={styles.smallfree}>
+              Give it a 10 seconds and refresh if needed
+            </div>
           </div>
         ) : (
           <>

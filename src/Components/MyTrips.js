@@ -148,6 +148,7 @@ function MyTrips() {
                 wrapperStyle
                 wrapperClass
               />
+              <div>Just a sec</div>
             </div>
           </div>
         ) : (
